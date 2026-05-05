@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --color-primary-bg: #05191C;
+  --color-accent-bg: #0B2529;
+  --color-brand-cyan: #2DC7CC;
+  --color-brand-green: #00A6A6;
+  --color-brand-gold: #D4AF37;
+}
+
+@layer base {
+  body {
+    @apply bg-primary-bg text-white font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-medium;
+  }
+}
+
+.glass-card {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+.btn-cyan {
+  @apply bg-brand-cyan text-primary-bg font-semibold px-6 py-3 rounded-full transition-all hover:scale-105 active:scale-95;
+}
+
+.btn-outline {
+  @apply border border-white/20 px-6 py-3 rounded-full transition-all hover:bg-white/10;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.33%); }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
