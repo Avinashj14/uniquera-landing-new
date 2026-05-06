@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Menu, 
@@ -22,6 +22,7 @@ import {
   Youtube,
   Search,
   MessageSquare,
+  MessageCircle,
   CheckCircle2,
   Download
 } from 'lucide-react';
@@ -86,8 +87,12 @@ const Header = () => (
         <a href="#about" className="hover:text-brand-cyan transition-colors">About Us</a>
         <a href="#transformations" className="hover:text-brand-cyan transition-colors">Transformations</a>
         <a href="#doctors" className="hover:text-brand-cyan transition-colors">Doctors</a>
-        <a href="#blog" className="hover:text-brand-cyan transition-colors">Blog</a>
-        <button className="btn-cyan text-sm py-2.5">Request An Appointment</button>
+        <button 
+          onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+          className="btn-cyan text-sm py-2.5"
+        >
+          Request An Appointment
+        </button>
       </div>
       <button className="lg:hidden text-white">
         <Menu size={24} />
@@ -97,7 +102,7 @@ const Header = () => (
 );
 
 const Hero = () => (
-  <section className="relative overflow-hidden">
+  <section id="about" className="relative overflow-hidden">
     {/* Main Hero Banner */}
     <div className="relative w-full aspect-[2/1] md:aspect-[3/1] lg:aspect-[2560/1280] max-h-[85vh]">
       <img 
@@ -114,6 +119,7 @@ const Hero = () => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
+        className="mb-[50px]"
       >
         <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 tracking-tight leading-[1.1]">
           The <span className="text-white">Most Trusted Clinic</span> by patients <span className="text-brand-cyan italic">World Wide</span>
@@ -121,6 +127,15 @@ const Hero = () => (
         <p className="text-gray-300 text-sm md:text-xl font-medium max-w-3xl mx-auto mb-10">
           31,000+ procedures performed on patients from 40+ countries over 13+ years
         </p>
+        <motion.button 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+          className="btn-cyan px-10 py-4 text-base font-bold uppercase tracking-tight shadow-xl"
+        >
+          Claim My Free Virtual Consultation
+        </motion.button>
       </motion.div>
     </div>
   </section>
@@ -145,10 +160,18 @@ const TrustFeatures = () => (
 );
 
 const Transformations = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
   const cases = [
-    { title: "THREE", beforeLabel: "1 FUE SAPPHIRE", afterLabel: "5400 GRAFTS", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/9-1-768x768.webp" },
-    { title: "ONE", beforeLabel: "1 DHI CHOI PEN", afterLabel: "3400 GRAFTS", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/11-1-768x768.webp" },
-    { title: "BEFORE", beforeLabel: "SAPPHIRE FUE", afterLabel: "3500 GRAFTS", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/12-1-768x768.webp" },
+    { title: "CASE 1", beforeLabel: "FUE SAPPHIRE", afterLabel: "FRONTAL DENSITY", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/1-1-768x768.webp" },
+    { title: "CASE 2", beforeLabel: "DHI CHOI", afterLabel: "NATURAL LINE", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/2-1-768x768.webp" },
+    { title: "CASE 3", beforeLabel: "FUE SAPPHIRE", afterLabel: "FULL COVERAGE", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/3-1-768x768.webp" },
+    { title: "CASE 4", beforeLabel: "MAX DENSITY", afterLabel: "4200 GRAFTS", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/4-1-768x768.webp" },
+    { title: "CASE 5", beforeLabel: "FUE SAPPHIRE", afterLabel: "CROWN WORK", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/5-1-768x768.webp" },
+    { title: "CASE 6", beforeLabel: "DHI CHOI", afterLabel: "PRECISE PLACEMENT", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/6-1-768x768.webp" },
+    { title: "CASE 7", beforeLabel: "FUE SAPPHIRE", afterLabel: "5400 GRAFTS", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/8-1-768x768.webp" },
+    { title: "CASE 8", beforeLabel: "FUE SAPPHIRE", afterLabel: "5400 GRAFTS", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/9-1-768x768.webp" },
+    { title: "CASE 9", beforeLabel: "DHI CHOI", afterLabel: "3400 GRAFTS", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/11-1-768x768.webp" },
+    { title: "CASE 10", beforeLabel: "SAPPHIRE FUE", afterLabel: "3500 GRAFTS", before: "https://uniqueraclinic.com/wp-content/uploads/2026/02/12-1-768x768.webp" },
   ];
 
   return (
@@ -172,19 +195,19 @@ const Transformations = () => {
           </div>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div ref={scrollRef} className="flex overflow-x-auto gap-4 md:gap-6 snap-x snap-mandatory pb-8 scrollbar-hide no-scrollbar">
           {cases.map((item, idx) => (
             <motion.div 
               key={idx}
-              whileHover={{ y: -10 }}
-              className="bg-accent-bg rounded-3xl overflow-hidden border border-white/5 group"
+              whileHover={{ y: -5 }}
+              className="flex-shrink-0 w-[85%] md:w-[calc(33.333%-16px)] snap-center bg-accent-bg rounded-2xl overflow-hidden border border-white/5 group shadow-2xl"
             >
-              <div className="relative aspect-[4/5]">
-                <img src={item.before} alt="Transformation" className="absolute inset-0 w-full h-full object-cover" referrerPolicy="no-referrer" />
-                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                  <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-brand-cyan">
+              <div className="relative aspect-square">
+                <img src={item.before} alt="Transformation Result" className="absolute inset-0 w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <div className="absolute inset-x-0 bottom-0 p-3 md:p-4 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                  <div className="flex flex-col gap-1 text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-brand-cyan">
                     <span>{item.beforeLabel}</span>
-                    <span>{item.afterLabel}</span>
+                    <span className="text-white opacity-60">{item.afterLabel}</span>
                   </div>
                 </div>
               </div>
@@ -193,10 +216,24 @@ const Transformations = () => {
         </div>
         
         <div className="flex justify-center mt-12 gap-4">
-          <button className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all">
+          <button 
+            onClick={() => {
+              if (scrollRef.current) {
+                scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+              }
+            }}
+            className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all"
+          >
             <ChevronLeft size={24} />
           </button>
-          <button className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all">
+          <button 
+            onClick={() => {
+              if (scrollRef.current) {
+                scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+              }
+            }}
+            className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all"
+          >
             <ChevronRight size={24} />
           </button>
         </div>
@@ -229,8 +266,18 @@ const CTASection = () => (
           <h2 className="text-4xl md:text-6xl font-bold mt-4 mb-6 leading-tight">Your transformation <span className="text-brand-cyan">starts here</span></h2>
           <p className="text-[#d1d5dc] text-lg mb-8 max-w-md">Real planning. Real outcomes. No guesswork. Schedule a free consultation for a graft assessment based on your hair loss.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <button className="btn-cyan">Book an Appointment</button>
-            <button className="btn-outline">View Before and Afters</button>
+            <button 
+              onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="btn-cyan"
+            >
+              Book an Appointment
+            </button>
+            <button 
+              onClick={() => document.getElementById('transformations')?.scrollIntoView({ behavior: 'smooth' })}
+              className="btn-outline"
+            >
+              View Before and Afters
+            </button>
           </div>
           <div className="mt-8 flex items-center justify-center md:justify-start gap-6 opacity-60 text-xs font-bold uppercase">
             <span className="flex items-center gap-1"><Star size={14} className="fill-brand-cyan text-brand-cyan" /> Trustpilot 4.9/5</span>
@@ -244,7 +291,7 @@ const CTASection = () => (
 );
 
 const Testimonials = () => (
-  <section className="py-24 bg-primary-bg">
+  <section id="testimonials" className="py-24 bg-primary-bg">
     <div className="container mx-auto px-4 grid lg:grid-cols-3 gap-12 items-center">
       <div className="lg:col-span-1 space-y-8">
         <h2 className="text-4xl md:text-5xl font-bold">Trusted <span className="text-brand-cyan italic">Worldwide</span></h2>
@@ -289,77 +336,6 @@ const Testimonials = () => (
     </div>
   </section>
 );
-
-const ChatShowcase = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  return (
-    <section className="py-24 bg-[#043a40] relative overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Patient <span className="text-brand-cyan italic">Support</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            We stay in constant touch with our patients throughout their journey, ensuring professional care from consultation to final results.
-          </p>
-        </div>
-
-        <div className="flex flex-col md:flex-row justify-center items-center md:items-end gap-8 md:-space-x-12 lg:-space-x-20">
-          {[
-            {
-              src: "https://uniqueraclinic.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-06-at-23.45.46-e1770409872204.webp",
-              rotate: isMobile ? "0deg" : "-4deg",
-              y: isMobile ? 0 : 40,
-              delay: 0
-            },
-            {
-              src: "https://uniqueraclinic.com/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-24-at-00.38.10.webp",
-              rotate: "0deg",
-              y: 0,
-              delay: 0.1,
-              zIndex: 10
-            },
-            {
-              src: "https://uniqueraclinic.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-01-at-18.00.53-1-1.jpeg",
-              rotate: isMobile ? "0deg" : "4deg",
-              y: isMobile ? 0 : 40,
-              delay: 0.2
-            }
-          ].map((chat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ y: 100, opacity: 0 }}
-              whileInView={{ y: chat.y, opacity: 1, rotate: chat.rotate }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: chat.delay, ease: [0.22, 1, 0.36, 1] }}
-              style={{ zIndex: chat.zIndex || 1 }}
-              className="w-full max-w-[280px] md:w-[32%] relative group"
-            >
-              <div className="bg-[#0b1b1e] p-2 rounded-[2.5rem] border border-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
-                <img 
-                  src={chat.src} 
-                  className="w-full rounded-[2rem] grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500" 
-                  alt={`WhatsApp Success Case ${idx + 1}`}
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              {chat.zIndex && (
-                <div className="absolute inset-0 bg-brand-cyan/5 blur-[80px] -z-10 rounded-full" />
-              )}
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 
 const MedicalGuideSection = () => {
   const items = [
@@ -423,7 +399,7 @@ const ConsultationSection = () => {
             You’ve seen real patient results, WhatsApp conversations, and reviews. Now let UniquEra’s team review your hair loss stage, donor area, and goals before you decide your next step.
           </p>
           <button 
-            onClick={scrollToTransformations}
+            onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
             className="btn-cyan px-10 py-5 text-lg font-bold shadow-[0_20px_40px_-10px_rgba(45,199,204,0.3)] hover:translate-y-[-4px] transition-all"
           >
             Secure My Free Consultation
@@ -492,7 +468,13 @@ const MedicalTeam = () => {
                 />
               </div>
               <h3 className="text-xl font-bold text-brand-cyan mb-1">{doc.name}</h3>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-tight">{doc.role}</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-tight mb-4">{doc.role}</p>
+              <button 
+                onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full py-3 rounded-xl border border-brand-cyan/20 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-primary-bg transition-all"
+              >
+                Book An Appointment
+              </button>
             </motion.div>
           ))}
         </div>
@@ -725,7 +707,10 @@ const AnniversaryProgram = () => (
               Secure your consultation today before priority slots close.
             </p>
 
-            <button className="btn-cyan mt-4 px-12 py-5 text-xl font-black uppercase tracking-tighter shadow-[0_20px_50px_rgba(45,199,204,0.3)] hover:translate-y-[-5px] transition-all">
+            <button 
+              onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="btn-cyan mt-4 px-12 py-5 text-xl font-black uppercase tracking-tighter shadow-[0_20px_50px_rgba(45,199,204,0.3)] hover:translate-y-[-5px] transition-all"
+            >
               Claim My Priority Slot
             </button>
           </div>
@@ -745,7 +730,10 @@ const AnniversaryCTA = () => (
         <p className="text-gray-300 text-lg mb-10 leading-relaxed max-w-3xl mx-auto font-medium">
           Only 50 priority consultation slots are open for new patients. Complete the form and mention “E-Book” during your consultation to access the Anniversary Medical Priority Program benefits.
         </p>
-        <button className="btn-cyan px-12 py-5 text-xl font-black uppercase tracking-tighter shadow-[0_20px_50px_rgba(45,199,204,0.3)] hover:translate-y-[-5px] transition-all">
+        <button 
+          onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+          className="btn-cyan px-12 py-5 text-xl font-black uppercase tracking-tighter shadow-[0_20px_50px_rgba(45,199,204,0.3)] hover:translate-y-[-5px] transition-all"
+        >
           Secure My Free Consultation
         </button>
       </div>
@@ -757,7 +745,7 @@ const ConsultationEmbed = () => {
   const src = 'https://uniqueraclinic.com/consultation-embed/';
 
   return (
-    <section aria-label="Consultation form" className="bg-primary-bg">
+    <section id="consultation-form" aria-label="Consultation form" className="bg-primary-bg">
       <div className="w-full">
         <div className="bg-white overflow-hidden shadow-2xl border-white/10">
           <iframe
@@ -847,21 +835,35 @@ const Footer = () => (
           © UNIQUERA 2025, All rights reserved.
        </div>
     </div>
-    <div className="fixed bottom-6 right-6 z-50">
-       <button className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
-          <MessageSquare size={28} />
-       </button>
+    <div className="fixed bottom-6 left-6 z-50">
+       <a 
+         href="https://wa.me/905388770199?text=Hi%20i%20want%20to%20know%20more%20about%20the%20process."
+         target="_blank"
+         rel="noopener noreferrer"
+         className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
+       >
+          <MessageCircle size={32} fill="currentColor" />
+       </a>
     </div>
     
     {/* Floating Action Tabs */}
     <div className="fixed right-0 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-1">
-       <div className="bg-brand-cyan text-[#031011] py-6 px-3 flex flex-col items-center gap-4 rounded-l-2xl shadow-2xl cursor-pointer hover:bg-white hover:text-brand-cyan transition-all group">
+       <div 
+        onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+        className="bg-brand-cyan text-[#031011] py-6 px-3 flex flex-col items-center gap-4 rounded-l-2xl shadow-2xl cursor-pointer hover:bg-white hover:text-brand-cyan transition-all group"
+       >
           <Calendar size={18} className="group-hover:scale-110 transition-transform" />
           <span className="[writing-mode:vertical-rl] rotate-180 font-bold text-[10px] tracking-widest uppercase">Book Now</span>
        </div>
-       <div className="bg-white text-[#031011] py-6 px-3 flex flex-col items-center gap-4 rounded-l-2xl shadow-2xl cursor-pointer hover:bg-brand-cyan hover:text-white transition-all group">
-          <Camera size={18} className="group-hover:scale-110 transition-transform" />
-          <span className="[writing-mode:vertical-rl] rotate-180 font-bold text-[10px] tracking-widest uppercase">Gallery</span>
+       <div 
+        onClick={() => {
+          const testimonials = document.getElementById('testimonials');
+          if (testimonials) testimonials.scrollIntoView({ behavior: 'smooth' });
+        }}
+        className="bg-white text-[#031011] py-6 px-3 flex flex-col items-center gap-4 rounded-l-2xl shadow-2xl cursor-pointer hover:bg-brand-cyan hover:text-white transition-all group"
+       >
+          <MessageSquare size={18} className="group-hover:scale-110 transition-transform" />
+          <span className="[writing-mode:vertical-rl] rotate-180 font-bold text-[10px] tracking-widest uppercase">Testimonials</span>
        </div>
     </div>
   </footer>
@@ -903,7 +905,7 @@ const PromoPopup = () => {
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative max-w-md w-full max-h-[80vh] bg-[#0b2529] border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-[0_50px_100px_-20px_rgba(45,199,204,0.3)] overflow-hidden flex flex-col"
+            className="relative max-w-md w-full max-h-[80vh] bg-[#043a40] border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-[0_50px_100px_-20px_rgba(45,199,204,0.3)] overflow-hidden flex flex-col"
           >
             {/* Background Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-brand-cyan/10 blur-[80px] -z-10" />
@@ -988,11 +990,10 @@ export default function App() {
       
       <main>
         <Hero />
-        <ConsultationEmbed />
         <TrustFeatures />
+        <ConsultationEmbed />
         <Transformations />
         <CTASection />
-        <ChatShowcase />
         <Testimonials />
         <ConsultationSection />
         <InstagramSection />
