@@ -39,7 +39,7 @@ const TopBar = () => {
   const messages = [
     "Book your flight fast",
     "Now is the time to act",
-    "Achieve stunning hair results with UniqueEra Clinic",
+    "Achieve stunning hair results with UniquEra Hair Transplant Clinic",
     "UniquEra Clinic: Best Hair Transplant in Turkey"
   ];
   const whatsappUrl = "https://wa.me/905388770199";
