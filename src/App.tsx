@@ -284,13 +284,45 @@ const WhatsappSection = () => {
   );
 };
 
-const Testimonials = () => (
-  <section id="testimonials" className="py-24 bg-primary-bg">
-    <div className="container mx-auto px-4 grid lg:grid-cols-3 gap-12 items-center">
-      <div className="lg:col-span-1 space-y-8">
-        <h2 className="text-4xl md:text-5xl font-bold">Trusted <span className="text-brand-cyan italic">Worldwide</span></h2>
-        <div className="flex flex-col gap-4">
-           <div className="bg-white/5 p-6 rounded-2xl border border-white/10 flex items-center justify-between">
+const Testimonials = () => {
+  const reviews = [
+    {
+      text: "Almost a year ago, I had my hair transplant at UniquEra Hair Transplant Clinic in Istanbul, and I'm beyond impressed with the results! The entire experience was top-notch from start to finish. The team was professional, warm, and incredibly thorough, explaining every detail of the process so I felt at ease. I had 4,500 grafts done, and despite the scale of the procedure, it was surprisingly comfortable once the numbing kicked in. The clinic's modern facilities and the surgeons' expertise really shone through. They even followed up with me during my stay, offering personalized care and some great recommendations for exploring Istanbul. Now, nearly a year later, my hair looks full, natural, and better than I ever imagined. UniquEra's dedication to their patients is unmatched!",
+      name: "Delvis Gomez",
+      country: "United States",
+      initials: "DG",
+    },
+    {
+      text: "My wife and I were both treated like first class VIP visitors when we went to Istanbul for my hair replacement therapy.",
+      name: "Edward Rickers",
+      country: "United States",
+      initials: "ER",
+    },
+    {
+      text: "I am from the states and wanted to make my hair restoration journey exciting and unique (also more affordable). Since my procedure in Jan 2024 the company has transitioned into UniqueEra. The most important thing is the medical team is the same! The patience, kindness, warmth and professionalism I received as a patient made my experience worthwhile. I have almost completed a year of healing, and my results are truly greater than what I expected. I am impressed with the teams ability to restore my hairline, thickness on the top/sides/and front of my scalp. I am excited for the rebranding of the company and trust they will be fine after getting to know them on an individual basis. I have no regrets going to Turkey for my procedure, only amazing results! I trust this team with my friends and family any day.",
+      name: "Jordan Cook",
+      country: "United States",
+      initials: "JC",
+    },
+  ];
+  const [activeReview, setActiveReview] = useState(0);
+  const currentReview = reviews[activeReview];
+
+  const onPrevReview = () => {
+    setActiveReview((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
+  };
+
+  const onNextReview = () => {
+    setActiveReview((prev) => (prev + 1) % reviews.length);
+  };
+
+  return (
+    <section id="testimonials" className="py-24 bg-primary-bg">
+      <div className="container mx-auto px-4 grid lg:grid-cols-3 gap-12 items-center">
+        <div className="lg:col-span-1 space-y-8">
+          <h2 className="text-4xl md:text-5xl font-bold">Trusted <span className="text-brand-cyan italic">Worldwide</span></h2>
+          <div className="flex flex-col gap-4">
+            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 flex items-center justify-between">
               <div>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-5 mb-2 grayscale brightness-200" referrerPolicy="no-referrer" />
                 <div className="text-3xl font-bold">200+</div>
@@ -299,40 +331,40 @@ const Testimonials = () => (
               <div className="flex gap-0.5 text-yellow-500">
                 {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="currentColor" />)}
               </div>
-           </div>
-
-        </div>
-      </div>
-      <div className="lg:col-span-2 relative">
-        <div className="bg-accent-bg p-8 md:p-12 rounded-4xl relative overflow-hidden">
-          <div className="text-6xl text-brand-cyan/20 absolute top-4 left-4 font-serif">"</div>
-          <p className="text-[17px] text-gray-300 leading-[23.5px] relative z-10 italic">
-            “Almost a year ago, I had my hair transplant at UniquEra Hair Transplant Clinic in Istanbul, and I’m beyond impressed with the results! The entire experience was top-notch from start to finish. The team was professional, warm, and incredibly thorough, explaining every detail of the process so I felt at ease. I had 4,500 grafts done, and despite the scale of the procedure, it was surprisingly comfortable once the numbing kicked in. The clinic’s modern facilities and the surgeons’ expertise really shone through. They even followed up with me during my stay, offering personalized care and some great recommendations for exploring Istanbul. Now, nearly a year later, my hair looks full, natural, and better than I ever imagined. UniquEra’s dedication to their patients is unmatched!”
-          </p>
-          <div className="mt-10 flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-brand-cyan/20 flex items-center justify-center font-bold text-xl border border-brand-cyan/40">DG</div>
-            <div>
-              <div className="font-bold text-lg">Delvis Gomez</div>
-              <div className="text-gray-500 text-sm">United States</div>
-            </div>
-            <div className="ml-auto flex gap-4">
-               <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all"><ChevronLeft size={20}/></button>
-               <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all"><ChevronRight size={20}/></button>
             </div>
           </div>
         </div>
-        <div className="mt-8 flex justify-center">
-            <button 
+        <div className="lg:col-span-2 relative">
+          <div className="bg-accent-bg p-8 md:p-12 rounded-4xl relative overflow-hidden">
+            <div className="text-6xl text-brand-cyan/20 absolute top-4 left-4 font-serif">"</div>
+            <p className="text-[17px] text-gray-300 leading-[23.5px] relative z-10 italic">
+              "{currentReview.text}"
+            </p>
+            <div className="mt-10 flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-brand-cyan/20 flex items-center justify-center font-bold text-xl border border-brand-cyan/40">{currentReview.initials}</div>
+              <div>
+                <div className="font-bold text-lg">{currentReview.name}</div>
+                <div className="text-gray-500 text-sm">{currentReview.country}</div>
+              </div>
+              <div className="ml-auto flex gap-4">
+                <button onClick={onPrevReview} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all"><ChevronLeft size={20}/></button>
+                <button onClick={onNextReview} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all"><ChevronRight size={20}/></button>
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 flex justify-center">
+            <button
               onClick={() => window.open('https://uniqueraclinic.com/testimonials/', '_blank')}
               className="btn-cyan flex items-center gap-2"
             >
               <MessageSquare size={18} /> View Testimonials
             </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const MedicalGuideSection = () => {
   const items = [
@@ -457,22 +489,15 @@ const HighAttentionCTA = () => {
 };
 
 const MedicalTeam = () => {
-  const [activeTab, setActiveTab] = useState<'MEDICAL' | 'OPERATIONAL'>('MEDICAL');
-  
-  const medicalDoctors = [
-    { name: "Emir Doğan", role: "DHI & FUE Sapphire Hair Transplant Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/11/Stafff-2-min.jpg" },
+  const doctors = [
+    { name: "Çagri Çelik", role: "Medical team Director", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/9-1.jpg" },
+    { name: "Atakan Akay", role: "Medical Team Director", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/Stafff.jpg" },
     { name: "Cengiz Yerlikaya", role: "Senior Sapphire Dhi Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/11/Stafff-1-min.jpg" },
-    { name: "Çağri Çelik", role: "Medical team Director", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/9-1.jpg" },
-    { name: "Yagmur Dalioğlu", role: "Anesthesiologist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/04/4.jpg" },
+    { name: "Emir Doğan", role: "DHI & FUE Sapphire Hair Transplant Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/11/Stafff-2-min.jpg" },
+    { name: "Ayşe Fedakartürk", role: "Senior Sapphire DHI Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/04/4.jpg" },
   ];
-
-  const operationalDocs = [
-    { name: "Juliana Koci", role: "Head Medical Consultant & Patient Care", img: "https://uniqueraclinic.com/wp-content/uploads/2025/08/PHOTO-2025-08-20-17-08-30-e1755705661225.jpg" },
-    { name: "Raffa Dabbas", role: "Medical Interpreter", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/10-1.jpg" },
-    { name: "Emad Albeni", role: "Operations Manager", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/Stafff-2-min.jpg" },
-  ];
-
-  const doctors = activeTab === 'MEDICAL' ? medicalDoctors : operationalDocs;
+  const topDoctors = doctors.slice(0, 2);
+  const bottomDoctors = doctors.slice(2);
 
   return (
     <section id="doctors" className="py-24 bg-primary-bg">
@@ -480,25 +505,10 @@ const MedicalTeam = () => {
         <h4 className="text-xs uppercase font-bold text-gray-500 tracking-widest mb-2">Doctors</h4>
         <h2 className="text-4xl md:text-6xl font-bold mb-16">Our Expert Doctors <span className="text-brand-cyan italic">For The Patients</span></h2>
         
-        <div className="flex justify-center gap-4 mb-12">
-           <button 
-             onClick={() => setActiveTab('MEDICAL')}
-             className={`${activeTab === 'MEDICAL' ? 'btn-cyan' : 'bg-white/5'} text-xs py-2 px-8 rounded-full font-bold transition-all`}
-           >
-             MEDICAL
-           </button>
-           <button 
-             onClick={() => setActiveTab('OPERATIONAL')}
-             className={`${activeTab === 'OPERATIONAL' ? 'btn-cyan' : 'bg-white/5'} text-xs py-2 px-8 rounded-full font-bold transition-all`}
-           >
-             OPERATIONAL
-           </button>
-        </div>
-
-        <div className="grid md:grid-cols-4 gap-8">
-          {doctors.map((doc, idx) => (
+        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {topDoctors.map((doc, idx) => (
             <motion.a 
-              key={`${activeTab}-${idx}`}
+              key={`${doc.name}-${idx}`}
               href="https://uniqueraclinic.com/our-team/"
               target="_blank"
               rel="noopener noreferrer"
@@ -513,6 +523,35 @@ const MedicalTeam = () => {
                   src={doc.img} 
                   alt={doc.name} 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <h3 className="text-xl font-bold text-brand-cyan mb-1 group-hover:text-white transition-colors">{doc.name}</h3>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-tight mb-2">{doc.role}</p>
+              <div className="text-[10px] text-brand-cyan font-bold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
+                View Profile <ArrowRight size={12} />
+              </div>
+            </motion.a>
+          ))}
+        </div>
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8">
+          {bottomDoctors.map((doc, idx) => (
+            <motion.a
+              key={`${doc.name}-${idx + 2}`}
+              href="https://uniqueraclinic.com/our-team/"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: (idx + 2) * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              className="bg-accent-bg rounded-3xl p-6 border border-white/5 block text-left group"
+            >
+              <div className="aspect-[4/5] bg-primary-bg rounded-2xl mb-6 overflow-hidden relative">
+                <img
+                  src={doc.img}
+                  alt={doc.name}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -724,6 +763,14 @@ const MedicalStandards = () => {
                 </a>
               ))}
            </div>
+        </div>
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => window.open('https://uniqueraclinic.com/uniquera-certifications/', '_blank')}
+            className="btn-cyan flex items-center gap-2"
+          >
+            <MessageSquare size={18} /> View Certifications
+          </button>
         </div>
       </div>
     </section>
