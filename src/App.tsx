@@ -81,6 +81,7 @@ const TopBar = () => {
   );
 };
 
+
 const Header = () => (
   <header className="sticky top-0 z-50 bg-primary-bg/80 backdrop-blur-lg border-b border-white/5 py-4">
     <div className="container mx-auto px-4 flex justify-between items-center">
