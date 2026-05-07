@@ -266,7 +266,7 @@ const WhatsappSection = () => {
                     <img 
                       src={src} 
                       alt="WhatsApp Conversation" 
-                      className="w-full h-auto min-h-full object-cover" 
+                      className="w-full h-full object-contain" 
                       referrerPolicy="no-referrer" 
                     />
                   </div>
@@ -491,78 +491,118 @@ const HighAttentionCTA = () => {
 
 const MedicalTeam = () => {
   const doctors = [
-    { name: "Çagri Çelik", role: "Medical team Director", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/9-1.jpg" },
     { name: "Atakan Akay", role: "Medical Team Director", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/Stafff.jpg" },
-    { name: "Cengiz Yerlikaya", role: "Senior Sapphire Dhi Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/11/Stafff-1-min.jpg" },
+    { name: "Ayşe Fedakartürk", role: "Senior Sapphire DHI Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/04/2.jpg" },
     { name: "Emir Doğan", role: "DHI & FUE Sapphire Hair Transplant Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/11/Stafff-2-min.jpg" },
-    { name: "Ayşe Fedakartürk", role: "Senior Sapphire DHI Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/04/4.jpg" },
+    { name: "Cengiz Yerlikaya", role: "Senior Sapphire DHI Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/11/Stafff-1-min.jpg" },
+    { name: "Çagri Çelik", role: "Medical Team Director", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/9-1.jpg" },
+    { name: "Yagmur Dalioğlu", role: "Anesthesiologist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/04/4.jpg" },
+    { name: "Burak Morkavuk", role: "Senior Sapphire DHI Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/04/5.jpg" },
+    { name: "Kübra Nur Töremen", role: "Senior DHI Specialist", img: "https://uniqueraclinic.com/wp-content/uploads/2024/04/3.jpg" },
   ];
-  const topDoctors = doctors.slice(0, 2);
-  const bottomDoctors = doctors.slice(2);
+  const operations = [
+    { name: "Juliana Koci", role: "Head Medical Consultant & Patient Care", img: "https://uniqueraclinic.com/wp-content/uploads/2025/08/PHOTO-2025-08-20-17-08-30-e1755705661225.jpg" },
+    { name: "Raffa Dabbas", role: "Medical Interpreter", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/10-1.jpg" },
+    { name: "Emad Albeni", role: "Operations Manager", img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/Stafff-2-min.jpg" },
+  ];
+  const [activeTeam, setActiveTeam] = useState<'doctors' | 'operations'>('doctors');
+  const teamMembers = activeTeam === 'doctors' ? doctors : operations;
+  const loopedTeamMembers = [...teamMembers, ...teamMembers];
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [isSliderPaused, setIsSliderPaused] = useState(false);
+
+  useEffect(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.scrollLeft = 0;
+  }, [activeTeam]);
+
+  useEffect(() => {
+    if (isSliderPaused) return;
+
+    const intervalId = window.setInterval(() => {
+      const slider = sliderRef.current;
+      if (!slider) return;
+
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const loopPoint = Math.min(slider.scrollWidth / 2, maxScroll);
+      slider.scrollLeft = slider.scrollLeft >= loopPoint ? 0 : slider.scrollLeft + 1;
+    }, 20);
+
+    return () => window.clearInterval(intervalId);
+  }, [activeTeam, isSliderPaused]);
 
   return (
     <section id="doctors" className="py-24 bg-primary-bg">
       <div className="container mx-auto px-4 text-center">
         <h4 className="text-xs uppercase font-bold text-gray-500 tracking-widest mb-2">Doctors</h4>
         <h2 className="text-4xl md:text-6xl font-bold mb-16">Our Expert Doctors <span className="text-brand-cyan italic">For The Patients</span></h2>
-        
-        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-          {topDoctors.map((doc, idx) => (
-            <motion.a 
-              key={`${doc.name}-${idx}`}
-              href="https://uniqueraclinic.com/our-team/"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="bg-accent-bg rounded-3xl p-6 border border-white/5 block text-left group"
-            >
-              <div className="aspect-[4/5] bg-primary-bg rounded-2xl mb-6 overflow-hidden relative">
-                <img 
-                  src={doc.img} 
-                  alt={doc.name} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-brand-cyan mb-1 group-hover:text-white transition-colors">{doc.name}</h3>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-tight mb-2">{doc.role}</p>
-              <div className="text-[10px] text-brand-cyan font-bold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
-                View Profile <ArrowRight size={12} />
-              </div>
-            </motion.a>
-          ))}
+
+        <div className="flex justify-center gap-3 mb-10">
+          <button
+            type="button"
+            onClick={() => setActiveTeam('doctors')}
+            className={`px-5 py-2 rounded-full text-xs md:text-sm font-semibold tracking-wide transition-colors ${
+              activeTeam === 'doctors'
+                ? 'bg-brand-cyan text-primary-bg'
+                : 'bg-accent-bg text-white border border-white/10 hover:border-brand-cyan/60'
+            }`}
+          >
+            Doctors
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTeam('operations')}
+            className={`px-5 py-2 rounded-full text-xs md:text-sm font-semibold tracking-wide transition-colors ${
+              activeTeam === 'operations'
+                ? 'bg-brand-cyan text-primary-bg'
+                : 'bg-accent-bg text-white border border-white/10 hover:border-brand-cyan/60'
+            }`}
+          >
+            Operations
+          </button>
         </div>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8">
-          {bottomDoctors.map((doc, idx) => (
-            <motion.a
-              key={`${doc.name}-${idx + 2}`}
-              href="https://uniqueraclinic.com/our-team/"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: (idx + 2) * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="bg-accent-bg rounded-3xl p-6 border border-white/5 block text-left group"
-            >
-              <div className="aspect-[4/5] bg-primary-bg rounded-2xl mb-6 overflow-hidden relative">
-                <img
-                  src={doc.img}
-                  alt={doc.name}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-brand-cyan mb-1 group-hover:text-white transition-colors">{doc.name}</h3>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-tight mb-2">{doc.role}</p>
-              <div className="text-[10px] text-brand-cyan font-bold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
-                View Profile <ArrowRight size={12} />
-              </div>
-            </motion.a>
-          ))}
+
+        <div
+          ref={sliderRef}
+          className="max-w-6xl mx-auto overflow-x-auto no-scrollbar pb-4"
+          onMouseEnter={() => setIsSliderPaused(true)}
+          onMouseLeave={() => setIsSliderPaused(false)}
+        >
+          <div className="flex gap-6 w-max min-w-full px-1">
+            {loopedTeamMembers.map((member, idx) => (
+              <motion.div
+                key={`${activeTeam}-${member.name}-${idx}-loop`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.08 }}
+                whileHover={{ scale: 1.03 }}
+                className="bg-accent-bg rounded-3xl p-6 border border-white/5 text-left group w-[260px] md:w-[280px] shrink-0"
+              >
+                <div className="aspect-[4/5] bg-primary-bg rounded-2xl mb-6 overflow-hidden relative">
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-brand-cyan mb-1 group-hover:text-white transition-colors">{member.name}</h3>
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-tight">{member.role}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-12">
+          <a
+            href="https://uniqueraclinic.com/our-team/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-cyan inline-flex items-center gap-2"
+          >
+            Meet our Team <ArrowRight size={16} />
+          </a>
         </div>
       </div>
     </section>
