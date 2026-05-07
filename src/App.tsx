@@ -24,7 +24,9 @@ import {
   MessageSquare,
   MessageCircle,
   CheckCircle2,
-  Download
+  Download,
+  ArrowRight,
+  Mail
 } from 'lucide-react';
 
 // Assets
@@ -355,7 +357,10 @@ const MedicalGuideSection = () => {
             </p>
             <div className="bg-brand-cyan/5 border border-brand-cyan/10 p-6 rounded-2xl">
               <p className="text-brand-cyan font-bold italic text-sm mb-4">Guide - A Guide to fixing hair loss</p>
-              <button className="btn-cyan w-full flex items-center justify-center gap-2">
+              <button 
+                onClick={() => window.open('https://uniqueraclinic.com/wp-content/uploads/2026/05/A-Guide-to-fixing-hair-loss.pdf', '_blank')}
+                className="btn-cyan w-full flex items-center justify-center gap-2"
+              >
                 <Download size={18} /> Download the Free Guide
               </button>
             </div>
@@ -378,11 +383,6 @@ const MedicalGuideSection = () => {
 };
 
 const ConsultationSection = () => {
-  const scrollToTransformations = () => {
-    const el = document.getElementById('transformations');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section className="py-24 bg-[#043a40] border-y border-white/5">
       <div className="container mx-auto px-4 text-center">
@@ -400,6 +400,57 @@ const ConsultationSection = () => {
             Secure My Free Consultation
           </button>
         </div>
+      </div>
+    </section>
+  );
+};
+
+const HighAttentionCTA = () => {
+  return (
+    <section className="py-24 bg-accent-bg relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-cyan/5 -skew-x-12 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-cyan/10 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-5xl mx-auto bg-[#043a40] border-2 border-brand-cyan/30 rounded-[3rem] p-8 md:p-16 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] relative overflow-hidden"
+        >
+          {/* Inner Glow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/10 to-transparent pointer-events-none"></div>
+
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="flex-1 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-cyan/20 text-brand-cyan text-sm font-bold tracking-widest uppercase mb-6">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-cyan"></span>
+                </span>
+                High Demand: Limited Availability
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 italic leading-tight">
+                Consultation Slots Are <span className="text-brand-cyan">Limited This Month</span>
+              </h2>
+              <p className="text-gray-300 text-lg mb-0 leading-relaxed max-w-xl">
+                You’ve seen real patient results, WhatsApp conversations, and reviews. Now let UniquEra’s team review your hair loss stage, donor area, and goals before you decide your next step.
+              </p>
+            </div>
+            
+            <div className="shrink-0">
+               <button 
+                onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="group relative inline-flex items-center gap-3 bg-brand-cyan text-primary-bg px-12 py-6 text-xl font-black rounded-full shadow-[0_20px_50px_rgba(45,199,204,0.4)] hover:shadow-[0_25px_60px_rgba(45,199,204,0.6)] hover:scale-105 transition-all duration-300 uppercase tracking-tighter"
+              >
+                Secure My Free Consultation
+                <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -446,15 +497,18 @@ const MedicalTeam = () => {
 
         <div className="grid md:grid-cols-4 gap-8">
           {doctors.map((doc, idx) => (
-            <motion.div 
+            <motion.a 
               key={`${activeTab}-${idx}`}
+              href="https://uniqueraclinic.com/our-team/"
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
               whileHover={{ scale: 1.05 }}
-              className="bg-accent-bg rounded-3xl p-6 border border-white/5"
+              className="bg-accent-bg rounded-3xl p-6 border border-white/5 block text-left group"
             >
-              <div className="aspect-[4/5] bg-primary-bg rounded-2xl mb-6 overflow-hidden relative group">
+              <div className="aspect-[4/5] bg-primary-bg rounded-2xl mb-6 overflow-hidden relative">
                 <img 
                   src={doc.img} 
                   alt={doc.name} 
@@ -462,15 +516,12 @@ const MedicalTeam = () => {
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <h3 className="text-xl font-bold text-brand-cyan mb-1">{doc.name}</h3>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-tight mb-4">{doc.role}</p>
-              <button 
-                onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full py-3 rounded-xl border border-brand-cyan/20 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-primary-bg transition-all"
-              >
-                Book An Appointment
-              </button>
-            </motion.div>
+              <h3 className="text-xl font-bold text-brand-cyan mb-1 group-hover:text-white transition-colors">{doc.name}</h3>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-tight mb-2">{doc.role}</p>
+              <div className="text-[10px] text-brand-cyan font-bold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
+                View Profile <ArrowRight size={12} />
+              </div>
+            </motion.a>
           ))}
         </div>
       </div>
@@ -657,13 +708,20 @@ const MedicalStandards = () => {
            
            <div className="flex animate-scroll gap-12 md:gap-24 items-center whitespace-nowrap py-8">
               {[...certifications, ...certifications, ...certifications].map((src, idx) => (
-                <img 
+                <a 
                   key={idx} 
-                  src={src} 
-                  alt="Certification" 
-                  className="h-20 md:h-28 object-contain transition-all duration-500 bg-white p-2 rounded-lg" 
-                  referrerPolicy="no-referrer"
-                />
+                  href="https://uniqueraclinic.com/uniquera-certifications/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block hover:scale-105 transition-transform"
+                >
+                  <img 
+                    src={src} 
+                    alt="Certification" 
+                    className="h-20 md:h-28 object-contain transition-all duration-500 bg-white p-2 rounded-lg" 
+                    referrerPolicy="no-referrer"
+                  />
+                </a>
               ))}
            </div>
         </div>
@@ -825,16 +883,17 @@ const Footer = () => (
              <div className="space-y-6">
                 <div>
                   <h5 className="text-white font-bold text-sm mb-2 uppercase tracking-wider">Visiting Hours:</h5>
-                  <p className="text-gray-500 text-xs">Monday - Saturday: 09:00 - 18:00</p>
+                  <p className="text-gray-500 text-xs">Monday - Saturday: 08:00 - 18:00</p>
+                  <p className="text-gray-500 text-xs">Sunday: Off</p>
                 </div>
                 <div className="space-y-4">
                     <div className="flex items-center gap-3">
+                       <Mail className="text-brand-cyan shrink-0" size={18} />
+                       <p className="text-gray-400 text-sm font-medium">info@uniqueraclinic.com</p>
+                    </div>
+                    <div className="flex items-center gap-3">
                        <Phone className="text-brand-cyan shrink-0" size={18} />
                        <p className="text-gray-400 text-sm font-medium">+90 538 877 01 99</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                       <MapPin className="text-brand-cyan shrink-0" size={18} />
-                       <p className="text-gray-400 text-sm">Istanbul, Turkey</p>
                     </div>
                 </div>
              </div>
@@ -842,48 +901,57 @@ const Footer = () => (
           <div>
              <h4 className="font-bold text-white text-base mb-6 uppercase tracking-wider">Quick Links</h4>
              <ul className="space-y-3 text-gray-500 text-sm">
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Home</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">About UniquEra</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Results</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Products</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">VIP Treatment Package</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Patient Guide</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Contact Us</a></li>
+                <li><a href="https://uniqueraclinic.com/" className="hover:text-brand-cyan transition-colors italic">Home</a></li>
+                <li><a href="https://uniqueraclinic.com/about-us-uniquera-clinic-turkey/" className="hover:text-brand-cyan transition-colors italic">About UniquEra</a></li>
+                <li><a href="https://uniqueraclinic.com/hazem-altal/" className="hover:text-brand-cyan transition-colors italic">Founder</a></li>
+                <li><a href="https://uniqueraclinic.com/our-team/" className="hover:text-brand-cyan transition-colors italic">Our Team</a></li>
+                <li><a href="https://uniqueraclinic.com/products/" className="hover:text-brand-cyan transition-colors italic">Our Products</a></li>
+                <li><a href="https://uniqueraclinic.com/vip-treatment/" className="hover:text-brand-cyan transition-colors italic">VIP Treatment Package</a></li>
              </ul>
           </div>
           <div>
              <h4 className="font-bold text-white text-base mb-6 uppercase tracking-wider">Services</h4>
              <ul className="space-y-3 text-gray-500 text-sm">
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Receding Hairline</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Repair Botched Hair Transplant</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Afro hair transplant</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Female Hair Transplant</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">DHI</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">FUE Sapphire</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">FUE Manual</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Stem Cell Hair Transplant</a></li>
+                <li><a href="https://uniqueraclinic.com/receding-hairline-transplant/" className="hover:text-brand-cyan transition-colors italic">Receding Hairline</a></li>
+                <li><a href="https://uniqueraclinic.com/crown-hair-transplant/" className="hover:text-brand-cyan transition-colors italic">Thinning Crown</a></li>
+                <li><a href="https://uniqueraclinic.com/diffuse-thinning-hair-transplant/" className="hover:text-brand-cyan transition-colors italic">Diffuse Hair Thinning</a></li>
+                <li><a href="https://uniqueraclinic.com/beard-transplant-turkey/" className="hover:text-brand-cyan transition-colors italic">Beard Transplants</a></li>
+                <li><a href="https://uniqueraclinic.com/eyebrow-transplant-turkey/" className="hover:text-brand-cyan transition-colors italic">Eyebrow Transplant</a></li>
+                <li><a href="https://uniqueraclinic.com/fix-botched-hair-transplant/" className="hover:text-brand-cyan transition-colors italic">Repair Botched Hair Transplant</a></li>
+                <li><a href="https://uniqueraclinic.com/afro-hair-transplant-turkey/" className="hover:text-brand-cyan transition-colors italic">Afro hair transplant</a></li>
+                <li><a href="https://uniqueraclinic.com/female-hair-transplant-turkey/" className="hover:text-brand-cyan transition-colors italic">Female Hair Transplant</a></li>
+                <li><a href="https://uniqueraclinic.com/dhi-hair-transplant-turkey/" className="hover:text-brand-cyan transition-colors italic">DHI</a></li>
+                <li><a href="https://uniqueraclinic.com/sapphire-fue-hair-transplant/" className="hover:text-brand-cyan transition-colors italic">FUE Sapphire</a></li>
+                <li><a href="https://uniqueraclinic.com/manual-fue-hair-transplant/" className="hover:text-brand-cyan transition-colors italic">FUE Manual</a></li>
+                <li><a href="https://uniqueraclinic.com/stem-cell-hair-transplant-in-turkey/" className="hover:text-brand-cyan transition-colors italic">Stem Cell Hair Transplant</a></li>
              </ul>
           </div>
           <div>
              <h4 className="font-bold text-white text-base mb-6 uppercase tracking-wider">Resources</h4>
              <ul className="space-y-3 text-gray-500 text-sm">
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Patient Guide</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Blog</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Case Study</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">FAQ</a></li>
+                <li><a href="https://uniqueraclinic.com/patient-guide/" className="hover:text-brand-cyan transition-colors italic">Patient Guide</a></li>
+                <li><a href="https://uniqueraclinic.com/blog/" className="hover:text-brand-cyan transition-colors italic">Blog</a></li>
+                <li><a href="https://uniqueraclinic.com/testimonials/" className="hover:text-brand-cyan transition-colors italic">Testimonials</a></li>
+                <li><a href="https://uniqueraclinic.com/our-gallery/" className="hover:text-brand-cyan transition-colors italic">Before and Afters</a></li>
+                <li><a href="https://uniqueraclinic.com/case-study/" className="hover:text-brand-cyan transition-colors italic">Case Study</a></li>
+                <li><a href="https://uniqueraclinic.com/faqs/" className="hover:text-brand-cyan transition-colors italic">FAQ</a></li>
              </ul>
           </div>
           <div>
              <h4 className="font-bold text-white text-base mb-6 uppercase tracking-wider">Support Page</h4>
              <ul className="space-y-3 text-gray-500 text-sm">
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-brand-cyan transition-colors italic">Contact Us</a></li>
+                <li><a href="https://uniqueraclinic.com/privacy-policy/" className="hover:text-brand-cyan transition-colors italic">Privacy Policy</a></li>
+                <li><a href="https://uniqueraclinic.com/contact-us/" className="hover:text-brand-cyan transition-colors italic">Contact Us</a></li>
              </ul>
              <div className="flex gap-4 pt-10">
-                   <a href="#" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all"><Instagram size={16}/></a>
-                   <a href="#" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all"><Twitter size={16}/></a>
-                   <a href="#" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all"><Facebook size={16}/></a>
-                   <a href="#" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all"><Youtube size={16}/></a>
+                   <a href="https://www.instagram.com/uniquerahairtransplant/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all"><Instagram size={16}/></a>
+                   <a href="https://www.facebook.com/profile.php?id=61568174116410#" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all"><Facebook size={16}/></a>
+                   <a href="https://www.youtube.com/@UniquEraHairTransplant" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all"><Youtube size={16}/></a>
+                   <a href="https://www.tiktok.com/@uniquerahairtransplant?_t=8pEDacrfmpa&_r=1" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-cyan hover:text-primary-bg transition-all">
+                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                       <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.01.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.89-.23-2.74.24-.81.47-1.34 1.31-1.43 2.24-.02.91.28 1.84.94 2.48.65.66 1.54.89 2.44.9 1.03-.01 2-.54 2.62-1.35.49-.67.6-1.47.59-2.29V.02z"/>
+                     </svg>
+                   </a>
              </div>
           </div>
        </div>
@@ -1061,6 +1129,7 @@ export default function App() {
 
 
         <MedicalGuideSection />
+        <HighAttentionCTA />
         <MedicalTeam />
         <AnniversaryProgram />
         <AnniversaryCTA />
