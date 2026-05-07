@@ -104,39 +104,13 @@ const Header = () => (
 const Hero = () => (
   <section id="about" className="relative overflow-hidden">
     {/* Main Hero Banner */}
-    <div className="relative w-full aspect-[2/1] md:aspect-[3/1] lg:aspect-[2560/1280] max-h-[85vh]">
+    <div className="relative w-full aspect-[2/1]">
       <img 
-        src="https://uniqueraclinic.com/wp-content/uploads/2026/04/Website-banner-final-soft-2560-x-1280-px-5-2-e1776191336605.webp" 
+        src="https://uniqueraclinic.com/wp-content/uploads/2026/05/Website-banner-final-soft.webp" 
         alt="Hair Transplant Results" 
         className="w-full h-full object-cover"
         referrerPolicy="no-referrer"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-bg/20 via-transparent to-primary-bg"></div>
-    </div>
-
-    <div className="container mx-auto px-4 text-center z-10 relative -mt-16 md:-mt-24 lg:-mt-32">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-[50px]"
-      >
-        <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 tracking-tight leading-[1.1]">
-          The <span className="text-white">Most Trusted Clinic</span> by patients <span className="text-brand-cyan italic">World Wide</span>
-        </h1>
-        <p className="text-gray-300 text-sm md:text-xl font-medium max-w-3xl mx-auto mb-10">
-          31,000+ procedures performed on patients from 40+ countries over 13+ years
-        </p>
-        <motion.button 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
-          className="btn-cyan px-10 py-4 text-base font-bold uppercase tracking-tight shadow-xl"
-        >
-          Claim My Free Virtual Consultation
-        </motion.button>
-      </motion.div>
     </div>
   </section>
 );
@@ -159,6 +133,27 @@ const TrustFeatures = () => (
   </div>
 );
 
+const EducationHeader = () => (
+  <section className="pt-24 bg-primary-bg overflow-hidden">
+    <div className="container mx-auto px-4">
+      <div className="text-center max-w-4xl mx-auto">
+        <span className="text-brand-cyan font-extrabold uppercase tracking-[0.2em] text-[10px] md:text-xs mb-4 block">
+          YOU COULD BE OUR NEXT TRANSFORMATION
+        </span>
+        <h2 className="font-bold text-white mb-6 uppercase tracking-tight" style={{ fontSize: '46px', lineHeight: '50px' }}>
+          Your transformation<br />starts <span className="text-[#2dc7cc]">here</span>
+        </h2>
+        <h3 className="text-brand-cyan text-lg md:text-2xl font-bold mb-6 italic tracking-tight">
+          Real planning. Real outcomes. No guesswork.
+        </h3>
+        <p className="text-gray-300 md:text-lg max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+          Schedule a free consultation for a graft assessment based on your hair loss, donor area, and long-term goals. Clear answers before you make any decision.
+        </p>
+      </div>
+    </div>
+  </section>
+);
+
 const Transformations = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const cases = [
@@ -178,21 +173,7 @@ const Transformations = () => {
     <section id="transformations" className="py-24 bg-primary-bg overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 max-w-4xl mx-auto">
-          <span className="text-brand-cyan font-extrabold uppercase tracking-[0.2em] text-[10px] md:text-xs mb-4 block">
-            YOU COULD BE OUR NEXT TRANSFORMATION
-          </span>
-          <h2 className="font-bold text-white mb-6 uppercase tracking-tight" style={{ fontSize: '46px', lineHeight: '50px' }}>
-            Your transformation<br />starts <span className="text-[#2dc7cc]">here</span>
-          </h2>
-          <h3 className="text-brand-cyan text-lg md:text-2xl font-bold mb-6 italic tracking-tight">
-            Real planning. Real outcomes. No guesswork.
-          </h3>
-          <p className="text-gray-300 md:text-lg max-w-2xl mx-auto font-medium leading-relaxed mb-12">
-            Schedule a free consultation for a graft assessment based on your hair loss, donor area, and long-term goals. Clear answers before you make any decision.
-          </p>
-          <div className="pt-8 border-t border-white/5">
-            <h2 className="text-4xl md:text-5xl font-bold">Real <span className="text-brand-cyan">Transformations</span></h2>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold">Real <span className="text-brand-cyan">Transformations</span></h2>
         </div>
         
         <div ref={scrollRef} className="flex overflow-x-auto gap-4 md:gap-6 snap-x snap-mandatory pb-8 scrollbar-hide no-scrollbar">
@@ -239,7 +220,10 @@ const Transformations = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <button className="btn-cyan flex items-center gap-2 mx-auto">
+          <button 
+            onClick={() => window.open('https://uniqueraclinic.com/our-gallery/', '_blank')}
+            className="btn-cyan flex items-center gap-2 mx-auto"
+          >
             <Play size={16} fill="currentColor" /> View More
           </button>
         </div>
@@ -248,47 +232,55 @@ const Transformations = () => {
   );
 };
 
-const CTASection = () => (
-  <section className="py-24">
-    <div className="container mx-auto px-4">
-      <div className="bg-accent-bg rounded-3xl p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 bg-gradient-to-l from-brand-cyan to-transparent"></div>
-        <div className="w-full md:w-1/2 relative z-10">
-            <img 
-            src="https://uniqueraclinic.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-05-at-02.35.29.webp" 
-            alt="Doctor and Patient" 
-            className="rounded-2xl shadow-well" 
-            referrerPolicy="no-referrer"
-          />
-        </div>
-        <div className="w-full md:w-1/2 z-10 text-center md:text-left">
-          <span className="text-brand-cyan font-bold uppercase tracking-widest text-sm">You could be our next transformation</span>
-          <h2 className="text-4xl md:text-6xl font-bold mt-4 mb-6 leading-tight">Your transformation <span className="text-brand-cyan">starts here</span></h2>
-          <p className="text-[#d1d5dc] text-lg mb-8 max-w-md">Real planning. Real outcomes. No guesswork. Schedule a free consultation for a graft assessment based on your hair loss.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <button 
-              onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-cyan"
-            >
-              Book an Appointment
-            </button>
-            <button 
-              onClick={() => document.getElementById('transformations')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-outline"
-            >
-              View Before and Afters
-            </button>
-          </div>
-          <div className="mt-8 flex items-center justify-center md:justify-start gap-6 opacity-60 text-xs font-bold uppercase">
-            <span className="flex items-center gap-1"><Star size={14} className="fill-brand-cyan text-brand-cyan" /> Trustpilot 4.9/5</span>
-            <span className="flex items-center gap-1"><CheckCircle2 size={14} className="text-brand-cyan" /> ProvenExpert 5/5</span>
-            <span className="flex items-center gap-1"><Star size={14} className="fill-brand-cyan text-brand-cyan" /> Google Reviews 5/5</span>
-          </div>
+const WhatsappSection = () => {
+  const screenshots = [
+    "https://uniqueraclinic.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-06-at-23.45.46-e1770409872204.webp",
+    "https://uniqueraclinic.com/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-24-at-00.38.10.webp",
+    "https://uniqueraclinic.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-01-at-18.00.53-1-1.jpeg"
+  ];
+
+  return (
+    <section className="py-24 bg-accent-bg border-y border-white/5 overflow-hidden">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold mb-16">Real <span className="text-brand-cyan italic">Patient Conversations</span></h2>
+        <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto items-center">
+          {screenshots.map((src, idx) => (
+            <div key={idx} className="relative group perspective-1000">
+               <motion.div 
+                 initial={{ opacity: 0, y: 30 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 transition={{ delay: idx * 0.2, duration: 0.8 }}
+                 viewport={{ once: true }}
+                 className="relative mx-auto border-[12px] border-gray-900 rounded-[3rem] h-[640px] w-[310px] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] bg-gray-900 overflow-hidden transform-gpu transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-4"
+               >
+                  {/* Speaker/Sensors Notch */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-gray-900 rounded-b-2xl z-30 flex items-center justify-center">
+                    <div className="w-10 h-1 bg-gray-800 rounded-full"></div>
+                  </div>
+                  
+                  {/* Screen Content */}
+                  <div className="h-full w-full bg-white overflow-y-auto no-scrollbar rounded-[2.2rem] relative">
+                    <img 
+                      src={src} 
+                      alt="WhatsApp Conversation" 
+                      className="w-full h-auto min-h-full object-cover" 
+                      referrerPolicy="no-referrer" 
+                    />
+                  </div>
+
+                  {/* Surface Reflection */}
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/10 via-transparent to-transparent z-20"></div>
+               </motion.div>
+               
+               {/* Decorative shadow reflect */}
+               <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-3/5 h-4 bg-brand-cyan/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Testimonials = () => (
   <section id="testimonials" className="py-24 bg-primary-bg">
@@ -312,7 +304,7 @@ const Testimonials = () => (
       <div className="lg:col-span-2 relative">
         <div className="bg-accent-bg p-8 md:p-12 rounded-4xl relative overflow-hidden">
           <div className="text-6xl text-brand-cyan/20 absolute top-4 left-4 font-serif">"</div>
-          <p className="text-[18px] text-gray-300 leading-[30.5px] relative z-10 italic">
+          <p className="text-[17px] text-gray-300 leading-[23.5px] relative z-10 italic">
             “Almost a year ago, I had my hair transplant at UniquEra Hair Transplant Clinic in Istanbul, and I’m beyond impressed with the results! The entire experience was top-notch from start to finish. The team was professional, warm, and incredibly thorough, explaining every detail of the process so I felt at ease. I had 4,500 grafts done, and despite the scale of the procedure, it was surprisingly comfortable once the numbing kicked in. The clinic’s modern facilities and the surgeons’ expertise really shone through. They even followed up with me during my stay, offering personalized care and some great recommendations for exploring Istanbul. Now, nearly a year later, my hair looks full, natural, and better than I ever imagined. UniquEra’s dedication to their patients is unmatched!”
           </p>
           <div className="mt-10 flex items-center gap-4">
@@ -328,7 +320,10 @@ const Testimonials = () => (
           </div>
         </div>
         <div className="mt-8 flex justify-center">
-            <button className="btn-cyan flex items-center gap-2">
+            <button 
+              onClick={() => window.open('https://uniqueraclinic.com/testimonials/', '_blank')}
+              className="btn-cyan flex items-center gap-2"
+            >
               <MessageSquare size={18} /> View Testimonials
             </button>
         </div>
@@ -491,7 +486,14 @@ const InstagramPost: React.FC<{ post: any }> = ({ post }) => {
       <div className="p-3 flex items-center gap-2 border-b">
         <div className="w-8 h-8 rounded-full bg-brand-cyan/20 flex items-center justify-center font-bold text-[10px]">U</div>
         <div className="text-[10px] font-bold">{post.user}</div>
-        <button className="ml-auto bg-brand-cyan text-white text-[10px] px-3 py-1 rounded">View profile</button>
+        <a 
+          href="https://www.instagram.com/uniquerahairtransplant/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="ml-auto bg-brand-cyan text-white text-[10px] px-3 py-1 rounded hover:bg-[#2dc7cc] transition-colors"
+        >
+          View profile
+        </a>
       </div>
       
       <div className="flex-1 relative bg-gray-100">
@@ -535,6 +537,49 @@ const InstagramPost: React.FC<{ post: any }> = ({ post }) => {
   );
 };
 
+const YoutubeSection = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoId = "vnXJtJ7D2D8";
+  const thumbnail = "https://uniqueraclinic.com/wp-content/uploads/2026/02/maxresdefault-1200x675.jpg";
+
+  return (
+    <section className="py-24 bg-primary-bg overflow-hidden border-y border-white/5">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold mb-12 uppercase tracking-tight">Real Patient <span className="text-brand-cyan">Experience</span></h2>
+        
+        <div className="relative inline-block w-full max-w-5xl group cursor-pointer aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-white/5">
+          {!isPlaying ? (
+            <div className="h-full w-full relative" onClick={() => setIsPlaying(true)}>
+              <img 
+                src={thumbnail} 
+                alt="Patient Experience Video" 
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-all duration-500">
+                <div className="w-20 h-20 md:w-32 md:h-32 bg-brand-cyan rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-[0_0_50px_rgba(45,199,204,0.4)]">
+                  <Play className="text-primary-bg fill-primary-bg ml-2" size={40} />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&si=U5LVU46njW-GPE2u`} 
+              title="YouTube video player" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const InstagramSection = () => {
   const posts = [
     { 
@@ -543,29 +588,40 @@ const InstagramSection = () => {
       likes: "178", 
       reelId: "DWJ0lOqDfex",
       content: "Natanael trusted the process and this is the result. Full hair, natural hairline, real confidence.",
-      img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/Ig-Post-1.jpg"
+      img: "https://uniqueraclinic.com/wp-content/uploads/2026/05/656320603_18320203021271135_4350920196892933004_n-e1778124524815.jpg"
     },
     { 
       user: "uniquerahairtransplant", 
       time: "1 year ago", 
       likes: "171", 
-      reelId: "DWJ0lOqDfex", // Using placeholder or same for now if others not known
+      reelId: "DSfb-gDCYFz",
       content: "What does a year really change? For Christopher, it changed everything without anyone noticing at first.",
-      img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/Ig-Post-2.jpg"
+      img: "https://uniqueraclinic.com/wp-content/uploads/2026/05/587461951_18308392801271135_455230924143920892_n-e1778124542139.jpg"
     },
     { 
       user: "uniquerahairtransplant", 
       time: "1 year ago", 
       likes: "14", 
-      reelId: "DWJ0lOqDfex",
+      reelId: "DVwAdqLDxUx",
       content: "Natanel trusted the process and this is the result. Fuller hair, natural hairline, real confidence.",
-      img: "https://uniqueraclinic.com/wp-content/uploads/2024/10/Ig-Post-3.jpg"
+      img: "https://uniqueraclinic.com/wp-content/uploads/2026/05/649667389_18318288985271135_9037796182761197950_n-e1778124558261.jpg"
     },
   ];
 
   return (
     <section className="py-24 bg-primary-bg">
       <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 uppercase tracking-tight">Real Results on <span className="text-brand-cyan">Instagram</span></h2>
+          <a 
+            href="https://www.instagram.com/uniquerahairtransplant/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-brand-cyan hover:underline inline-flex items-center gap-2 font-bold tracking-widest text-sm"
+          >
+            <Instagram size={18} /> @uniquerahairtransplant
+          </a>
+        </div>
         <div className="grid md:grid-cols-3 gap-8">
           {posts.map((post, idx) => (
             <InstagramPost key={idx} post={post} />
@@ -990,12 +1046,13 @@ export default function App() {
       
       <main>
         <Hero />
-        <TrustFeatures />
+        <EducationHeader />
         <ConsultationEmbed />
         <Transformations />
-        <CTASection />
+        <WhatsappSection />
         <Testimonials />
         <ConsultationSection />
+        <YoutubeSection />
         <InstagramSection />
         <MedicalStandards />
         <BloombergSection />
