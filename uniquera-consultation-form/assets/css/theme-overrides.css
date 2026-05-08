@@ -371,16 +371,24 @@
     min-height:120px;
     padding:10px 8px;
 }
+
+/* Step 10 option artwork: avoid top clipping from legacy overflow rules */
+.uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select .option > div,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select .option > div{
+    overflow: visible !important;
+}
+
 .uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select .animate,
 .uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select .animate{
     width:44px;
-    height:44px;
+    height:48px;
     margin:0 auto 8px;
 }
 .uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select object,
 .uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select object{
-    width:34px !important;
-    height:34px !important;
+    width:38px !important;
+    height:38px !important;
+    margin-top:2px;
 }
 .uniquera-form-wrap #question-10 .uniquera-q9-english .option-text,
 .uniquera-form-wrap #question-10 .uniquera-q9-travel .option-text{
@@ -433,6 +441,14 @@
     min-height:4.25rem;
     resize:vertical;
     max-height:min(40vh,260px);
+}
+
+/* Ensure submit stays clickable even when positioned across card edge */
+.uniquera-form-wrap #onlineForm .question-content .form-button,
+.uniquera-form-wrap #onlineForm .question-content .form-button-wrapper{
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 20;
 }
 
 /* Thank-you redesign */

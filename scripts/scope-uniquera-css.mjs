@@ -15,9 +15,15 @@ const INPUTS = [
   'uniquera-consultation-form/assets/css/main_v2.css',
 ];
 
-const merged = INPUTS.map((rel) =>
+const mergedRaw = INPUTS.map((rel) =>
   fs.readFileSync(path.join(root, rel), 'utf8')
 ).join('\n');
+
+// Normalize relative image URLs so bundled CSS works in production.
+const merged = mergedRaw.replace(
+  /url\((['"]?)(?:\.\.\/|\.\/)?images\//g,
+  'url($1/uniquera-consultation-form/assets/images/'
+);
 
 const { css } = postcss([
   prefixSelector({

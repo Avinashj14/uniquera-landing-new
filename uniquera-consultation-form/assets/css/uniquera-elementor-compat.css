@@ -97,7 +97,7 @@ body.uniquera-consultation-form-active {
     min-height: 48px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding-top: 20px;
 }
 
@@ -149,10 +149,15 @@ body.uniquera-consultation-form-active {
 }
 
 .uniquera-form-wrap #footer .steps {
-    flex: 1;
-    text-align: center;
+    flex: 1 1 auto;
+    text-align: left;
     position: relative;
     z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    margin-left: 56px; /* keep clear of back button area */
 }
 
 /*
