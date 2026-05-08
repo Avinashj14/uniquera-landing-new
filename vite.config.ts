@@ -73,7 +73,7 @@ export default defineConfig(({mode}) => {
             res.end(JSON.stringify({success: true, data: {nonce: 'react-app'}}));
           });
 
-          server.middlewares.use('/api/uniquera-form-submit', async (req, res) => {
+          const handleSubmit = async (req: any, res: any) => {
             if (req.method !== 'POST') {
               res.statusCode = 405;
               res.end();
@@ -156,7 +156,10 @@ export default defineConfig(({mode}) => {
             });
 
             req.pipe(bb);
-          });
+          };
+
+          server.middlewares.use('/api/uniquera-form-submit', handleSubmit);
+          server.middlewares.use('/api/uniquera-form-submit.php', handleSubmit);
         },
       },
     ],

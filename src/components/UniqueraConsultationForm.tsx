@@ -16,6 +16,8 @@ declare global {
       ajaxUrl: string;
       nonce: string;
       submitError: string;
+      homeUrl?: string;
+      thankYouUrl?: string;
       trackingDefaults: {
         utm_source: string;
         utm_campaign: string;
@@ -27,14 +29,6 @@ declare global {
     __uniqueraScriptPromises?: Record<string, Promise<void>>;
   }
 }
-
-const SCRIPT_SOURCES = [
-  '/uniquera-consultation-form/assets/js/jquery-3.6.0.min.js',
-  '/uniquera-consultation-form/assets/js/nouislider.min.js',
-  '/uniquera-consultation-form/assets/js/intlTelInput.min.js',
-  '/uniquera-consultation-form/assets/js/utils.js',
-  '/uniquera-consultation-form/assets/js/uniquera-main.js',
-];
 
 function loadScript(src: string): Promise<void> {
   window.__uniqueraScriptPromises = window.__uniqueraScriptPromises || {};
@@ -70,14 +64,37 @@ function loadScript(src: string): Promise<void> {
   return promise;
 }
 
+async function waitFor(check: () => boolean, retries = 20, delayMs = 150): Promise<boolean> {
+  for (let i = 0; i < retries; i += 1) {
+    if (check()) {
+      return true;
+    }
+    await new Promise((resolve) => window.setTimeout(resolve, delayMs));
+  }
+  return false;
+}
+
 export default function UniqueraConsultationForm() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const basePath = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+  const assetBase = `${basePath}/uniquera-consultation-form/assets`;
+  const submitUrl = `${basePath}/api/uniquera-form-submit.php`;
+  const scriptSources = useMemo(
+    () => [
+      `${assetBase}/js/jquery-3.6.0.min.js`,
+      `${assetBase}/js/nouislider.min.js`,
+      `${assetBase}/js/intlTelInput.min.js`,
+      `${assetBase}/js/utils.js`,
+      `${assetBase}/js/uniquera-main.js`,
+    ],
+    [assetBase],
+  );
 
   const formHtml = useMemo(() => {
     return formHtmlRaw
-      .replaceAll('../assets/form/images/', '/uniquera-consultation-form/assets/images/')
-      .replaceAll('https://uniqueraclinic.com/', '/');
-  }, []);
+      .replaceAll('../assets/form/images/', `${assetBase}/images/`)
+      .replaceAll('https://uniqueraclinic.com/', `${basePath}/`);
+  }, [assetBase, basePath]);
 
   useEffect(() => {
     document.body.classList.add('uniquera-consultation-form-active');
@@ -93,9 +110,11 @@ export default function UniqueraConsultationForm() {
       window.language = 'en';
       window.tedaviler = [];
       window.uniqueraForm = {
-        ajaxUrl: '/api/uniquera-form-submit',
+        ajaxUrl: submitUrl,
         nonce: 'react-app',
         submitError: 'Could not submit your form. Please try again.',
+        homeUrl: `${basePath || ''}/`,
+        thankYouUrl: 'https://uniqueraclinic.com/thank-you/',
         trackingDefaults: {
           utm_source: window.location.hostname,
           utm_campaign: 'uniquera_consultation_form',
@@ -103,7 +122,7 @@ export default function UniqueraConsultationForm() {
         },
       };
 
-      for (const src of SCRIPT_SOURCES) {
+      for (const src of scriptSources) {
         if (cancelled) {
           return;
         }
@@ -114,10 +133,18 @@ export default function UniqueraConsultationForm() {
         return;
       }
 
-      const jq = window.jQuery;
-      if (!jq || !jq.fn?.onlineForm) {
-        return;
+      const ready = await waitFor(() => {
+        const jq = window.jQuery;
+        if (!jq || !jq.fn?.onlineForm || !rootRef.current) {
+          return false;
+        }
+        const wrap = rootRef.current;
+        return wrap.querySelector('.questions') != null && wrap.querySelector('#footer .steps') != null;
+      });
+      if (!ready) {
+        throw new Error('Uniquera form scripts loaded but onlineForm plugin was not ready');
       }
+      const jq = window.jQuery;
 
       const selector = `#${rootRef.current.id} .questions`;
       const hasBootedUi = () => {
@@ -125,15 +152,10 @@ export default function UniqueraConsultationForm() {
         return rootRef.current.querySelectorAll('#footer .steps .step').length > 0;
       };
 
-      // Some environments race script eval vs inline template init.
-      // Re-run init a few times until steps/questions are actually mounted.
-      for (let attempt = 0; attempt < 5; attempt += 1) {
-        if (cancelled) return;
-        jq(selector)?.onlineForm?.();
-        await new Promise((resolve) => window.setTimeout(resolve, 250));
-        if (hasBootedUi()) {
-          break;
-        }
+      jq(selector)?.onlineForm?.();
+      await new Promise((resolve) => window.setTimeout(resolve, 400));
+      if (!hasBootedUi()) {
+        throw new Error('Uniquera form initialization incomplete: steps were not mounted');
       }
     };
 
@@ -144,7 +166,7 @@ export default function UniqueraConsultationForm() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [scriptSources, submitUrl]);
 
   return (
     <section id="consultation-form" aria-label="Consultation form" className="bg-primary-bg">

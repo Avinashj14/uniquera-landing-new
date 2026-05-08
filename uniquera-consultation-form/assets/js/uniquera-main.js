@@ -144,8 +144,15 @@ function uniqueraShowSubmitLoader($root) {
 
         return this.each(function () {
 
-            var $container = $(this),
-                loading,
+            var $container = $(this);
+
+            /* Calling onlineForm multiple times stacks duplicate delegated handlers + timeouts,
+             * which breaks navigation after closing validation quickly. */
+            if ($container.data('uniqueraOnlineFormInitialized')) {
+                return;
+            }
+
+            var loading,
                 phoneInput,
                 stepCreate,
                 stepSelect,
@@ -713,6 +720,9 @@ function uniqueraShowSubmitLoader($root) {
 
                 var closeModal = function () {
                     $root.find('.uniquera-validation-overlay, .uniquera-validation-modal').remove();
+                    /* Modal can close while queued navigation timers left interaction disabled. */
+                    settings.clickable = true;
+                    settings.validate = true;
                 };
                 $root.find('.uniquera-validation-overlay').on('click', closeModal);
                 $root.find('.uniquera-validation-close, .uniquera-validation-ok').on('click', closeModal);
@@ -967,10 +977,19 @@ function uniqueraShowSubmitLoader($root) {
             var thankYouRedirectTimer = null;
 
             function showInlineThankYouAndRedirect() {
+                uniqueraSetThankYouUrl();
+                var redirectTarget = '/';
+                if (typeof uniqueraForm !== 'undefined') {
+                    if (typeof uniqueraForm.thankYouUrl === 'string' && uniqueraForm.thankYouUrl.trim() !== '') {
+                        redirectTarget = uniqueraForm.thankYouUrl;
+                    } else if (typeof uniqueraForm.homeUrl === 'string' && uniqueraForm.homeUrl.trim() !== '') {
+                        redirectTarget = uniqueraForm.homeUrl;
+                    }
+                }
                 var $thankYou = $root.find('#uniquera-thankyou-screen');
                 if (!$thankYou.length) {
                     window.setTimeout(function () {
-                        window.location.href = '/';
+                        window.location.href = redirectTarget;
                     }, 8000);
                     return;
                 }
@@ -986,7 +1005,7 @@ function uniqueraShowSubmitLoader($root) {
                     window.clearTimeout(thankYouRedirectTimer);
                 }
                 thankYouRedirectTimer = window.setTimeout(function () {
-                    window.location.href = '/';
+                    window.location.href = redirectTarget;
                 }, 8000);
             }
 
@@ -2004,6 +2023,7 @@ function uniqueraShowSubmitLoader($root) {
 
             run();
             policy();
+            $container.data('uniqueraOnlineFormInitialized', true);
 
         });
 
