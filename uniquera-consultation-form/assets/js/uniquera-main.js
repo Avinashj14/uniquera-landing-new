@@ -964,6 +964,31 @@ function uniqueraShowSubmitLoader($root) {
 
 
             var stepAtla = 0;
+            var thankYouRedirectTimer = null;
+
+            function showInlineThankYouAndRedirect() {
+                var $thankYou = $root.find('#uniquera-thankyou-screen');
+                if (!$thankYou.length) {
+                    window.setTimeout(function () {
+                        window.location.href = '/';
+                    }, 8000);
+                    return;
+                }
+
+                $root.find('#content > form').hide();
+                $root.find('#footer').hide();
+                $root.find('.form-button-wrapper').hide();
+                $root.find('.back').addClass('hide');
+                $thankYou.addClass('uniquera-thankyou-screen--open').show();
+                scrollToFormTitle();
+
+                if (thankYouRedirectTimer) {
+                    window.clearTimeout(thankYouRedirectTimer);
+                }
+                thankYouRedirectTimer = window.setTimeout(function () {
+                    window.location.href = '/';
+                }, 8000);
+            }
 
             loadQuestion = function (currentQuestionNumber) {
 
@@ -997,14 +1022,7 @@ function uniqueraShowSubmitLoader($root) {
                                         } catch (e) {
                                             /* ignore */
                                         }
-                                        var redirectUrl = 'https://uniqueraclinic.com/thank-you/';
-                                        if (window.parent !== window) {
-                                            /* Inside iframe: open thank-you in new tab, then reload iframe to reset form */
-                                            try { window.open(redirectUrl, '_blank', 'noopener'); } catch (e) {}
-                                            window.setTimeout(function () { window.location.reload(); }, 120);
-                                        } else {
-                                            window.location.href = redirectUrl;
-                                        }
+                                        showInlineThankYouAndRedirect();
                                     } else {
                                         settings.validate = false;
                                         window.alert(typeof uniqueraForm !== 'undefined' && typeof uniqueraForm.submitError === 'string' ? uniqueraForm.submitError : 'Could not submit your form. Please try again.');

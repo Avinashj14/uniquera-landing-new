@@ -461,6 +461,20 @@
     padding:34px 28px;
     text-align:center;
 }
+.uniquera-form-wrap #onlineForm .uniquera-thankyou-screen .uniquera-thankyou-check{
+    width:56px;
+    height:56px;
+    margin:0 auto 12px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#0eb3ad;
+    color:#fff;
+    font-size:32px;
+    line-height:1;
+    font-weight:700;
+}
 .uniquera-form-wrap #onlineForm .uniquera-thankyou-screen .uniquera-thankyou-card h1{
     color:#0d2a3f;
     margin:0 0 12px;

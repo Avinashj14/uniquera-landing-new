@@ -1030,14 +1030,14 @@ const Footer = () => (
        </div>
     </div>
     <div className="fixed bottom-6 left-6 z-50">
-       <a 
-         href="https://wa.me/905388770199?text=Hi%20i%20want%20to%20know%20more%20about%20the%20process."
-         target="_blank"
-         rel="noopener noreferrer"
-         className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
-       >
-          <MessageCircle size={32} fill="currentColor" />
-       </a>
+      <button
+        type="button"
+        onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+        className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
+        aria-label="Open consultation form"
+      >
+        <MessageCircle size={32} fill="currentColor" />
+      </button>
     </div>
     
     {/* Floating Action Tabs */}
@@ -1065,7 +1065,6 @@ const Footer = () => (
 
 const PromoPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const whatsappUrl = "https://wa.me/905388770199";
 
   useEffect(() => {
     // Show popup after 1 second
@@ -1082,6 +1081,13 @@ const PromoPopup = () => {
   const closePopup = () => {
     setIsVisible(false);
     sessionStorage.setItem('hasSeenPromo', 'true');
+  };
+
+  const openConsultationForm = () => {
+    closePopup();
+    window.setTimeout(() => {
+      document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' });
+    }, 0);
   };
 
   return (
@@ -1146,15 +1152,13 @@ const PromoPopup = () => {
                 Get your exclusive offer now!
               </p>
 
-              <a 
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={closePopup}
+              <button
+                type="button"
+                onClick={openConsultationForm}
                 className="block w-full btn-cyan py-4 text-xs font-bold uppercase tracking-[0.1em] shadow-[0_15px_30px_-5px_rgba(45,199,204,0.4)]"
               >
                 Book My Hair Transplant
-              </a>
+              </button>
 
               <p className="text-[9px] text-gray-500 mt-7 font-medium italic opacity-60">
                 *Offer valid for bookings and procedures until the end of June 2026.
