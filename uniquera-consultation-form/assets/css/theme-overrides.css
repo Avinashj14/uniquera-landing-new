@@ -22,6 +22,19 @@
     color:var(--primary) !important;
 }
 
+/* Question text color */
+.uniquera-form-wrap #onlineForm .title-text h2,
+.uniquera-form-wrap #onlineForm .question p,
+.uniquera-form-wrap #onlineForm .question small {
+    color:#fff !important;
+}
+
+/* Keep option/input labels readable with original brand color */
+.uniquera-form-wrap #onlineForm .question .col-form-label,
+.uniquera-form-wrap #onlineForm .question .option-text {
+    color: var(--primary) !important;
+}
+
 /* Main CTA + hover */
 .uniquera-form-wrap .form-button{
     background:var(--primary) !important;
@@ -174,6 +187,27 @@
     font-size:15px;
     font-weight:700;
     color:#1f2d3d;
+    cursor:pointer;
+    text-decoration:underline;
+    text-underline-offset:2px;
+}
+
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__picker{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    justify-content:center;
+    padding:6px 0 2px;
+}
+
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__picker select{
+    border:1px solid #c9dde1;
+    border-radius:8px;
+    background:#fff;
+    padding:6px 8px;
+    font-weight:600;
+    color:#1f2d3d;
+    min-height:34px;
 }
 .uniquera-form-wrap #question-5 .uniquera-date-calendar__nav{
     width:30px;
@@ -297,8 +331,35 @@
     background:#ffffff;
     border:none;
     border-radius:12px;
-    padding:12px 14px;
-    margin-bottom:12px;
+    padding:10px 12px;
+    margin-bottom:8px;
+}
+
+/* Step 10: reduce extra vertical gaps inside rows */
+.uniquera-form-wrap #question-10 .form-group{
+    margin-bottom:8px;
+}
+
+.uniquera-form-wrap #question-10 .col-form-label{
+    padding-top:8px;
+    padding-bottom:6px;
+}
+
+/* Step 10: align Yes/No/Other options to the left (override justify-content-center) */
+.uniquera-form-wrap #question-10 .uniquera-q9-english,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel{
+    justify-content:flex-start !important;
+}
+
+.uniquera-form-wrap #question-10 .uniquera-q9-english > [class*="col-"],
+.uniquera-form-wrap #question-10 .uniquera-q9-travel > [class*="col-"]{
+    margin-bottom:8px !important; /* reduce mb-3 */
+}
+
+.uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select .option,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select .option{
+    min-height:104px;
+    padding:8px 8px;
 }
 .uniquera-form-wrap #question-10 .uniquera-step9-field .col-form-label,
 .uniquera-form-wrap #question-10 .uniquera-step10-field .col-form-label{

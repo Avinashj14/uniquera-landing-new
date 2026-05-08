@@ -27,7 +27,7 @@ body.uniquera-consultation-form-active {
     min-height: 0 !important;
     max-height: none !important;
     overflow: visible !important;
-    align-items: stretch;
+    align-items: stretch !important;
 }
 
 /* Initial loader block: avoid locking to full viewport when embedded */
@@ -54,6 +54,29 @@ body.uniquera-consultation-form-active {
  */
 .uniquera-form-wrap #onlineForm .wrapper {
     display: block !important;
+    background-color: #05191C !important;
+}
+
+.uniquera-form-wrap #onlineForm .question-content {
+    position: relative;
+    z-index: 2;
+    overflow: visible !important;
+}
+
+.uniquera-form-wrap #onlineForm .question.active {
+    display: block !important;
+}
+
+.uniquera-form-wrap #onlineForm #footer .col {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Safety: never let legacy overlay block inputs in embedded mode */
+.uniquera-form-wrap #onlineForm .overlay {
+    display: none !important;
+    pointer-events: none !important;
 }
 
 .uniquera-form-wrap #onlineForm #loading {
@@ -75,6 +98,7 @@ body.uniquera-consultation-form-active {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 20px;
 }
 
 .uniquera-form-wrap #footer .back {
@@ -112,6 +136,18 @@ body.uniquera-consultation-form-active {
     box-sizing: border-box;
 }
 
+/* Continue/Submit button: centered on bottom edge, half outside card */
+.uniquera-form-wrap #onlineForm .question-content .form-button-wrapper {
+    position: absolute !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: 0 !important;
+    transform: translate(-50%, 50%) !important;
+    width: auto !important;
+    text-align: center !important;
+    z-index: 6;
+}
+
 .uniquera-form-wrap #footer .steps {
     flex: 1;
     text-align: center;
@@ -138,16 +174,16 @@ body.uniquera-consultation-form-active {
  */
 .uniquera-form-wrap #onlineForm #footer .steps .step {
     width: 26px !important;
-    height: 20px !important;
-    border-width: 3px !important;
+    height: 26px !important;
+    border-width: 4px !important;
     border-style: solid !important;
     border-radius: 50% !important;
     box-sizing: border-box !important;
     background-color: #f4f6f7 !important;
     box-shadow: none !important;
     position: relative;
-    font-size: 7px;
-    line-height: 13px;
+    font-size: 9px;
+    line-height: 18px;
     text-align: center;
     z-index: 2;
 }
@@ -212,7 +248,7 @@ body.uniquera-consultation-form-active {
 
 /* Step label under Continue / Submit */
 .uniquera-form-wrap .uniquera-step-indicator {
-    display: block;
+    display: none !important;
     text-align: center;
     margin-top: 12px;
     font-size: 14px;
@@ -226,7 +262,10 @@ body.uniquera-consultation-form-active {
  * input in many browsers and steal clicks. Let events reach the overlay input.
  */
 .uniquera-form-wrap .radio-select input[type="radio"] {
+    position: absolute;
+    inset: 0;
     z-index: 5 !important;
+    pointer-events: auto !important;
 }
 
 .uniquera-form-wrap .radio-select .option .animate::before {
@@ -235,6 +274,34 @@ body.uniquera-consultation-form-active {
 
 .uniquera-form-wrap .radio-select object {
     pointer-events: none;
+}
+
+/* Keep option visuals centered without changing plugin layout mechanics */
+.uniquera-form-wrap .radio-select .option {
+    text-align: center;
+}
+
+.uniquera-form-wrap .radio-select {
+    position: relative;
+    cursor: pointer;
+}
+
+.uniquera-form-wrap .radio-select .option {
+    text-align: center;
+}
+
+.uniquera-form-wrap .radio-select .option .animate,
+.uniquera-form-wrap .radio-select .option > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uniquera-form-wrap .radio-select .option object,
+.uniquera-form-wrap .radio-select .option svg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Step validation: female hair-loss row needs a visible error when nothing is selected */

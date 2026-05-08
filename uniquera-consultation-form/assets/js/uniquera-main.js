@@ -232,7 +232,7 @@ function uniqueraShowSubmitLoader($root) {
                 $('#uniquera-step-denom-style').remove();
                 $('body').append(
                     '<style id="uniquera-step-denom-style" type="text/css">' +
-                    '.uniquera-form-wrap #footer .steps .step.active::after{content: " / ' + maxDisplay + '";}' +
+                    '.uniquera-form-wrap #footer .steps .step.active::after{content: "";}' +
                     '</style>'
                 );
 
@@ -1608,6 +1608,136 @@ function uniqueraShowSubmitLoader($root) {
                         }
                     }
 
+                    function parseMonthInput(raw) {
+                        var value = String(raw || '').trim();
+                        if (!value) {
+                            return null;
+                        }
+                        var asNum = parseInt(value, 10);
+                        if (!isNaN(asNum) && asNum >= 1 && asNum <= 12) {
+                            return asNum - 1;
+                        }
+                        var lowered = value.toLowerCase();
+                        var idx;
+                        for (idx = 0; idx < monthNames.length; idx++) {
+                            var mn = monthNames[idx].toLowerCase();
+                            if (mn === lowered || mn.indexOf(lowered) === 0) {
+                                return idx;
+                            }
+                        }
+                        return null;
+                    }
+
+                    function jumpToMonthYear(monthRaw, yearRaw) {
+                        var nextMonth = parseMonthInput(monthRaw);
+                        var nextYear = parseInt(String(yearRaw || '').trim(), 10);
+                        if (nextMonth == null || isNaN(nextYear) || nextYear < 1900 || nextYear > 2100) {
+                            return false;
+                        }
+                        viewMonth = nextMonth;
+                        viewYear = nextYear;
+                        clampViewMonth();
+                        renderCalendar();
+                        return true;
+                    }
+
+                    var pickerWrap = null;
+                    function closeMonthYearPicker() {
+                        if (pickerWrap && pickerWrap.parentNode) {
+                            pickerWrap.parentNode.removeChild(pickerWrap);
+                        }
+                        pickerWrap = null;
+                    }
+
+                    function openMonthYearPicker() {
+                        if (!titleEl || !calEl) {
+                            return;
+                        }
+                        if (pickerWrap) {
+                            closeMonthYearPicker();
+                            return;
+                        }
+
+                        pickerWrap = document.createElement('div');
+                        pickerWrap.className = 'uniquera-date-calendar__picker';
+
+                        var monthSel = document.createElement('select');
+                        monthSel.className = 'uniquera-date-calendar__picker-month';
+                        var mi;
+                        for (mi = 0; mi < monthNames.length; mi++) {
+                            var opt = document.createElement('option');
+                            opt.value = String(mi);
+                            opt.textContent = monthNames[mi];
+                            monthSel.appendChild(opt);
+                        }
+                        monthSel.value = String(viewMonth);
+
+                        var yearSel = document.createElement('select');
+                        yearSel.className = 'uniquera-date-calendar__picker-year';
+                        var minYear = minDateObj.getFullYear();
+                        var maxYear = maxDateObj.getFullYear();
+                        var yi;
+                        for (yi = maxYear; yi >= minYear; yi--) {
+                            var yopt = document.createElement('option');
+                            yopt.value = String(yi);
+                            yopt.textContent = String(yi);
+                            yearSel.appendChild(yopt);
+                        }
+                        yearSel.value = String(viewYear);
+
+                        pickerWrap.appendChild(monthSel);
+                        pickerWrap.appendChild(yearSel);
+
+                        // Insert right under the title (same head row)
+                        titleEl.parentNode.insertBefore(pickerWrap, titleEl.nextSibling);
+
+                        function apply() {
+                            var m = parseInt(String(monthSel.value || '0'), 10);
+                            var y = parseInt(String(yearSel.value || ''), 10);
+                            if (!isNaN(m) && !isNaN(y)) {
+                                viewMonth = m;
+                                viewYear = y;
+                                clampViewMonth();
+                                renderCalendar();
+                            }
+                        }
+
+                        monthSel.addEventListener('change', apply);
+                        yearSel.addEventListener('change', apply);
+
+                        // Wheel on month select: change month quickly
+                        monthSel.addEventListener('wheel', function (evt) {
+                            evt.preventDefault();
+                            var delta = evt.deltaY > 0 ? 1 : -1;
+                            var nm = viewMonth + delta;
+                            var ny = viewYear;
+                            if (nm < 0) {
+                                nm = 11;
+                                ny -= 1;
+                            } else if (nm > 11) {
+                                nm = 0;
+                                ny += 1;
+                            }
+                            viewMonth = nm;
+                            viewYear = ny;
+                            clampViewMonth();
+                            renderCalendar();
+                            monthSel.value = String(viewMonth);
+                            yearSel.value = String(viewYear);
+                        }, { passive: false });
+
+                        // Close picker if you click elsewhere in the calendar
+                        window.setTimeout(function () {
+                            $(document).on('mousedown.uniqueraMonthYear', function (evt) {
+                                if (!pickerWrap) return;
+                                if ($(calEl).has(evt.target).length === 0) {
+                                    closeMonthYearPicker();
+                                    $(document).off('mousedown.uniqueraMonthYear');
+                                }
+                            });
+                        }, 0);
+                    }
+
                     function syncFromCurrentValue() {
                         var parsed = parseIsoDateSafe($(el).val());
                         if (!parsed && pickerEl) {
@@ -1728,6 +1858,40 @@ function uniqueraShowSubmitLoader($root) {
                                 viewMonth = 0;
                                 viewYear += 1;
                             }
+                            renderCalendar();
+                        });
+                    }
+
+                    if (titleEl) {
+                        titleEl.setAttribute('role', 'button');
+                        titleEl.setAttribute('tabindex', '0');
+                        titleEl.setAttribute('title', 'Click to change month and year');
+                        $(titleEl).on('click', function (evt) {
+                            evt.preventDefault();
+                            openMonthYearPicker();
+                        });
+                        $(titleEl).on('keydown', function (evt) {
+                            if (evt.key === 'Enter' || evt.key === ' ') {
+                                evt.preventDefault();
+                                $(titleEl).trigger('click');
+                            } else if (evt.key === 'Escape') {
+                                closeMonthYearPicker();
+                            }
+                        });
+
+                        // Scroll on the title changes month (fast)
+                        $(titleEl).on('wheel', function (evt) {
+                            evt.preventDefault();
+                            var delta = evt.originalEvent && evt.originalEvent.deltaY > 0 ? 1 : -1;
+                            viewMonth += delta;
+                            if (viewMonth < 0) {
+                                viewMonth = 11;
+                                viewYear -= 1;
+                            } else if (viewMonth > 11) {
+                                viewMonth = 0;
+                                viewYear += 1;
+                            }
+                            clampViewMonth();
                             renderCalendar();
                         });
                     }

@@ -1,11 +1,7 @@
 import {useEffect, useMemo, useRef} from 'react';
 import formHtmlRaw from '../../uniquera-consultation-form/templates/form-fragment.html?raw';
 
-import '../../uniquera-consultation-form/assets/css/nouislider.min.css';
-import '../../uniquera-consultation-form/assets/css/intlTelInput.css';
-import '../../uniquera-consultation-form/assets/css/main_v2.css';
-import '../../uniquera-consultation-form/assets/css/theme-overrides.css';
-import '../../uniquera-consultation-form/assets/css/uniquera-elementor-compat.css';
+/* Form markup is in `.uniquera-form-wrap`; CSS is scoped in uniquera-form-scoped.css and loaded unlayered in index.css so Bootstrap class names beat Tailwind utilities inside the form. */
 
 type JQueryWithPlugin = {
   fn?: {
@@ -66,6 +62,13 @@ export default function UniqueraConsultationForm() {
   }, []);
 
   useEffect(() => {
+    document.body.classList.add('uniquera-consultation-form-active');
+    return () => {
+      document.body.classList.remove('uniquera-consultation-form-active');
+    };
+  }, []);
+
+  useEffect(() => {
     let cancelled = false;
 
     const boot = async () => {
@@ -111,7 +114,7 @@ export default function UniqueraConsultationForm() {
 
   return (
     <section id="consultation-form" aria-label="Consultation form" className="bg-primary-bg">
-      <div className="w-full bg-white overflow-hidden shadow-2xl border-white/10 py-6">
+      <div className="w-full bg-primary-bg overflow-x-hidden overflow-y-visible shadow-2xl border-white/10 py-6">
         <div
           id="uniquera-react-form-root"
           ref={rootRef}

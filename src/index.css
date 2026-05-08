@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
 @theme {
@@ -15,10 +16,15 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   body {
     @apply bg-primary-bg text-white font-sans antialiased;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -71,4 +77,23 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/*
+ * Form CSS must NOT live in a layer below Tailwind utilities: Bootstrap-style
+ * classes (.order-1, .text-center, etc.) share names with Tailwind; earlier layers
+ * always lose to @layer utilities, which breaks image-left / text-right rows and
+ * radio-overlay cards. Imports are unlayered; selectors are scoped to .uniquera-form-wrap only.
+ */
+@import "./generated/uniquera-form-scoped.css";
+@import "../uniquera-consultation-form/assets/css/theme-overrides.css";
+@import "../uniquera-consultation-form/assets/css/uniquera-elementor-compat.css";
+
+/*
+ * Prefixed legacy `body { overflow: hidden }` maps to `.uniquera-form-wrap { overflow:hidden }`,
+ * which clips intl-tel dropdowns (popovers need a visible overflow chain).
+ */
+body.uniquera-consultation-form-active .uniquera-form-wrap {
+  overflow-x: hidden;
+  overflow-y: visible;
 }
