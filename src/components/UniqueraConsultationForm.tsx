@@ -24,6 +24,7 @@ declare global {
     };
     language?: string;
     tedaviler?: unknown[];
+    __uniqueraScriptPromises?: Record<string, Promise<void>>;
   }
 }
 
@@ -36,20 +37,37 @@ const SCRIPT_SOURCES = [
 ];
 
 function loadScript(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
+  window.__uniqueraScriptPromises = window.__uniqueraScriptPromises || {};
+  if (window.__uniqueraScriptPromises[src]) {
+    return window.__uniqueraScriptPromises[src];
+  }
+
+  const promise = new Promise<void>((resolve, reject) => {
     const existing = document.querySelector<HTMLScriptElement>(`script[data-uniquera-src="${src}"]`);
-    if (existing) {
+    if (existing?.dataset.uniqueraLoaded === 'true') {
       resolve();
       return;
     }
+    if (existing) {
+      existing.addEventListener('load', () => resolve(), {once: true});
+      existing.addEventListener('error', () => reject(new Error(`Failed loading ${src}`)), {once: true});
+      return;
+    }
+
     const script = document.createElement('script');
     script.src = src;
     script.async = false;
     script.dataset.uniqueraSrc = src;
-    script.onload = () => resolve();
+    script.onload = () => {
+      script.dataset.uniqueraLoaded = 'true';
+      resolve();
+    };
     script.onerror = () => reject(new Error(`Failed loading ${src}`));
     document.body.appendChild(script);
   });
+
+  window.__uniqueraScriptPromises[src] = promise;
+  return promise;
 }
 
 export default function UniqueraConsultationForm() {

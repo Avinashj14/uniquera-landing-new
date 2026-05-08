@@ -33,6 +33,7 @@ import UniqueraConsultationForm from './components/UniqueraConsultationForm';
 // Assets
 const LOGO_URL = "https://uniqueraclinic.com/wp-content/uploads/2024/09/Group-17.svg";
 const LOGO_WHITE_URL = "https://uniqueraclinic.com/wp-content/uploads/2024/04/Group-1111.svg";
+const WHATSAPP_URL = "https://wa.me/905388770199?text=Hi%20I%20want%20to%20know%20more%20about%20the%20services%20-%20I%20checked%20your%20landing%20page";
 
 // Components
 const TopBar = () => {
@@ -43,8 +44,6 @@ const TopBar = () => {
     "Achieve stunning hair results with UniquEra Hair Transplant Clinic",
     "UniquEra Clinic: Best Hair Transplant in Turkey"
   ];
-  const whatsappUrl = "https://wa.me/905388770199";
-
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % messages.length);
@@ -58,7 +57,7 @@ const TopBar = () => {
         <AnimatePresence mode="wait">
           <motion.a
             key={index}
-            href={whatsappUrl}
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ y: 15, opacity: 0 }}
@@ -708,7 +707,7 @@ const YoutubeSection = () => {
             <iframe 
               width="100%" 
               height="100%" 
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&si=U5LVU46njW-GPE2u`} 
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&vq=hd1080&si=U5LVU46njW-GPE2u`} 
               title="YouTube video player" 
               frameBorder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -861,7 +860,7 @@ const BloombergSection = () => {
               <iframe 
                 width="100%" 
                 height="100%" 
-                src="https://www.youtube.com/embed/bKTyYS0b624?autoplay=1" 
+                src="https://www.youtube.com/embed/bKTyYS0b624?autoplay=1&vq=hd1080" 
                 title="YouTube video player" 
                 frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -928,27 +927,6 @@ const AnniversaryProgram = () => (
             </button>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-);
-
-const AnniversaryCTA = () => (
-  <section className="py-24 bg-[#043a40] border-y border-white/5">
-    <div className="container mx-auto px-4 text-center">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
-          Claim your <span className="text-brand-cyan italic">Anniversary Priority Consultation Slots</span>
-        </h2>
-        <p className="text-gray-300 text-lg mb-10 leading-relaxed max-w-3xl mx-auto font-medium">
-          Only 50 priority consultation slots are open for new patients. Complete the form and mention “E-Book” during your consultation to access the Anniversary Medical Priority Program benefits.
-        </p>
-        <button 
-          onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
-          className="btn-cyan px-12 py-5 text-xl font-black uppercase tracking-tighter shadow-[0_20px_50px_rgba(45,199,204,0.3)] hover:translate-y-[-5px] transition-all"
-        >
-          Secure My Free Consultation
-        </button>
       </div>
     </div>
   </section>
@@ -1039,15 +1017,16 @@ const Footer = () => (
           © UNIQUERA 2025, All rights reserved.
        </div>
     </div>
-    <div className="fixed bottom-6 left-6 z-50">
-      <button
-        type="button"
-        onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+    <div className="hidden md:block fixed bottom-6 left-[5%] z-50">
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
         className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
-        aria-label="Open consultation form"
+        aria-label="Chat with us on WhatsApp"
       >
         <MessageCircle size={32} fill="currentColor" />
-      </button>
+      </a>
     </div>
     
     {/* Floating Action Tabs */}
@@ -1271,14 +1250,28 @@ export default function App() {
         <HighAttentionCTA />
         <MedicalTeam />
         <AnniversaryProgram />
-        <AnniversaryCTA />
       </main>
 
       <Footer />
 
       {/* Floating CTA for Mobile */}
-      <div className="md:hidden fixed bottom-20 left-4 right-4 z-50">
-         <button className="w-full btn-cyan py-4 text-lg shadow-2xl">Book Now</button>
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex flex-col items-start gap-3">
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-[5%] w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
+          aria-label="Chat with us on WhatsApp"
+        >
+          <MessageCircle size={32} fill="currentColor" />
+        </a>
+        <button
+          type="button"
+          onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+          className="w-[95%] self-center mb-[3px] btn-cyan py-4 text-lg shadow-2xl"
+        >
+          Book Now
+        </button>
       </div>
     </div>
   );
