@@ -1171,6 +1171,60 @@ const PromoPopup = () => {
   );
 };
 
+const CookieConsent = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('uniquera-cookie-consent');
+      if (!saved) {
+        setVisible(true);
+      }
+    } catch {
+      setVisible(true);
+    }
+  }, []);
+
+  const setConsent = (value: 'accepted' | 'rejected') => {
+    try {
+      localStorage.setItem('uniquera-cookie-consent', value);
+      localStorage.setItem('uniquera-cookie-consent-at', new Date().toISOString());
+    } catch {
+      // ignore storage errors
+    }
+    setVisible(false);
+  };
+
+  if (!visible) return null;
+
+  return (
+    <div className="fixed bottom-4 left-4 right-4 z-[120] md:left-auto md:right-6 md:max-w-xl">
+      <div className="rounded-2xl border border-white/10 bg-[#031011]/95 backdrop-blur-md p-4 md:p-5 shadow-2xl">
+        <p className="text-sm text-gray-200 leading-relaxed mb-4">
+          We use cookies to improve your experience, analyze traffic, and personalize content.
+          By clicking <span className="text-brand-cyan font-semibold">Accept</span>, you agree to our use of cookies.
+        </p>
+        <div className="flex items-center gap-2 justify-end">
+          <button
+            type="button"
+            onClick={() => setConsent('rejected')}
+            className="px-4 py-2 rounded-full border border-white/20 text-white text-xs md:text-sm font-semibold hover:bg-white/10 transition-colors"
+          >
+            Reject
+          </button>
+          <button
+            type="button"
+            onClick={() => setConsent('accepted')}
+            className="px-4 py-2 rounded-full bg-brand-cyan text-primary-bg text-xs md:text-sm font-bold hover:opacity-90 transition-opacity"
+          >
+            Accept
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -1183,6 +1237,7 @@ export default function App() {
   return (
     <div className="min-h-screen selection:bg-brand-cyan selection:text-primary-bg">
       <PromoPopup />
+      <CookieConsent />
       <TopBar />
       <Header />
       
