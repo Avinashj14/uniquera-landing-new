@@ -100,7 +100,23 @@ export default function UniqueraConsultationForm() {
       if (!jq || !jq.fn?.onlineForm) {
         return;
       }
-      jq(`#${rootRef.current.id} .questions`)?.onlineForm?.();
+
+      const selector = `#${rootRef.current.id} .questions`;
+      const hasBootedUi = () => {
+        if (!rootRef.current) return false;
+        return rootRef.current.querySelectorAll('#footer .steps .step').length > 0;
+      };
+
+      // Some environments race script eval vs inline template init.
+      // Re-run init a few times until steps/questions are actually mounted.
+      for (let attempt = 0; attempt < 5; attempt += 1) {
+        if (cancelled) return;
+        jq(selector)?.onlineForm?.();
+        await new Promise((resolve) => window.setTimeout(resolve, 250));
+        if (hasBootedUi()) {
+          break;
+        }
+      }
     };
 
     boot().catch((error) => {

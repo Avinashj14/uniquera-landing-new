@@ -82,9 +82,15 @@ export default defineConfig(({mode}) => {
 
             const transporter = createTransport(env);
             if (!transporter) {
-              res.statusCode = 500;
+              // Local/dev fallback: allow form UX testing without SMTP.
+              res.statusCode = 200;
               res.setHeader('Content-Type', 'application/json');
-              res.end(JSON.stringify({success: false, data: {message: 'smtp_not_configured'}}));
+              res.end(
+                JSON.stringify({
+                  success: true,
+                  data: {id: Date.now(), mock: true, message: 'smtp_not_configured_dev_fallback'},
+                }),
+              );
               return;
             }
 

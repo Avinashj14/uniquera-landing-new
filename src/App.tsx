@@ -334,6 +334,16 @@ const Testimonials = () => {
                 {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="currentColor" />)}
               </div>
             </div>
+            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 flex items-center justify-between">
+              <div>
+                <div className="h-5 mb-2 text-[#00B67A] text-sm font-bold tracking-wide">Trustpilot</div>
+                <div className="text-3xl font-bold">4.9</div>
+                <div className="text-[10px] uppercase font-bold text-gray-500">Trustpilot Rating</div>
+              </div>
+              <div className="flex gap-0.5 text-green-500">
+                {[1,2,3,4,5].map(i => <Star key={`tp-${i}`} size={14} fill="currentColor" />)}
+              </div>
+            </div>
           </div>
         </div>
         <div className="lg:col-span-2 relative">
@@ -1160,7 +1170,7 @@ const PromoPopup = () => {
                 Book My Hair Transplant
               </button>
 
-              <p className="text-[9px] text-gray-500 mt-7 font-medium italic opacity-60">
+              <p className="text-[9px] text-white mt-7 font-medium italic opacity-80">
                 *Offer valid for bookings and procedures until the end of June 2026.
               </p>
             </div>
