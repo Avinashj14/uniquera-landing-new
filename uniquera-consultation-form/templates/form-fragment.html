@@ -1,0 +1,1185 @@
+<div id="onlineForm">
+    <!-- Full-page preloader: covers layout until window load + form init (see script at bottom). -->
+    <div id="uniquera-page-preloader"
+        class="uniquera-page-preloader"
+        style="display:none !important;"
+        aria-busy="false"
+        aria-live="polite"
+        aria-label="Loading consultation form">
+        <div class="uniquera-page-preloader__spinner" aria-hidden="true"></div>
+        <p class="uniquera-page-preloader__text">Loading…</p>
+    </div>
+    <div class="main">
+
+        <div class="container-fluid" id="loading" style="display:none;">
+            <div class="row">
+                <div class="col-md-4 col-10" id="loading_image">
+                    <div style="margin:0 auto;position:relative;width: 275px;height: 325px">
+                        <img src="../assets/form/images/transparent/8.png" width="275" height="325" alt="character" aria-labelledby="character"><span style="display: none;" id="character">character</span>
+                        <span id="character-intro" style="display:none;">character-intro</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-10" id="loading_text">
+                    <h1>Hair Transplantation Planning Consultation</h1>
+                    <div class="meter">
+                        <span style="width: 0%;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--questions-->
+        <div class="wrapper" style="display:block;">
+
+            <div class="container-fluid" id="content">
+
+                <!--header-->
+                <div class="header" id="header">
+                    <a href="https://uniqueraclinic.com/" class="back-site"></a>
+                </div>
+
+                <!--title-->
+                <div class="title" id="title">
+
+                    <div class="row align-items-center">
+                        <div class="col-sm-5 col-6 order-2 order-sm-1">
+                            <div class="title-image">
+                                <img src="../assets/form/images/transparent/1.png" data-step="1" style="display:inline;" alt="data step 1" aria-labelledby="data_step_1"><span style="display: none;" id="data_step_1">data step 1</span>
+                                <img src="../assets/form/images/transparent/2.png" data-step="2" alt="data step 2" aria-labelledby="data_step_2"><span style="display: none;" id="data_step_2">data step 2</span>
+                                <img src="../assets/form/images/transparent/3.png" data-step="3" alt="data step 3" aria-labelledby="data_step_3"><span style="display: none;" id="data_step_3">data step 3</span>
+                                <img src="../assets/form/images/transparent/4.png" data-step="4" alt="data step 4" aria-labelledby="data_step_4"><span style="display: none;" id="data_step_4">data step 4</span>
+                                <img src="../assets/form/images/transparent/3.png" data-step="5" alt="data step 5" aria-labelledby="data_step_5"><span style="display: none;" id="data_step_5">data step 5</span>
+                                <img src="../assets/form/images/transparent/6.png" data-step="6" alt="data step 6" aria-labelledby="data_step_6"><span style="display: none;" id="data_step_6">data step 6</span>
+                                <img src="../assets/form/images/transparent/7.png" data-step="7" alt="data step 7" aria-labelledby="data_step_7"><span style="display: none;" id="data_step_7">data step 7</span>
+                                <img src="../assets/form/images/transparent/8.png" data-step="8" alt="data step 8" aria-labelledby="data_step_8"><span style="display: none;" id="data_step_8">data step 8</span>
+                                <img src="../assets/form/images/transparent/7.png" data-step="9" alt="data step 9" aria-labelledby="data_step_9"><span style="display: none;" id="data_step_9">data step 9</span>
+                                <img src="../assets/form/images/transparent/5.png" data-step="10" alt="data step 10" aria-labelledby="data_step_10"><span style="display: none;" id="data_step_10">data step 10</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-7 order-1 order-sm-2">
+                            <div class="title-text">
+                                <h2></h2>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--questions-->
+                <form enctype="multipart/form-data">
+                    <div class="questions" id="questions">
+
+                        <div class="question-content">
+
+                            <!--question-1-->
+                            <div class="question step" id="question-1" data-question="1" data-title="Please choose your gender.">
+
+                                <div class="row justify-content-center full-width">
+                                    <div class="col-md-3 col-sm-5 col-6">
+
+                                        <div class="radio-select">
+                                            <input type="radio" name="gender" value="female">
+                                            <div class="option">
+                                                <div class="animate">
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-gender-00.svg" aria-labelledby="option_gender_1"></object>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> <span id="option_gender_1">Woman</span></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-sm-5 col-6">
+
+                                        <div class="radio-select">
+                                            <input type="radio" name="gender" value="male">
+                                            <div class="option">
+                                                <div class="animate">
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-gender-01.svg" aria-labelledby="option_gender_2"></object>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> <span id="option_gender_2">Man</span></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div><!--question-1_end-->
+                            <!--question-2-->
+                            <div class="question hair-question" id="question-2" data-question="2" data-title="How do you define your hair loss?">
+
+                                <div class="row justify-content-center full-width question-female">
+
+                                    <div class="col-md-2 col-sm-4 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="preview" value="0">
+                                            <div class="option">
+                                                <div>
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-preview-female-00.svg" aria-labelledby="option-preview-female-00"></object><span style="display: none;" id="option-preview-female-00">option-preview-female-00</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> None</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="preview" value="1">
+                                            <div class="option">
+                                                <div>
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-preview-female-01.svg" aria-labelledby="option-preview-female-01"></object><span style="display: none;" id="option-preview-female-01">option-preview-female-01</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> Light</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="preview" value="2">
+                                            <div class="option">
+                                                <div>
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-preview-female-02.svg" aria-labelledby="option-preview-female-02"></object><span style="display: none;" id="option-preview-female-02">option-preview-female-02</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> Light-Medium</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="preview" value="3">
+                                            <div class="option">
+                                                <div>
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-preview-female-03.svg" aria-labelledby="option-preview-female-03"></object><span style="display: none;" id="option-preview-female-03">option-preview-female-03</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> Medium</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="preview" value="4">
+                                            <div class="option">
+                                                <div>
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-preview-female-04.svg" aria-labelledby="option-preview-female-04"></object><span style="display: none;" id="option-preview-female-04">option-preview-female-04</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> Extensive</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="preview" value="5">
+                                            <div class="option">
+                                                <div>
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-preview-female-05.svg" aria-labelledby="option-preview-female-05"></object><span style="display: none;" id="option-preview-female-05">option-preview-female-05</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> Completely</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <!--male-->
+
+                                <div class="row justify-content-center full-width question-male">
+
+                                    <!--sol-->
+                                    <div class="col-md-3 col-sm-6 col-8 sol">
+                                        <h6 class="text-center">Preview</h6>
+                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                            <path id="front-0" fill-rule="evenodd" fill="#804308" d="M168.678,143.771s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3,0,0,.694,35.8,17.022,33.881,0,0,3.527-14.724,35.78-5.893s59.194,4.557,71.7,0S165.932,141.8,168.678,143.771Z"></path>
+                                            <path id="front-1" style="display:none;" fill-rule="evenodd" fill="#804308" d="M34.936,146.191c9.138-47.918,36.475-34.607,36.475-34.607,6.951,29.721,31.612,24.927,31.612,24.927,25.45-.159,31.611-24.927,31.611-24.927,22.117-2.866,34.044,32.187,34.044,32.187s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.874,7.471,134.634,5.824c0,0-40.217-13.112-68.086,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3C17.914,112.31,18.608,148.112,34.936,146.191Z"></path>
+                                            <path id="front-2" style="display:none;" fill-rule="evenodd" fill="#804308" d="M34.936,146.191C36.343,92.37,76.691,89.552,76.691,89.552c6.951,29.721,23.9,35.821,23.9,35.821,16.688,2.373,26.887-35.821,26.887-35.821,25.609-5,41.2,54.219,41.2,54.219s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3C17.914,112.31,18.608,148.112,34.936,146.191Z"></path>
+                                            <path id="front-3" style="display:none;" fill-rule="evenodd" fill="#804308" d="M185.7,80.848c-6.186,18.147-2.1,30.439-2.432,33.882-8.513,34.937-14.59,29.041-14.59,29.041S174.466,65.59,133.453,80.6c0,0-.114.331-0.314,0.886-18.618,4.864-29.56,5.084-29.56,5.084-9.99,0-25.909-3.557-32.645-5.177-0.066-.27-0.154-0.52-0.218-0.793,0,0-43.692-18.058-35.78,65.594-16.328,1.921-17.022-33.881-17.022-33.881,5.014-11.934-4.863-36.3-4.863-36.3,4.438-75.744,53.5-70.184,53.5-70.184,27.869-13.112,68.086,0,68.086,0C172.875,7.471,191.885,62.7,185.7,80.848Zm-55.059,7.14c-5.344,13.168-17.552,39.162-30.05,37.385A79.065,79.065,0,0,1,72.769,87.6C99.652,92.889,120.917,90.012,130.641,87.988Z"></path>
+                                            <path id="front-4" style="display:none;" fill-rule="evenodd" fill="#804308" d="M185.7,80.848c-6.186,18.147-2.106,30.439-2.432,33.882-8.513,34.937-14.59,29.041-14.59,29.041S157.9,28.456,136.85,72.351c-19.3,5.284-33.271,8.247-33.271,8.247-13.859.132-32.65-6.607-37.58-8.471-8.843-13.292-27.357-27.961-31.063,74.065-16.328,1.921-17.022-33.881-17.022-33.881,5.014-11.934-4.863-36.3-4.863-36.3,4.438-75.744,53.5-70.184,53.5-70.184,27.87-13.112,68.087,0,68.087,0C172.874,7.471,191.885,62.7,185.7,80.848Zm-55.06,7.14c-5.343,13.168-17.551,39.162-30.049,37.385A79.064,79.064,0,0,1,72.769,87.6C99.653,92.889,120.917,90.012,130.64,87.988Z"></path>
+                                            <path id="front-5" style="display:none;" fill-rule="evenodd" fill="#804308" d="M185.7,80.848c-6.186,18.147-2.1,30.439-2.432,33.882-8.513,34.937-14.59,29.041-14.59,29.041S156.542-50.156,120.143,72.01C110.379,82.2,103.579,80.6,103.579,80.6c-9.174.087-16.622-5.753-21.336-10.788-0.919-3.406-1.79-6.8-2.564-10.107,0,0-38.321-102.489-44.743,86.489-16.328,1.921-17.022-33.881-17.022-33.881,5.014-11.934-4.863-36.3-4.863-36.3,4.438-75.744,53.5-70.184,53.5-70.184,27.869-13.112,68.086,0,68.086,0C172.874,7.471,191.885,62.7,185.7,80.848ZM112.373,106.6c-3.029,10.414-7.052,19.475-11.782,18.769,0,0-2.963-7.644-6.827-18.745C100.94,106.855,107.145,106.805,112.373,106.6Z"></path>
+                                            <path id="back-1" style="display:none;" fill-rule="evenodd" fill="#f9a17b" d="M100.388,24.38c11.541,0,20.9,6.014,20.9,13.433s-9.355,13.433-20.9,13.433-20.9-6.014-20.9-13.433S88.848,24.38,100.388,24.38Z"></path>
+                                            <path id="back-2" style="display:none;" fill-rule="evenodd" fill="#f9a17b" d="M99.9,21.395c15.662,0,28.358,8.687,28.358,19.4S115.558,60.2,99.9,60.2,71.537,51.514,71.537,40.8,84.234,21.395,99.9,21.395Z"></path>
+                                            <path id="back-3" style="display:none;" fill-rule="evenodd" fill="#f9a17b" d="M100.4,18.41c23.081,0,41.792,12.028,41.792,26.866S123.484,72.142,100.4,72.142,58.612,60.113,58.612,45.276,77.323,18.41,100.4,18.41Z"></path>
+                                            <path id="back-4" style="display:none;" fill-rule="evenodd" fill="#f9a17b" d="M100.4,18.41c28.027,0,50.747,15.37,50.747,34.329S128.43,87.067,100.4,87.067,49.657,71.7,49.657,52.738,72.377,18.41,100.4,18.41Z"></path>
+                                            <path id="back-5" style="display:none;" fill-rule="evenodd" fill="#f9a17b" d="M100.4,15.425c34.621,0,62.687,18.711,62.687,41.791S135.024,99.008,100.4,99.008,37.716,80.3,37.716,57.216,65.782,15.425,100.4,15.425Z"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!--sag-->
+                                    <div class="col-md-9 sag">
+                                        <h6>Choose your hair loss in the frontal area.</h6>
+                                        <div class="row validate mb-20">
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="front" value="0">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-0" fill-rule="evenodd" fill="#804308" d="M168.678,143.771s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3,0,0,.694,35.8,17.022,33.881,0,0,3.527-14.724,35.78-5.893s59.194,4.557,71.7,0S165.932,141.8,168.678,143.771Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> None</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="front" value="1">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-1" fill-rule="evenodd" fill="#804308" d="M34.936,146.191c9.138-47.918,36.475-34.607,36.475-34.607,6.951,29.721,31.612,24.927,31.612,24.927,25.45-.159,31.611-24.927,31.611-24.927,22.117-2.866,34.044,32.187,34.044,32.187s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.874,7.471,134.634,5.824c0,0-40.217-13.112-68.086,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3C17.914,112.31,18.608,148.112,34.936,146.191Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Light</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="front" value="2">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-2" fill-rule="evenodd" fill="#804308" d="M34.936,146.191C36.343,92.37,76.691,89.552,76.691,89.552c6.951,29.721,23.9,35.821,23.9,35.821,16.688,2.373,26.887-35.821,26.887-35.821,25.609-5,41.2,54.219,41.2,54.219s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3C17.914,112.31,18.608,148.112,34.936,146.191Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Light-Medium</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="front" value="3">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-3" fill-rule="evenodd" fill="#804308" d="M185.7,80.848c-6.186,18.147-2.1,30.439-2.432,33.882-8.513,34.937-14.59,29.041-14.59,29.041S174.466,65.59,133.453,80.6c0,0-.114.331-0.314,0.886-18.618,4.864-29.56,5.084-29.56,5.084-9.99,0-25.909-3.557-32.645-5.177-0.066-.27-0.154-0.52-0.218-0.793,0,0-43.692-18.058-35.78,65.594-16.328,1.921-17.022-33.881-17.022-33.881,5.014-11.934-4.863-36.3-4.863-36.3,4.438-75.744,53.5-70.184,53.5-70.184,27.869-13.112,68.086,0,68.086,0C172.875,7.471,191.885,62.7,185.7,80.848Zm-55.059,7.14c-5.344,13.168-17.552,39.162-30.05,37.385A79.065,79.065,0,0,1,72.769,87.6C99.652,92.889,120.917,90.012,130.641,87.988Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Medium</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="front" value="4">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-4" fill-rule="evenodd" fill="#804308" d="M185.7,80.848c-6.186,18.147-2.106,30.439-2.432,33.882-8.513,34.937-14.59,29.041-14.59,29.041S157.9,28.456,136.85,72.351c-19.3,5.284-33.271,8.247-33.271,8.247-13.859.132-32.65-6.607-37.58-8.471-8.843-13.292-27.357-27.961-31.063,74.065-16.328,1.921-17.022-33.881-17.022-33.881,5.014-11.934-4.863-36.3-4.863-36.3,4.438-75.744,53.5-70.184,53.5-70.184,27.87-13.112,68.087,0,68.087,0C172.874,7.471,191.885,62.7,185.7,80.848Zm-55.06,7.14c-5.343,13.168-17.551,39.162-30.049,37.385A79.064,79.064,0,0,1,72.769,87.6C99.653,92.889,120.917,90.012,130.64,87.988Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Medium-Extensive</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="front" value="5">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-5" fill-rule="evenodd" fill="#804308" d="M185.7,80.848c-6.186,18.147-2.1,30.439-2.432,33.882-8.513,34.937-14.59,29.041-14.59,29.041S156.542-50.156,120.143,72.01C110.379,82.2,103.579,80.6,103.579,80.6c-9.174.087-16.622-5.753-21.336-10.788-0.919-3.406-1.79-6.8-2.564-10.107,0,0-38.321-102.489-44.743,86.489-16.328,1.921-17.022-33.881-17.022-33.881,5.014-11.934-4.863-36.3-4.863-36.3,4.438-75.744,53.5-70.184,53.5-70.184,27.869-13.112,68.086,0,68.086,0C172.874,7.471,191.885,62.7,185.7,80.848ZM112.373,106.6c-3.029,10.414-7.052,19.475-11.782,18.769,0,0-2.963-7.644-6.827-18.745C100.94,106.855,107.145,106.805,112.373,106.6Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Extensive</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6>Choose your hair loss in the crown area.</h6>
+                                        <div class="row validate">
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="back" value="0">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-0" fill-rule="evenodd" fill="#804308" d="M168.678,143.771s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3,0,0,.694,35.8,17.022,33.881,0,0,3.527-14.724,35.78-5.893s59.194,4.557,71.7,0S165.932,141.8,168.678,143.771Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> None</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="back" value="1">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-0" fill-rule="evenodd" fill="#804308" d="M168.678,143.771s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3,0,0,.694,35.8,17.022,33.881,0,0,3.527-14.724,35.78-5.893s59.194,4.557,71.7,0S165.932,141.8,168.678,143.771Z"></path>
+                                                            <path id="back-1" fill-rule="evenodd" fill="#f9a17b" d="M100.388,24.38c11.541,0,20.9,6.014,20.9,13.433s-9.355,13.433-20.9,13.433-20.9-6.014-20.9-13.433S88.848,24.38,100.388,24.38Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Light</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="back" value="2">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-0" fill-rule="evenodd" fill="#804308" d="M168.678,143.771s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3,0,0,.694,35.8,17.022,33.881,0,0,3.527-14.724,35.78-5.893s59.194,4.557,71.7,0S165.932,141.8,168.678,143.771Z"></path>
+                                                            <path id="back-2" fill-rule="evenodd" fill="#f9a17b" d="M99.9,21.395c15.662,0,28.358,8.687,28.358,19.4S115.558,60.2,99.9,60.2,71.537,51.514,71.537,40.8,84.234,21.395,99.9,21.395Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Light-Medium</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="back" value="3">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-0" fill-rule="evenodd" fill="#804308" d="M168.678,143.771s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3,0,0,.694,35.8,17.022,33.881,0,0,3.527-14.724,35.78-5.893s59.194,4.557,71.7,0S165.932,141.8,168.678,143.771Z"></path>
+                                                            <path id="back-3" fill-rule="evenodd" fill="#f9a17b" d="M100.4,18.41c23.081,0,41.792,12.028,41.792,26.866S123.484,72.142,100.4,72.142,58.612,60.113,58.612,45.276,77.323,18.41,100.4,18.41Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Medium</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="back" value="4">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-0" fill-rule="evenodd" fill="#804308" d="M168.678,143.771s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3,0,0,.694,35.8,17.022,33.881,0,0,3.527-14.724,35.78-5.893s59.194,4.557,71.7,0S165.932,141.8,168.678,143.771Z"></path>
+                                                            <path id="back-4" fill-rule="evenodd" fill="#f9a17b" d="M100.4,18.41c28.027,0,50.747,15.37,50.747,34.329S128.43,87.067,100.4,87.067,49.657,71.7,49.657,52.738,72.377,18.41,100.4,18.41Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Medium-Extensive</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4 col-2">
+                                                <div class="radio-select">
+                                                    <input type="radio" name="back" value="5">
+                                                    <div class="option">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="preview" viewBox="0 0 200 200">
+                                                            <path id="body" fill-rule="evenodd" fill="#f9a17b" d="M193.2,98.508c-3.317,7.471-6.458,11.807-9.222,14.242-0.207,1.194-.347,1.841-0.347,1.841-8.144,60.513-46.572,73.635-68.184,76.158C114.69,195.954,109,200,102.086,200c-6.78,0-12.373-3.893-13.305-8.951C68,189.406,26.267,178.129,17.61,115.081c-3.109-1.947-6.869-6.413-10.9-15.811,0,0-6.076-29.485,4.538-23.986a15.677,15.677,0,0,0,4.364,9.726C17.173,53.542,31.4,8.244,100.4,8.244c67.64,0,82.878,43.137,85.03,74.464a15.109,15.109,0,0,0,3.092-8.081C199.468,69.154,193.2,98.508,193.2,98.508Z"></path>
+                                                            <path id="eyes" fill-rule="evenodd" fill="#bc7c60" d="M52.792,158.208H82.666s3.881,7.423,5.975,11.941H85.654l-5.975-5.971H52.792S50.02,159.553,52.792,158.208Zm94.426,0h-28.9s-3.753,7.423-5.779,11.941h2.89l5.779-5.971h26.007S149.9,159.553,147.217,158.208Z"></path>
+                                                            <path id="front-0" fill-rule="evenodd" fill="#804308" d="M168.678,143.771s6.077,5.9,14.59-29.041C183.6,111.287,179.514,99,185.7,80.848S172.875,7.471,134.635,5.824c0,0-40.218-13.112-68.087,0,0,0-49.059-5.561-53.5,70.184,0,0,9.877,24.368,4.863,36.3,0,0,.694,35.8,17.022,33.881,0,0,3.527-14.724,35.78-5.893s59.194,4.557,71.7,0S165.932,141.8,168.678,143.771Z"></path>
+                                                            <path id="back-5" fill-rule="evenodd" fill="#f9a17b" d="M100.4,15.425c34.621,0,62.687,18.711,62.687,41.791S135.024,99.008,100.4,99.008,37.716,80.3,37.716,57.216,65.782,15.425,100.4,15.425Z"></path>
+                                                        </svg>
+                                                        <span class="option-text"><span class="check"></span> Extensive</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div><!--question-2-female_end-->
+
+
+                            <!--question-3-->
+                            <div class="question hair-question" id="question-3" data-question="3" data-title="How long have you been experiencing hair loss?">
+
+                                <div class="row justify-content-center full-width">
+
+
+                                    <div class="col-md-10">
+                                        <div class="slider">
+                                            <div class="input">
+                                                <input type="text" name="period" readonly=""><span>Years</span>
+                                            </div>
+                                            <div id="slider"></div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <span>Less than 1 year</span>
+                                                </div>
+                                                <div class="col">
+                                                    <span>More than 10 years</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div><!--question-3_end-->
+
+
+                            <!--question-4-->
+                            <div class="question hair-question" id="question-4" data-question="4" data-title="Hmm. Have you ever had a hair transplant operation before?">
+
+                                <div class="row justify-content-center full-width">
+
+                                    <div class="col-md-3 col-sm-5 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="experienced" value="no">
+                                            <div class="option">
+                                                <div class="animate">
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-experienced-00.svg" aria-labelledby="option-experienced-00"></object><span style="display: none;" id="option-experienced-00">option-experienced-00</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> No</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-5 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="experienced" value="yes">
+                                            <div class="option">
+                                                <div class="animate">
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-experienced-01.svg" aria-labelledby="option-experienced-01"></object><span style="display: none;" id="option-experienced-01">option-experienced-01</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> Yes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div><!--question-4_end-->
+
+
+                            <!--question-5-->
+                            <div class="question hair-question" id="question-5" data-question="5" data-title="When did you have a hair transplant operation?">
+
+                                <div class="row justify-content-center full-width">
+
+
+                                    <div class="col-lg-3 d-none d-lg-block text-center">
+                                        <object type="image/svg+xml" height="150" style="position: relative;left: -80px;transform: skew(18deg, -18deg);" data="../assets/form/images/option-date-00.svg" aria-labelledby="option-date-00"></object><span style="display: none;" id="option-date-00">option-date-00</span>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-6 mx-auto text-center form-group uniquera-q5-date-wrap" lang="en-US">
+                                        <label class="uniquera-sr-only" for="beforeExperienceDate">Prior transplant date</label>
+                                        
+                                        <input type="text" name="beforeExperienceDate" id="beforeExperienceDate" class="form-control uniquera-date-native" autocomplete="off" inputmode="none" placeholder="MM-DD-YY" readonly aria-describedby="beforeExperienceDateHint">
+                                        <input type="date" id="beforeExperienceDatePicker" class="uniquera-date-native-picker" min="1930-01-01" tabindex="0" aria-label="Prior transplant date picker">
+                                        <div id="beforeExperienceDateCalendar" class="uniquera-date-calendar" aria-hidden="true">
+                                            <div class="uniquera-date-calendar__head">
+                                                <button type="button" class="uniquera-date-calendar__nav" data-dir="-1" aria-label="Previous month">&lsaquo;</button>
+                                                <div class="uniquera-date-calendar__title" aria-live="polite"></div>
+                                                <button type="button" class="uniquera-date-calendar__nav" data-dir="1" aria-label="Next month">&rsaquo;</button>
+                                            </div>
+                                            <div class="uniquera-date-calendar__weekdays">
+                                                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                                            </div>
+                                            <div class="uniquera-date-calendar__days"></div>
+                                        </div>
+                                        <small id="beforeExperienceDateHint" class="form-text uniquera-date-native-hint">Use the calendar to choose a date (only valid dates are accepted).</small>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-3 d-none d-lg-block text-center">
+                                        <object type="image/svg+xml" height="150" style="position: relative;right: -100px;transform: skew(-18deg, 18deg);" data="../assets/form/images/option-date-01.svg" class="object_1" aria-labelledby="option-date-01"></object><span style="display: none;" id="option-date-01">option-date-01</span>
+                                    </div>
+
+
+                                </div>
+
+                            </div><!--question-5_end-->
+
+
+                            <!--question-6-->
+                            <div class="question hair-question step" id="question-6" data-question="6" data-title="What have you tried so far to treat hair loss?">
+
+                                <div class="row justify-content-center full-width" id="medicines">
+                                    <div class="col-md-7 col-lg-6">
+                                        <p class="small text-muted text-center mb-3">Select all that apply.</p>
+                                        <div class="uniquera-tried-treatments validate">
+                                            <div class="form-check mb-2">
+                                                <label class="form-check-label"><input type="checkbox" name="tried_treatments[]" value="minoxidil" class="form-check-input"> Minoxidil (topical)</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <label class="form-check-label"><input type="checkbox" name="tried_treatments[]" value="finasteride_or_similar" class="form-check-input"> Finasteride / dutasteride or similar (prescription)</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <label class="form-check-label"><input type="checkbox" name="tried_treatments[]" value="prp_or_stem" class="form-check-input"> PRP, stem cell, or similar injections</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <label class="form-check-label"><input type="checkbox" name="tried_treatments[]" value="laser_therapy" class="form-check-input"> Low-level laser therapy / devices</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <label class="form-check-label"><input type="checkbox" name="tried_treatments[]" value="hair_fibers_or_concealers" class="form-check-input"> Hair fibers / concealers</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <label class="form-check-label"><input type="checkbox" name="tried_treatments[]" value="nothing_yet" class="form-check-input"> Nothing yet</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <label class="form-check-label"><input type="checkbox" name="tried_treatments[]" value="other" id="tried_treatments_other_cb" class="form-check-input"> Other</label>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="text" name="tried_treatments_other" class="form-control" placeholder="If Other, please specify" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <object type="image/svg+xml" data="../assets/form/images/medicines-01.svg" aria-labelledby="medicines-01"></object><span style="display: none;" id="medicines-01">medicines-01</span>
+                                </div>
+
+                            </div><!--question-6_end-->
+
+
+                            <!--question-7-->
+                            <div class="question hair-question" id="question-7" data-question="7" data-title="When do you intend to have a hair transplant?">
+
+                                <div class="row justify-content-center full-width">
+
+
+                                    <div class="col-sm-3 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="date" value="now">
+                                            <div class="option">
+                                                <div class="animate">
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-date-00.svg" aria-labelledby="option-date-00"></object><span style="display: none;" id="option-date-00">option-date-00</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> As soon as possible</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="date" value="3m">
+                                            <div class="option">
+                                                <div class="animate">
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-date-01.svg" aria-labelledby="option-date-01"></object><span style="display: none;" id="option-date-01">option-date-01</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> Within 3 months</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="date" value="12m">
+                                            <div class="option">
+                                                <div class="animate">
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-date-02.svg" aria-labelledby="option-date-02"></object><span style="display: none;" id="option-date-02">option-date-02</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> In 1 year</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-6">
+                                        <div class="radio-select">
+                                            <input type="radio" name="date" value="info">
+                                            <div class="option">
+                                                <div class="animate">
+                                                    <object type="image/svg+xml" data="../assets/form/images/option-date-03.svg" aria-labelledby="option-date-03"></object><span style="display: none;" id="option-date-03">option-date-03</span>
+                                                </div>
+                                                <span class="option-text"><span class="check"></span> I haven't planned it yet.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div><!--question-7_end-->
+
+
+                            <!--question-8-->
+                            <div class="question step" id="question-8" data-question="8" data-title="Medication, allergies, or medical conditions ?">
+
+                                <div class="row justify-content-center full-width" id="medicines">
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-5 col-form-label" for="uniquera-health-conditions">Medication, allergies, or medical conditions ?</label>
+                                            <div class="col-sm-7">
+                                                <textarea id="uniquera-health-conditions" name="medicines" rows="5" class="form-control" placeholder='Describe any conditions, medications, or allergies (you may write "None").'></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <object type="image/svg+xml" data="../assets/form/images/medicines-00.svg" aria-labelledby="medicines-00"></object><span style="display: none;" id="medicines-00">medicines-00</span>
+                                    <object type="image/svg+xml" data="../assets/form/images/medicines-01.svg" aria-labelledby="medicines-01"></object><span style="display: none;" id="medicines-01">medicines-01</span>
+
+
+                                </div>
+
+                            </div><!--question-8_end-->
+
+
+                            <!--question-9-->
+                            <div class="question step" id="question-9" data-question="9" data-title="How did you get to know about us?">
+
+                                <div class="row justify-content-center full-width">
+
+                                        <div class="col-12 uniquera-referral-section validate">
+                                            
+                                            <div class="row justify-content-center uniquera-referral-row">
+                                                <div class="col-6 col-sm-4 col-md-4 col-lg-2 uniquera-referral-option">
+                                                    <div class="radio-select">
+                                                        <input type="radio" name="referral_source" value="instagram" id="referral_instagram">
+                                                        <div class="option">
+                                                            <div class="animate">
+                                                                <object type="image/svg+xml" data="../assets/form/images/option-referral-instagram.svg" aria-labelledby="referral_lbl_instagram"></object>
+                                                            </div>
+                                                            <span class="option-text"><span class="check"></span> <span id="referral_lbl_instagram">Instagram</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-4 col-md-4 col-lg-2 uniquera-referral-option">
+                                                    <div class="radio-select">
+                                                        <input type="radio" name="referral_source" value="facebook" id="referral_facebook">
+                                                        <div class="option">
+                                                            <div class="animate">
+                                                                <object type="image/svg+xml" data="../assets/form/images/option-referral-facebook.svg" aria-labelledby="referral_lbl_facebook"></object>
+                                                            </div>
+                                                            <span class="option-text"><span class="check"></span> <span id="referral_lbl_facebook">Facebook</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-4 col-md-4 col-lg-2 uniquera-referral-option">
+                                                    <div class="radio-select">
+                                                        <input type="radio" name="referral_source" value="google_search" id="referral_google">
+                                                        <div class="option">
+                                                            <div class="animate">
+                                                                <object type="image/svg+xml" data="../assets/form/images/option-referral-google.svg" aria-labelledby="referral_lbl_google"></object>
+                                                            </div>
+                                                            <span class="option-text"><span class="check"></span> <span id="referral_lbl_google">Google / Search Engine</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-4 col-md-4 col-lg-2 uniquera-referral-option">
+                                                    <div class="radio-select">
+                                                        <input type="radio" name="referral_source" value="friend_or_family" id="referral_friend">
+                                                        <div class="option">
+                                                            <div class="animate">
+                                                                <object type="image/svg+xml" data="../assets/form/images/option-referral-friend.svg" aria-labelledby="referral_lbl_friend"></object>
+                                                            </div>
+                                                            <span class="option-text"><span class="check"></span> <span id="referral_lbl_friend">Friend or family</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-4 col-md-4 col-lg-2 uniquera-referral-option">
+                                                    <div class="radio-select">
+                                                        <input type="radio" name="referral_source" value="other_clinic_or_doctor" id="referral_clinic">
+                                                        <div class="option">
+                                                            <div class="animate">
+                                                                <object type="image/svg+xml" data="../assets/form/images/option-referral-clinic.svg" aria-labelledby="referral_lbl_clinic"></object>
+                                                            </div>
+                                                            <span class="option-text"><span class="check"></span> <span id="referral_lbl_clinic">Another clinic or doctor</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-4 col-md-4 col-lg-2 uniquera-referral-option">
+                                                    <div class="radio-select">
+                                                        <input type="radio" name="referral_source" value="other" id="referral_other">
+                                                        <div class="option">
+                                                            <div class="animate">
+                                                                <object type="image/svg+xml" data="../assets/form/images/option-referral-other.svg" aria-labelledby="referral_lbl_other"></object>
+                                                            </div>
+                                                            <span class="option-text"><span class="check"></span> <span id="referral_lbl_other">Other</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                </div>
+
+                                <!--<input type="hidden" name="country">-->
+                                <input type="hidden" name="visitorIP">
+                                <input type="hidden" name="visitorCity">
+                                <input type="hidden" name="visitorCountry">
+                                <input type="hidden" name="contact_time_country">
+
+
+                            </div><!--question-9_end-->
+
+
+                            <!--question-10-->
+                            <div class="question step" id="question-10" data-question="10" data-title="Your contact details.">
+
+                                <div class="row justify-content-center full-width">
+                                    <div class="col-12 col-lg-10">
+                                        <p class="small text-muted mb-3">* Indicates required question</p>
+
+                                        <div class="form-group row uniquera-step9-field">
+                                            <label class="col-sm-5 col-form-label" for="uniquera-step9-fullname">Full Name <span class="text-danger">*</span></label>
+                                            <div class="col-sm-7">
+                                                <input type="text" name="fullName" id="uniquera-step9-fullname" class="form-control" autocomplete="name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row uniquera-step9-field">
+                                            <label class="col-sm-5 col-form-label" for="long-form-email">E-Mail Address <span class="text-danger">*</span></label>
+                                            <div class="col-sm-7">
+                                                <input type="email" name="email" class="form-control" id="long-form-email" autocomplete="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row uniquera-step9-field">
+                                            <label class="col-sm-5 col-form-label" for="phone">Your Telephone Number <span class="text-danger">*</span></label>
+                                            <div class="col-sm-7">
+                                                <input type="tel" name="phone" id="phone" class="form-control" autocomplete="tel" inputmode="numeric" pattern="[0-9]*" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                                                <small class="form-text text-muted">Example: +1 555 123 4567 (WhatsApp reachable preferred)</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row uniquera-step9-field">
+                                            <label class="col-sm-5 col-form-label" for="city_country">City and Country</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" name="city_country" id="city_country" class="form-control" autocomplete="address-level1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center full-width mt-2">
+                                    <div class="col-12 col-lg-10">
+                                        <div class="form-group row uniquera-step9-field">
+                                            <label class="col-sm-5 col-form-label">Do you speak English? <span class="text-danger">*</span></label>
+                                            <div class="col-sm-7">
+                                                <div class="row justify-content-center align-items-start validate uniquera-q9-english">
+                                                    <div class="col-6 col-md-4 mb-3">
+                                                        <div class="radio-select">
+                                                            <input type="radio" name="speaks_english" value="yes" id="speaks_english_yes">
+                                                            <div class="option">
+                                                                <div class="animate">
+                                                                    <object type="image/svg+xml" data="../assets/form/images/option-experienced-01.svg" aria-labelledby="se_yes_lbl"></object><span style="display: none;" id="se_yes_lbl">Yes</span>
+                                                                </div>
+                                                                <span class="option-text"><span class="check"></span> Yes</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4 mb-3">
+                                                        <div class="radio-select">
+                                                            <input type="radio" name="speaks_english" value="no" id="speaks_english_no">
+                                                            <div class="option">
+                                                                <div class="animate">
+                                                                    <object type="image/svg+xml" data="../assets/form/images/option-experienced-00.svg" aria-labelledby="se_no_lbl"></object><span style="display: none;" id="se_no_lbl">No</span>
+                                                                </div>
+                                                                <span class="option-text"><span class="check"></span> No</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 mb-3 uniquera-se-other-radio-col">
+                                                        <div class="radio-select">
+                                                            <input type="radio" name="speaks_english" value="other" id="speaks_english_other_inp">
+                                                            <div class="option">
+                                                                <div class="animate">
+                                                                    <object type="image/svg+xml" data="../assets/form/images/option-referral-other.svg" aria-labelledby="se_other_lbl"></object><span style="display: none;" id="se_other_lbl">Other</span>
+                                                                </div>
+                                                                <span class="option-text"><span class="check"></span> Other</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 uniquera-se-other-wrap uniquera-se-other-wrap--full" style="display:none;">
+                                                        <input type="text" name="speaks_english_other" id="speaks_english_other" class="form-control" placeholder="Please specify" autocomplete="off" aria-label="Language if other">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row uniquera-step9-field">
+                                            <label class="col-sm-5 col-form-label">Clinic is in Istanbul, Turkey. Are you able to travel here for the procedure? <span class="text-danger">*</span></label>
+                                            <div class="col-sm-7">
+                                                <div class="row justify-content-center validate uniquera-q9-travel">
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        <div class="radio-select">
+                                                            <input type="radio" name="travel_istanbul" value="yes" id="travel_yes" required>
+                                                            <div class="option">
+                                                                <div class="animate">
+                                                                    <object type="image/svg+xml" data="../assets/form/images/option-experienced-01.svg" aria-labelledby="travel_yes_lbl"></object><span style="display: none;" id="travel_yes_lbl">Yes</span>
+                                                                </div>
+                                                                <span class="option-text"><span class="check"></span> Yes</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row justify-content-center full-width mt-3">
+                                    <div class="col-12 col-lg-10">
+                                        <div class="form-group row uniquera-step10-field uniquera-additional-message-field">
+                                            <label class="col-sm-5 col-form-label" for="additional_message">
+                                                Anything else you want us to know?
+                                                <small class="form-text text-muted d-block mt-1 uniquera-optional-hint">Optional — leave blank if you have nothing to add.</small>
+                                            </label>
+                                            <div class="col-sm-7">
+                                                <textarea name="additional_message" id="additional_message" class="form-control uniquera-additional-message" rows="3" maxlength="4000" autocomplete="off" aria-required="false" placeholder=""></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row uniquera-step10-field">
+                                            <div class="col-12">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" name="consent_info_processing" value="accepted" id="consent_info_processing">
+                                                    <label class="form-check-label" for="consent_info_processing">I consent to UniquEra processing my information for pre-assessment and contact.</label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" name="consent_information_accuracy" value="accepted" id="consent_information_accuracy">
+                                                    <label class="form-check-label" for="consent_information_accuracy">I confirm the information provided is accurate to the best of my knowledge.</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="consent_contact_channels" value="accepted" id="consent_contact_channels">
+                                                    <label class="form-check-label" for="consent_contact_channels">I agree to be contacted via WhatsApp/Phone/Email about my case.</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!--question-10_end-->
+
+
+
+
+                            <div class="form-button-wrapper">
+                                <button type="button" class="form-button" style="display: none">Continue
+                                    <i class="form-button-arrow"></i></button>
+                                <div class="uniquera-step-indicator" aria-live="polite"></div>
+                                <!--<button type="button" class="human-button" style="display:none">Vücut Bölgesi</button>-->
+                            </div>
+
+                            <div class="spinner"></div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+                <div id="uniquera-thankyou-screen" class="uniquera-thankyou-screen">
+                    <div class="uniquera-thankyou-card">
+                        <h1>Thank you</h1>
+                        <p class="uniquera-thankyou-text">Your consultation form has been submitted successfully.</p>
+                        <p class="uniquera-thankyou-text">One of our medical consultants will contact you within 24 hours.</p>
+                        <p class="uniquera-thankyou-whatsapp">WhatsApp: <a href="https://wa.me/905388770199" target="_blank" rel="noopener noreferrer">+90 538 877 01 99</a></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--footer-->
+            <div class="container-fluid">
+                <div class="row" id="footer">
+                    <div class="col">
+                        <button type="button" class="back hide" aria-label="Previous step"></button>
+                        <div class="steps">
+                        </div>
+                        <div class="uniquera-step-indicator uniquera-step-indicator--footer" aria-live="polite" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+           
+@media (max-width: 1024px) {
+  .steps {
+    margin-top: 19px !important;
+  }
+}
+                /* Full-page preloader (all viewports): hide broken first paint until ready */
+                .uniquera-page-preloader {
+                    transition: opacity 0.35s ease, visibility 0.35s ease;
+                }
+                .uniquera-page-preloader.uniquera-page-preloader--hidden {
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                }
+                .uniquera-page-preloader__text {
+                    margin: 0;
+                    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+                    font-size: 0.95rem;
+                    color: #555;
+                }
+                .uniquera-page-preloader__spinner {
+                    width: 40px;
+                    height: 40px;
+                    border: 3px solid #e0dcd4;
+                    border-top-color: #c9a962;
+                    border-radius: 50%;
+                    animation: uniquera-page-preloader-spin 0.75s linear infinite;
+                }
+                @keyframes uniquera-page-preloader-spin {
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+                @media (prefers-reduced-motion: reduce) {
+                    .uniquera-page-preloader__spinner {
+                        animation: none;
+                        border-top-color: #c9a962;
+                    }
+                    .uniquera-page-preloader {
+                        transition: none;
+                    }
+                }
+
+                /* -------- UniquEra form: mobile-only responsiveness fixes -------- */
+                @media (max-width: 576px) {
+                    /* Keep header visible while questions change without forcing page scroll */
+                    #onlineForm #header {
+                        position: sticky;
+                        top: 0;
+                        z-index: 30;
+                        background: #fff;
+                    }
+                    /* Mobile spacer above sticky header so it stays fully visible on step changes */
+                    #onlineForm #header::before {
+                        content: "";
+                        display: block;
+                        height: 8px;
+                    }
+
+                    /* Prevent any child from forcing horizontal scroll */
+                    #onlineForm,
+                    #onlineForm .main,
+                    #onlineForm .wrapper,
+                    #onlineForm #content,
+                    #onlineForm #questions,
+                    #onlineForm .question,
+                    #onlineForm .question-content {
+                        max-width: 100%;
+                        /* overflow-x: hidden; */
+                    }
+
+   #title .col-sm-5{
+   flex:0 0 66.666667%;
+   max-width: 66.666667%;
+   }
+   
+   .uniquera-form-wrap .uniquera-step-indicator {
+font-weight: 700 !important;
+font-size: 17px !important;
+}
+
+                    /* Mobile: show back button + step indicator in one row */
+
+                    #onlineForm #footer .uniquera-step-indicator--footer {
+                        display: block !important;
+                        flex: 1;
+                        text-align: center;
+                        margin-top: 0 !important;
+                        position: relative;
+                        z-index: 10;
+                    }
+
+                    #onlineForm #footer .back {
+                        left: 10px !important;
+                    }
+
+                    /* Make embedded SVG/Object media responsive */
+                    #onlineForm object,
+                    #onlineForm svg,
+                    #onlineForm img {
+                        max-width: 100%;
+                    }
+
+                    /* Step title (theme wraps form in .page-main-content; h2 lives in .title-text) */
+                    .page-main-content .title-text h2,
+                    .page-main-content h2,
+                    #onlineForm .title-text h2 {
+                        font-size: 21px !important;
+        				line-height: 1 !important;
+        				font-weight: 600;
+                        min-height: 2.2em;
+                    }
+				.form-button-wrapper {bottom:-25px!important;}
+				#question-3 .slider {padding: 15px;}
+                    #onlineForm .title-text {
+                        margin-bottom: 0 !important;
+                        margin-top: 35px !important;
+                    }
+
+                    #onlineForm .title-image {
+                        transform: scale(1.08);
+                        transform-origin: center center;
+                    }
+
+                    #question-2 #preview {
+                        width: 60% !important;
+                        max-width: 60% !important;
+                        height: auto;
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    /* Choice-card icons: smaller on mobile (gender, dates, yes/no, etc.) */
+                    #onlineForm .questions .question:not(#question-10) .radio-select .option object,
+                    #onlineForm .questions .question:not(#question-10) .radio-select .option svg {
+                        width: 100%;
+                        height: auto;
+                        max-width: 114px;
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    #onlineForm .uniquera-referral-row .radio-select .option .animate {
+                        min-height: 52px;
+                        margin-bottom: 4px;
+                    }
+
+                    #onlineForm .uniquera-referral-row .radio-select object {
+                        width: 44px !important;
+                        height: 44px !important;
+                        max-width: 44px !important;
+                    }
+
+                    /* Step 2: keep radio option visuals inside container */
+                    #question-2 .radio-select .option svg,
+                    #question-2 .radio-select .option object {
+                        width: 100%;
+                        height: auto;
+                        max-width: 72px;
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    /* Prevent long labels from overflowing */
+                    #onlineForm .option-text {
+                        overflow-wrap: anywhere;
+                        word-break: break-word;
+                    }
+
+                    /* Keep host page spacing tight around this form */
+                    .page-main-content {
+                        margin-top: 0 !important;
+                        margin-bottom: 0 !important;
+                    }
+
+                    /* Remove any inner scroll area on mobile (prefer page scroll) */
+                    #onlineForm .main,
+                    #onlineForm .wrapper,
+                    #onlineForm #content,
+                    #onlineForm #questions {
+                        height: auto !important;
+                        max-height: none !important;
+                        overflow-y: visible !important;
+                    }
+
+                    /* 1) Hide ONLY the footer step numbers on mobile */
+                    #footer .steps {
+                        display: none !important;
+                    }
+
+                    /* Reduce paddings a bit */
+                    #onlineForm #content {
+                        padding-left: 12px;
+                        padding-right: 12px;
+                    }
+
+                    /* 2) Step 2: reduce font sizes and ensure items wrap nicely */
+                    #question-2 h6 {
+                        font-size: 0.95rem;
+                        line-height: 1.25;
+                    }
+
+                    #question-2 .option-text {
+                        font-size: 0.9rem;
+                        line-height: 1.2;
+                    }
+
+                    /* Make the male step-2 option grid wrap instead of squeezing */
+                    #question-2 .sag .row.validate {
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-left: -6px;
+                        margin-right: -6px;
+                    }
+
+                    #question-2 .sag .row.validate > [class*="col-"] {
+                        padding-left: 6px;
+                        padding-right: 6px;
+                        flex: 0 0 33.3333%;
+                        max-width: 33.3333%;
+                    }
+
+                    /* Slightly smaller previews in step 2 to avoid overflow */
+                    #question-2 .radio-select .option svg,
+                    #question-2 .radio-select .option object {
+                        max-width: 64px;
+                    }
+
+                    /* Female step-2 previews: make them smaller on mobile */
+                    #question-2 .question-female .radio-select .option object,
+                    #question-2 .question-female .radio-select .option svg {
+                        max-width: 32px;
+                    }
+
+                    .uniquera-form-wrap #question-2 .question-female .radio-select object {
+                        max-width: 32% !important;
+                        height: auto;
+                    }
+
+                    /* Step 10: Yes / No / Other in one row on mobile using flex */
+                    #question-10 .uniquera-q9-english,
+                    #question-10 .uniquera-q9-travel {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        margin-left: -6px;
+                        margin-right: -6px;
+                    }
+
+                    #question-10 .uniquera-q9-english > div,
+                    #question-10 .uniquera-q9-travel > div {
+                        flex: 1 1 33.3333%;
+                        max-width: 33.3333%;
+                        padding-left: 6px;
+                        padding-right: 6px;
+                        margin-bottom: 8px !important;
+                    }
+
+                    /* Step 10: if Travel has only one option, let it span full width */
+                    #question-10 .uniquera-q9-travel > div:only-child {
+                        flex: 1 1 100%;
+                        max-width: 100%;
+                    }
+
+                    /* Male step-2 previews: shrink SVGs similar to female sizing */
+                    #question-2 .sag .row.validate .radio-select .option svg {
+                        width: 60%;
+                        max-width: 40px;
+                        height: auto;
+                        margin-left: auto;
+                        margin-right: auto;
+                        display: block;
+                    }
+
+                    #question-2 .question-female > [class*="col-"] {
+                        padding-left: 2px;
+                        padding-right: 2px;
+                    }
+
+                    #question-2 .question-female .option-text {
+                        font-size: 0.82rem;
+                        line-height: 1.15;
+                    }
+                }
+
+                /* Non-desktop (mobile + tablet): hide the under-button step indicator */
+                @media (max-width: 991.98px) {
+                    #onlineForm .form-button-wrapper .uniquera-step-indicator {
+                        display: none !important;
+                    }
+                }
+                
+                
+                @media (max-width: 576px){
+    /* Step 10 mobile: reduce extra gap between English and Travel blocks */
+    .uniquera-form-wrap #question-10 .uniquera-step9-field{
+        margin-bottom:8px;
+        padding:10px 12px;
+    }
+}
+
+            </style>
+
+            <script>
+                (function () {
+                    var pre = document.getElementById("uniquera-page-preloader");
+                    if (pre && pre.parentNode) {
+                        pre.parentNode.removeChild(pre);
+                    }
+                })();
+            </script>
+
+        </div>
+
+    </div>
+
+</div>

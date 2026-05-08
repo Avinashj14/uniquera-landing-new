@@ -1,0 +1,977 @@
+<div class="overlay"></div>
+
+<script type="text/javascript">
+    var language = "en";
+</script>
+<script type="text/javascript">
+
+    var tedaviler = [{
+        id: "sac",
+        bolge: "Hair",
+        bolge_baslik: "Treatments applicable for <span class='data'>hair</span>",
+        tedaviler: [
+            {
+                tedavi: "Hair Transplantation",
+                id: "sac_ekimi",
+                islemler: [{
+                    islem: "Soft FUE",
+                    aciklama: "Hair transplantation is performed under the effect of soft sedation. In 2019, it was introduced by the founder of Doku Medical, Uniqueraclinic."
+                }, {
+                    islem: "Safir FUE",
+                    aciklama: "It is a hair transplantation method in which tips made of sapphire, which is among the precious metals, are used to open channels during the operation, instead of the metal tips preferred in Classical FUE."
+                }, {
+                    islem: "DHI Hair Transplantation",
+                    aciklama: "In this method, the hair is transplanted directly with special needles called implanters without creating channels. Thus, it allows implanting in hairy scalp without the need to cut the hair."
+                }]
+            }, {
+                tedavi: "Hair Treatment",
+                id: "sac_tedavisi",
+                islemler: [{
+                    islem: "PRP",
+                    aciklama: "PRP stands out with its skin rejuvenation, removal of skin damage and skin rejuvenation effects. The aim of the treatment is to provide faster healing of the tissue by blood circulation."
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue. "
+                }, {
+                    islem: "Laser Treatment",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "alin",
+        bolge: "Forehead",
+        bolge_baslik: "Treatments applicable for <span class='data'>forehead</span>.",
+        tedaviler:
+            [
+                {
+                    tedavi: "Wrinkle Removal",
+                    id: "kirisiklik_giderme",
+                    islemler: [{
+                        islem: "Botox",
+                        aciklama: "It temporarily blocks the connection between the nerve and muscle in the area where it is applied, softens the conscious or unconscious gestures and prevents the formation of wrinkles. "
+                    }, {
+                        islem: "Filler Application",
+                        aciklama: "It is a dermal filler application performed to reduce the fine lines in the forehead area. "
+                    }, {
+                        islem: "Mesotherapy",
+                        aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                    }, {
+                        islem: "Laser Treatments",
+                        aciklama: ""
+                    }]
+                }, {
+                tedavi: "Blemish Treatment",
+                id: "leke_tedavisi",
+                islemler: [{
+                    islem: "Icon Laser",
+                    aciklama: "It is a light and laser system that creates a thermal reaction by providing a sensitive pulse of light energy to the lower layers of the skin. It initiates the restructuring process in the lower layers of the skin without causing any irritation on the skin surface. "
+                }, {
+                    islem: "Scarlet X",
+                    aciklama: "Fractional radiofrequency, Scarlet X or Gold Needle targets the subcutaneous layer directly and makes the skin look more taut, lively and bright. "
+                }, {
+                    islem: "BBL Hero Full Body",
+                    aciklama: "It is a light therapy that is effective against acne, freckles, and deeper spots than rosacea. It can be applied regardless of age and it is possible to achieve results in a short time."
+                }, {
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }, {
+                    islem: "Starwalker Lazer",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "Dermamelan/Cosmelan",
+                    aciklama: "It is an effective enzymatic peeling method that suppresses pigmentation by reducing the amount of melanin in the skin. With this treatment, the formation of melanin in the skin is reduced and dark colours are lightened. "
+                }, {
+                    islem: "Chemical Peeling",
+                    aciklama: "It aims to remove the top layer of the skin and replace the damaged skin with new and healthy skin. It consists of application of many chemical agents at different depths in the skin layer."
+                }, {
+                    islem: "PRP",
+                    aciklama: "PRP stands out with its skin rejuvenation, removal of skin damage and skin rejuvenation effects. The aim of the treatment is to provide faster healing of the tissue by blood circulation. "
+                }]
+            }, {
+                tedavi: "Forehead Reshaping",
+                id: "alin_estetigi",
+                islemler: [{
+                    islem: "Surgical Operation",
+                    aciklama: ""
+                }]
+            }
+            ]
+    }, {
+        id: "kas",
+        bolge: "Eyebrow",
+        bolge_baslik: "Treatments applicable for for <span class='data'>eyebrow</span>.",
+        tedaviler: [
+            {
+                tedavi: "Eyebrow Transplantation",
+                id: "kas_ekimi",
+                islemler: [{
+                    islem: "DHI Eyebrow Transplantation",
+                    aciklama: "Çeşitli sebeplerden ötürü kaş dökülmesi yaşayan bireylere uygulanır. Başın arka bölgesi öncelikli olmak üzere tüm donör bölgelerden alınabilen saç kökleri ile gerçekleştirilen kaş ekimi genellikle DHI yöntemi ile yapılır."
+                }]
+            }, {
+                tedavi: "Eyebrow Lifting",
+                id: "kas_kaldirma",
+                islemler: [{
+                    islem: "Botox",
+                    aciklama: "It temporarily blocks the connection between the nerve and muscle in the area where it is applied, softens the conscious or unconscious gestures and prevents the formation of wrinkles. "
+                }, {
+                    islem: "Ulthera",
+                    aciklama: "It is a non-surgical facelift application utilizing focused ultrasound technology to trigger new collagen production. It can be applied to the entire face and body. Thanks to the ultrasonic imaging systems, it indicates which layer under the skin is being treated."
+                }, {
+                    islem: "HI-FU",
+                    aciklama: "HIFU, which means High-Intensity Focused Ultrasound Energy, is a treatment method that triggers collagen production in the subcutaneous tissues by using ultra cell sound waves, thereby creating tightening and stretching in the face, neck and décolleté area. "
+                }, {
+                    islem: "Thread Eyebrow Lifting",
+                    aciklama: "İple kaş kaldırma olarak da bilinen bu işlem, kaşlarda ince fakat görünür bir kaldırma (lifting) etkisi oluşturmak için doğal iplerin kullanıldığı bir işlemdir. Ameliyat olmak istemeyen kişiler için acısız alternatif oluştur."
+                }, {
+                    islem: "Surgical Operation ",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Tattoo Removal",
+                id: "dovme_silme",
+                islemler: [{
+                    islem: "Laser Tattoo Removal",
+                    aciklama: "Tattoo removal consists of decomposition of pigments into small particles with laser beams reaching the coloured tattoo pigment in the skin. These tiny particles are easily absorbed and destroyed by the body’s immune system."
+                }]
+            }, {
+                tedavi: "Eyebrow Treatment",
+                id: "kas_tedavisi",
+                islemler: [{
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }]
+            }
+        ]
+    }, {
+        id: "goz",
+        bolge: "Eye",
+        bolge_baslik: "Treatments applicable for the <span class='data'>eye</span> area. The eye itself is not directly operated.",
+        tedaviler: [
+            {
+                tedavi: "Wrinkle Removal",
+                id: "kirisiklik_giderme",
+                islemler: [{
+                    islem: "Botox",
+                    aciklama: "It temporarily blocks the connection between the nerve and muscle in the area where it is applied, softens the conscious or unconscious gestures and prevents the formation of wrinkles. "
+                }, {
+                    islem: "Endolift",
+                    aciklama: "It is a combined laser treatment that offers skin rejuvenation and facial shaping together. It is applied with air cooling only, without the need for incision and anaesthesia for sagging in the face, chin, neck areas and bags under the eyes. "
+                }, {
+                    islem: "Exilis",
+                    aciklama: ""
+                }, {
+                    islem: "Ulthera",
+                    aciklama: "It is a non-surgical facelift application utilizing focused ultrasound technology to trigger new collagen production. It can be applied to the entire face and body. Thanks to the ultrasonic imaging systems, it indicates which layer under the skin is being treated."
+                }, {
+                    islem: "HI-FU",
+                    aciklama: "HIFU, which means High-Intensity Focused Ultrasound Energy, is a treatment method that triggers collagen production in the subcutaneous tissues by using ultra cell sound waves, thereby creating tightening and stretching in the face, neck and décolleté area. "
+                }, {
+                    islem: "Bi-one",
+                    aciklama: "Bio-uyumlu manyetik alan ile birlikte bazı spesifik amino asit bazlı serumların cilde verilmesi esasına dayanan bu işlem, dokuların biyolojik olarak tekrar canlanmasına ve kendi kendini yenilemesine yardımcı olur."
+                }]
+            }, {
+                tedavi: "Blemish Treatment",
+                id: "leke_tedavisi",
+                islemler: [{
+                    islem: "Eyelit",
+                    aciklama: "Genetik göz altı morluğu için çözüm sunan tedavi, o bölgeye medikal karbondioksit verilerek oksijen seviyesini artırma esasına dayanır. Damarlarda biriken kanın dolaşımı hızlandırılır ve o bölgedeki renk tonunda açılma görülür."
+                }, {
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }, {
+                    islem: "Starwalker Laser",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching."
+                }, {
+                    islem: "Under Eye Light Fillers",
+                    aciklama: "It is a filler application applied to solve the problems such as under-eye dents, dark circles and reducing wrinkles and rejuvenating the skin in the area. "
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }]
+            }, {
+                tedavi: "Eyelid Aesthetics",
+                id: "goz_kapagi_estetigi",
+                islemler: [{
+                    islem: "Surgical Operation",
+                    aciklama: ""
+                }, {
+                    islem: "Thread Lift Application",
+                    aciklama: "It is an application developed to remove the early signs of ageing. Suspending the sagging areas without the need for a surgical operation allows the skin to be stretched. "
+                }]
+            }
+        ]
+    }, {
+        id: "yanak",
+        bolge: "Cheek",
+        bolge_baslik: "Treatments applicable for <span class='data'>cheek</span>.",
+        tedaviler: [
+            {
+                tedavi: "Cheekbone Fillers",
+                id: "elmacik_kemigi_dolgusu",
+                islemler: [{
+                    islem: "Jawline",
+                    aciklama: "It is a procedure applied to improve the general appearance of the chin area to obtain a sharper jaw line. "
+                }, {
+                    islem: "Smart Filler",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Blemish Treatment",
+                id: "leke_tedavisi",
+                islemler: [{
+                    islem: "Jawline",
+                    aciklama: "It is a procedure applied to improve the general appearance of the chin area to obtain a sharper jaw line. "
+                }, {
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }, {
+                    islem: "Starwalker Laser",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "ICON Laser",
+                    aciklama: "It is a light and laser system that creates a thermal reaction by providing a sensitive pulse of light energy to the lower layers of the skin. It initiates the restructuring process in the lower layers of the skin without causing any irritation on the skin surface. "
+                }, {
+                    islem: "Peeling",
+                    aciklama: "It aims to remove the top layer of the skin and replace the damaged skin with new and healthy skin. It consists of application of many chemical agents at different depths in the skin layer."
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }]
+            }
+        ]
+    }, {
+        id: "dudak",
+        bolge: "Lips",
+        bolge_baslik: "Treatmens applicable for <span class='data'>lips</span>.",
+        tedaviler: [
+            {
+                tedavi: "Lip filler",
+                id: "dudak_dolgusu",
+                islemler: [{
+                    islem: "Filler Application",
+                    aciklama: "It is the application of filling applied to the inner part of the lips or around them for shaping or volumizing purposes."
+                }, {
+                    islem: "Filler Removal",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Blemish Removal",
+                id: "leke_silme",
+                islemler: [{
+                    islem: "Starwalker Laser",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "Peeling",
+                    aciklama: "It aims to remove the top layer of the skin and replace the damaged skin with new and healthy skin. It consists of application of many chemical agents at different depths in the skin layer."
+                }, {
+                    islem: "Dermomelan/Cosmomelan",
+                    aciklama: "It is an effective enzymatic peeling method that suppresses pigmentation by reducing the amount of melanin in the skin. With this treatment, the formation of melanin in the skin is reduced and dark colours are lightened. "
+                }, {
+                    islem: "Smoker Lines (Filler)",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "burun",
+        bolge: "Nose",
+        bolge_baslik: "Treatments applicable for <span class='data'>nose</span>.",
+        tedaviler: [
+            {
+                tedavi: "Nasal Fillers",
+                id: "burun_dolgusu",
+                islemler: [{
+                    islem: "Filler",
+                    aciklama: "Nasal filler, also known as non-surgical rhinoplasty, is the correction of structural problems in the nose. Gaps, indentations, contour deficiencies and symmetry in the nose are treated."
+                }, {
+                    islem: "Filler Removal",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Nose Aesthetics",
+                id: "burun_estetigi",
+                islemler: [{
+                    islem: "Threadlift Application ",
+                    aciklama: ""
+                }, {
+                    islem: "Surgical Operation",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Blemish Removal",
+                id: "leke_silme",
+                islemler: [{
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }, {
+                    islem: "Starwalker Laser",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "ICON Laser",
+                    aciklama: "It is a light and laser system that creates a thermal reaction by providing a sensitive pulse of light energy to the lower layers of the skin. It initiates the restructuring process in the lower layers of the skin without causing any irritation on the skin surface. "
+                }, {
+                    islem: "Peeling",
+                    aciklama: "It aims to remove the top layer of the skin and replace the damaged skin with new and healthy skin. It consists of application of many chemical agents at different depths in the skin layer."
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "PRP",
+                    aciklama: "PRP stands out with its skin rejuvenation, removal of skin damage and skin rejuvenation effects. The aim of the treatment is to provide faster healing of the tissue by blood circulation. "
+                }]
+            }
+        ]
+    }, {
+        id: "cene",
+        bolge: "Jaw",
+        bolge_baslik: "Treatments applicable for <span class='data'>jaw</span>.",
+        tedaviler: [
+            {
+                tedavi: "Chin Fillers",
+                id: "cene_dolgusu",
+                islemler: [{
+                    islem: "Filler",
+                    aciklama: ""
+                }, {
+                    islem: "Cleft Chin Filler",
+                    aciklama: "It is a procedure applied to improve the general appearance of the chin area to obtain a sharper jaw line."
+                }]
+            }, {
+                tedavi: "Blemish Treatment",
+                id: "leke_tedavisi",
+                islemler: [{
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }, {
+                    islem: "Starwalker Lazer",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "ICON Laser",
+                    aciklama: "It is a light and laser system that creates a thermal reaction by providing a sensitive pulse of light energy to the lower layers of the skin. It initiates the restructuring process in the lower layers of the skin without causing any irritation on the skin surface. "
+                }, {
+                    islem: "Peeling",
+                    aciklama: "It aims to remove the top layer of the skin and replace the damaged skin with new and healthy skin. It consists of application of many chemical agents at different depths in the skin layer."
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "PRP",
+                    aciklama: "PRP stands out with its skin rejuvenation, removal of skin damage and skin rejuvenation effects. The aim of the treatment is to provide faster healing of the tissue by blood circulation. "
+                }]
+            }, {
+                tedavi: "Chin Aesthetics",
+                id: "cene_estetigi",
+                islemler: [{
+                    islem: "Jaw Implant",
+                    aciklama: ""
+                }, {
+                    islem: "Fat injection",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "gidi",
+        bolge: "Jowl",
+        bolge_baslik: "Treatments applicable for <span class='data'>jowl</span>.",
+        tedaviler: [
+            {
+                tedavi: "Wrinkle Removal",
+                id: "kirisiklik_giderme",
+                islemler: [{
+                    islem: "Endolift",
+                    aciklama: "It is a combined laser treatment that offers skin rejuvenation and facial shaping together. It is applied with air cooling only, without the need for incision and anaesthesia for sagging in the face, chin, neck areas and bags under the eyes. "
+                }, {
+                    islem: "HI-FU",
+                    aciklama: "HIFU, which means High-Intensity Focused Ultrasound Energy, is a treatment method that triggers collagen production in the subcutaneous tissues by using ultra cell sound waves, thereby creating tightening and stretching in the face, neck and décolleté area. "
+                }, {
+                    islem: "Threadlift Application ",
+                    aciklama: ""
+                }, {
+                    islem: "Jowl Reduction",
+                    aciklama: ""
+                }, {
+                    islem: "CoolSculpting",
+                    aciklama: "CoolScupting, also known as Cold Lipolysis, is a medical aesthetic method that freezes and breaks up fat tissue. "
+                }]
+            }, {
+                tedavi: "Jowl Reduction",
+                id: "gidi_eritme",
+                islemler: [{
+                    islem: "CoolSculpting",
+                    aciklama: "CoolScupting, also known as Cold Lipolysis, is a medical aesthetic method that freezes and breaks up fat tissue. "
+                }]
+            }, {
+                tedavi: "Jowl Aesthetics",
+                id: "gidi_estetigi",
+                islemler: [{
+                    islem: "Surgical Operation",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "boyun",
+        bolge: "Neck",
+        bolge_baslik: "Treatments applicable for <span class='data'>neck</span>.",
+        tedaviler: [
+            {
+                tedavi: "Wrinkle Removal",
+                id: "kirisiklik_giderme",
+                islemler: [{
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "HI-FU",
+                    aciklama: "HIFU, which means High-Intensity Focused Ultrasound Energy, is a treatment method that triggers collagen production in the subcutaneous tissues by using ultra cell sound waves, thereby creating tightening and stretching in the face, neck and décolleté area. "
+                }, {
+                    islem: "ICON Laser",
+                    aciklama: "It is a light and laser system that creates a thermal reaction by providing a sensitive pulse of light energy to the lower layers of the skin. It initiates the restructuring process in the lower layers of the skin without causing any irritation on the skin surface. "
+                }, {
+                    islem: "Scarlet X",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "Exilis",
+                    aciklama: ""
+                }, {
+                    islem: "Ultherapy",
+                    aciklama: "It is a non-surgical facelift application utilizing focused ultrasound technology to trigger new collagen production. It can be applied to the entire face and body. Thanks to the ultrasonic imaging systems, it indicates which layer under the skin is being treated."
+                }]
+            }, {
+                tedavi: "Neck Aeshetics",
+                id: "boyun_estetigi",
+                islemler: [{
+                    islem: "Surgical Operation",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "kulak",
+        bolge: "Ear",
+        bolge_baslik: "Treatments aplicable for <span class='data'>ear</span>.",
+        tedaviler: [
+            {
+                tedavi: "Jug-Ears",
+                id: "kepce_kulak",
+                islemler: [{
+                    islem: "Surgical Operation",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "yuz",
+        bolge: "Face",
+        bolge_baslik: "Treatments applicable for <span class='data'>face</span>.",
+        tedaviler: [
+            {
+                tedavi: "Blemish Removal",
+                id: "leke_silme",
+                islemler: [{
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }, {
+                    islem: "Starwalker Laser",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "ICON Laser",
+                    aciklama: "It is a light and laser system that creates a thermal reaction by providing a sensitive pulse of light energy to the lower layers of the skin. It initiates the restructuring process in the lower layers of the skin without causing any irritation on the skin surface. "
+                }, {
+                    islem: "Scarlet X",
+                    aciklama: "Fractional radiofrequency, Scarlet X or Gold Needle targets the subcutaneous layer directly and makes the skin look more taut, lively and bright. "
+                }, {
+                    islem: "Peeling",
+                    aciklama: "It aims to remove the top layer of the skin and replace the damaged skin with new and healthy skin. It consists of application of many chemical agents at different depths in the skin layer."
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "BBL Hero",
+                    aciklama: "It is a light therapy that is effective against acne, freckles, and deeper spots than rosacea. It can be applied regardless of age and it is possible to achieve results in a short time."
+                }, {
+                    islem: "PRP",
+                    aciklama: "PRP stands out with its skin rejuvenation, removal of skin damage and skin rejuvenation effects. The aim of the treatment is to provide faster healing of the tissue by blood circulation. "
+                }]
+            }, {
+                tedavi: "Skin Rejuvenation",
+                id: "cilt_genclestirme",
+                islemler: [{
+                    islem: "Endolift",
+                    aciklama: "It is a combined laser treatment that offers skin rejuvenation and facial shaping together. It is applied with air cooling only, without the need for incision and anaesthesia for sagging in the face, chin, neck areas and bags under the eyes. "
+                }, {
+                    islem: "HI-FU",
+                    aciklama: "HIFU, which means High-Intensity Focused Ultrasound Energy, is a treatment method that triggers collagen production in the subcutaneous tissues by using ultra cell sound waves, thereby creating tightening and stretching in the face, neck and décolleté area. "
+                }, {
+                    islem: "BBL Hero",
+                    aciklama: "It is a light therapy that is effective against acne, freckles, and deeper spots than rosacea. It can be applied regardless of age and it is possible to achieve results in a short time."
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "PRP",
+                    aciklama: "PRP stands out with its skin rejuvenation, removal of skin damage and skin rejuvenation effects. The aim of the treatment is to provide faster healing of the tissue by blood circulation. "
+                }, {
+                    islem: "Ulthera",
+                    aciklama: "It is a non-surgical facelift application utilizing focused ultrasound technology to trigger new collagen production. It can be applied to the entire face and body. Thanks to the ultrasonic imaging systems, it indicates which layer under the skin is being treated."
+                }]
+            }, {
+                tedavi: "Face lift",
+                id: "yuz_germe",
+                islemler: [{
+                    islem: "Surgical Operation",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "dekolte",
+        bolge: "Decollete",
+        bolge_baslik: "Treatments applicable for <span class='data'>decollete</span>.",
+        tedaviler: [
+            {
+                tedavi: "Blemish Removal",
+                id: "leke_silme",
+                islemler: [{
+                    islem: "Endolift",
+                    aciklama: "It is a combined laser treatment that offers skin rejuvenation and facial shaping together. It is applied with air cooling only, without the need for incision and anaesthesia for sagging in the face, chin, neck areas and bags under the eyes. "
+                }, {
+                    islem: "Scarlet X",
+                    aciklama: "Fractional radiofrequency, Scarlet X or Gold Needle targets the subcutaneous layer directly and makes the skin look more taut, lively and bright. "
+                }, {
+                    islem: "Starwalker Lazer",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "Peeling",
+                    aciklama: "It aims to remove the top layer of the skin and replace the damaged skin with new and healthy skin. It consists of application of many chemical agents at different depths in the skin layer."
+                }, {
+                    islem: "PRP",
+                    aciklama: "PRP stands out with its skin rejuvenation, removal of skin damage and skin rejuvenation effects. The aim of the treatment is to provide faster healing of the tissue by blood circulation. "
+                }]
+            }, {
+                tedavi: "Skin Rejuvenation",
+                id: "cilt_genclestirme",
+                islemler: [{
+                    islem: "HI-FU",
+                    aciklama: "HIFU, which means High-Intensity Focused Ultrasound Energy, is a treatment method that triggers collagen production in the subcutaneous tissues by using ultra cell sound waves, thereby creating tightening and stretching in the face, neck and décolleté area. "
+                }, {
+                    islem: "Ultherapy",
+                    aciklama: "It is a non-surgical facelift application utilizing focused ultrasound technology to trigger new collagen production. It can be applied to the entire face and body. Thanks to the ultrasonic imaging systems, it indicates which layer under the skin is being treated."
+                }, {
+                    islem: "BBL Hero",
+                    aciklama: "It is a light therapy that is effective against acne, freckles, and deeper spots than rosacea. It can be applied regardless of age and it is possible to achieve results in a short time."
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "PRP",
+                    aciklama: "PRP stands out with its skin rejuvenation, removal of skin damage and skin rejuvenation effects. The aim of the treatment is to provide faster healing of the tissue by blood circulation. "
+                }]
+            }
+        ]
+    }, {
+        id: "gogus",
+        bolge: "Chest / Breasts",
+        bolge_baslik: "<span class='data'>Treatments applicable for <span class='data'>chest / breasts</span>.</span>",
+        tedaviler: [
+            {
+                tedavi: "Blemish Removal",
+                id: "leke_silme",
+                islemler: [{
+                    islem: "BBL Hero",
+                    aciklama: "It is a light therapy that is effective against acne, freckles, and deeper spots than rosacea. It can be applied regardless of age and it is possible to achieve results in a short time."
+                }, {
+                    islem: "Scarlet",
+                    aciklama: "Fractional radiofrequency, Scarlet X or Gold Needle targets the subcutaneous layer directly and makes the skin look more taut, lively and bright. "
+                }, {
+                    islem: "Starwalker Lazer",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Breast Augmentation",
+                id: "meme_buyutme",
+                islemler: [{
+                    islem: "Surgical Operation",
+                    aciklama: "It is a plastic surgery procedure to change the shape and size of the breasts. It is performed with silicone implants or fat injection."
+                }]
+            }, {
+                tedavi: "Breast Reduction",
+                id: "meme_kucultme",
+                islemler: [{
+                    islem: "Surgical Operation",
+                    aciklama: "It aims the removal of the fat tissue in the skin and breast and reshaping of the breast in order to change its shape and size."
+                }, {
+                    islem: "Gynecomastia (for men)",
+                    aciklama: "It is the benign enlargement of breast tissue in men. This condition is clinically defined by the presence of a hard mass spreading from the nipples to the deep and around it, and this mass is removed by surgical operation. "
+                }, {
+                    islem: "Coolsculpting (for men)",
+                    aciklama: "CoolScupting, also known as Cold Lipolysis, is a medical aesthetic method that freezes and breaks up fat tissue. "
+                }]
+            }
+        ]
+    }, {
+        id: "abs",
+        bolge: "ABS / Stomach",
+        bolge_baslik: "Treatments applicable for <span class='data'>ABS / Stomach</span>.",
+        tedaviler: [
+            {
+                tedavi: "Tightening",
+                id: "sikilasma",
+                islemler: [{
+                    islem: "Emsculpt",
+                    aciklama: "Using Emsculpt High-Intensity Focused Electromagnetic (HIFEM) technology enables the body to burn fat and activates muscle tissue in areas such as abdominal muscle, butt lift and arm tightening.  without requiring any surgical intervention."
+                }, {
+                    islem: "Endolift",
+                    aciklama: "It is a combined laser treatment that offers skin rejuvenation and facial shaping together. It is applied with air cooling only, without the need for incision and anaesthesia for sagging in the face, chin, neck areas and bags under the eyes. "
+                }, {
+                    islem: "Exilis",
+                    aciklama: ""
+                }, {
+                    islem: "Emtone",
+                    aciklama: "It aims to remove the orange peel texture on the skin from the first session. Developed as a result of long-term research, the most distinctive feature of Emtone is that it is also effective against the factors causing cellulite. "
+                }, {
+                    islem: "Lipocell",
+                    aciklama: "It is a regional thinning application in which a high-intensity cooling focus ultrasound technique is used. Provides a body slimming in one session."
+                }, {
+                    islem: "Coolsculpting",
+                    aciklama: "CoolScupting, also known as Cold Lipolysis, is a medical aesthetic method that freezes and breaks up fat tissue."
+                }]
+            }, {
+                tedavi: "Blemish Removal",
+                id: "leke_silme",
+                islemler: [{
+                    islem: "Post-operative Scar Revision",
+                    aciklama: ""
+                }, {
+                    islem: "BBL Hero",
+                    aciklama: "It is a light therapy that is effective against acne, freckles, and deeper spots than rosacea. It can be applied regardless of age and it is possible to achieve results in a short time."
+                }, {
+                    islem: "Scarlet X",
+                    aciklama: "Fractional radiofrequency, Scarlet X or Gold Needle targets the subcutaneous layer directly and makes the skin look more taut, lively and bright."
+                }, {
+                    islem: "Starwalker Lazer",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching."
+                }, {
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "Peeling",
+                    aciklama: "It aims to remove the top layer of the skin and replace the damaged skin with new and healthy skin. It consists of application of many chemical agents at different depths in the skin layer."
+                }, {
+                    islem: "PRP",
+                    aciklama: "PRP stands out with its skin rejuvenation, removal of skin damage and skin rejuvenation effects. The aim of the treatment is to provide faster healing of the tissue by blood circulation."
+                }]
+            }, {
+                tedavi: "Tummy Tuck",
+                id: "karin_germe",
+                islemler: [{
+                    islem: "Surgical operation",
+                    aciklama: "It is a surgical operation in which excess fat and skin are removed from the abdomen, weakened abdominal muscles are repaired and the person has a smoother and more uniform abdomen."
+                }, {
+                    islem: "Liposuction",
+                    aciklama: "It is performed to remove excess fat in certain parts of the body such as the abdomen, waist, hips, legs, back, arms or neck areas. It helps to shape these areas and improve their contours."
+                }]
+            }
+        ]
+    }, {
+        id: "simit",
+        bolge: "Hips",
+        bolge_baslik: "Treatments applicable for <span class='data'>hips</span>",
+        tedaviler: [
+            {
+                tedavi: "Tightening",
+                id: "sikilasma",
+                islemler: [{
+                    islem: "Exilis",
+                    aciklama: ""
+                }, {
+                    islem: "Coolsculpting",
+                    aciklama: "CoolScupting, also known as Cold Lipolysis, is a medical aesthetic method that freezes and breaks up fat tissue. "
+                }, {
+                    islem: "Lipocel",
+                    aciklama: "It is a regional thinning application in which a high-intensity cooling focus ultrasound technique is used. Provides a body slimming in one session."
+                }]
+            }, {
+                tedavi: "Lateral Tension Tummy Tuck",
+                id: "karin_yanlari_germe",
+                islemler: [{
+                    islem: "Surgical Operation",
+                    aciklama: "It is a surgical operation in which excess fat and skin are removed from the abdomen, weakened abdominal muscles are repaired and the person has a smoother and more uniform abdomen. "
+                }, {
+                    islem: "Liposuction",
+                    aciklama: "It is performed to remove excess fat in certain parts of the body such as the abdomen, waist, hips, legs, back, arms or neck areas. It helps to shape these areas and improve their contours. "
+                }]
+            }
+        ]
+    }, {
+        id: "genital",
+        bolge: "Genital",
+        bolge_baslik: "Treatments applicable for <span class='data'>gentital</span> area.",
+        tedaviler: [
+            {
+                tedavi: "Tightening",
+                id: "sikilasma",
+                islemler: [{
+                    islem: "Femilift",
+                    aciklama: "It is a Fractional Carbon Dioxide (CO2) Laser technology developed as a non-surgical solution to women's problems  such as vaginal dryness and vaginal laxity. The formation of new collagen in the vagina is triggered and the wall thickness and elasticity increase, the loosened canal tightens."
+                }]
+            }, {
+                tedavi: "Bleaching",
+                id: "beyazlatma",
+                islemler: [{
+                    islem: "Femilift",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "kol",
+        bolge: "Arm",
+        bolge_baslik: "Treatments applicable for <span class='data'>arm</span>.",
+        tedaviler: [
+            {
+                tedavi: "Tattoo Removal",
+                id: "dovme_silme",
+                islemler: [{
+                    islem: "Laser Tattoo Removal",
+                    aciklama: "Tattoo removal consists of decomposition of pigments into small particles with laser beams reaching the coloured tattoo pigment in the skin. These tiny particles are easily absorbed and destroyed by the body’s immune system."
+                }]
+            }, {
+                tedavi: "Tightening",
+                id: "sikilasma",
+                islemler: [{
+                    islem: "Emsculpt",
+                    aciklama: "Using Emsculpt High-Intensity Focused Electromagnetic (HIFEM) technology enables the body to burn fat and activates muscle tissue in areas such as abdominal muscle, butt lift and arm tightening.  without requiring any surgical intervention."
+                }, {
+                    islem: "CoolSculpting",
+                    aciklama: "CoolScupting, also known as Cold Lipolysis, is a medical aesthetic method that freezes and breaks up fat tissue. "
+                }, {
+                    islem: "Exilis",
+                    aciklama: ""
+                }, {
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "Emtone",
+                    aciklama: "It aims to remove the orange peel texture on the skin from the first session. Developed as a result of long-term research, the most distinctive feature of Emtone is that it is also effective against the factors causing cellulite. "
+                }]
+            }, {
+                tedavi: "Blemish Treatment",
+                id: "leke_tedavisi",
+                islemler: [{
+                    islem: "Scarlet X",
+                    aciklama: "Fractional radiofrequency, Scarlet X or Gold Needle targets the subcutaneous layer directly and makes the skin look more taut, lively and bright. "
+                }, {
+                    islem: "Starwalker Lazer",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Epilation",
+                id: "epilasyon",
+                islemler: [{
+                    islem: "Alexandrite Cynsure",
+                    aciklama: ""
+                }, {
+                    islem: "Diod Leda",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Arm Lift",
+                id: "kol_Germe",
+                islemler: [{
+                    islem: "Surgical operation",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "el",
+        bolge: "Hand",
+        bolge_baslik: "Treatments applicable for <span class='data'>hand</span>.",
+        tedaviler: [
+            {
+                tedavi: "Skin Rejuvenation",
+                id: "cilt_genclestirme",
+                islemler: [{
+                    islem: "Mesotherapy",
+                    aciklama: "Mesotherapy refers to the injection of ingredients playing an active role in cell metabolisms such as vitamins, minerals, amino acids and hyaluronic acid into the skin and sometimes into the subcutaneous adipose tissue."
+                }, {
+                    islem: "Smart Filling",
+                    aciklama: "It is a bio-absorbable filler that can be applied to any area that needs volume and lifting, and its effects last for between one and four years."
+                }]
+            }, {
+                tedavi: "Blemish Treatment",
+                id: "leke_tedavisi",
+                islemler: [{
+                    islem: "Starwalker Lazer",
+                    aciklama: "It is a Q-Switched (Q-key) Nd: YAG laser used to remove stains on different layers of the skin. It is also preferred for tattoo and permanent make-up removal and hair bleaching. "
+                }, {
+                    islem: "Carbon Laser",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }, {
+        id: "popo",
+        bolge: "Popo",
+        bolge_baslik: "Treatments applicable for <span class='data'>butt</span>.",
+        tedaviler: [
+            {
+                tedavi: "Tightening",
+                id: "sikilasma",
+                islemler: [{
+                    islem: "Emsculpt",
+                    aciklama: "Using Emsculpt High-Intensity Focused Electromagnetic (HIFEM) technology enables the body to burn fat and activates muscle tissue in areas such as abdominal muscle, butt lift and arm tightening.  without requiring any surgical intervention."
+                }, {
+                    islem: "CoolSculpting",
+                    aciklama: "CoolScupting, also known as Cold Lipolysis, is a medical aesthetic method that freezes and breaks up fat tissue. "
+                }, {
+                    islem: "Exilis",
+                    aciklama: ""
+                }, {
+                    islem: "Emtone",
+                    aciklama: "It aims to remove the orange peel texture on the skin from the first session. Developed as a result of long-term research, the most distinctive feature of Emtone is that it is also effective against the factors causing cellulite."
+                }]
+            }, {
+                tedavi: "Epilation",
+                id: "epilasyon",
+                islemler: [{
+                    islem: "Alexandrite Cynsure",
+                    aciklama: ""
+                }, {
+                    islem: "Diod Leda",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Butt Lifting",
+                id: "popo_diklestirme",
+                islemler: [{
+                    islem: "BBL Hero",
+                    aciklama: "It is a light therapy that is effective against acne, freckles, and deeper spots than rosacea. It can be applied regardless of age and it is possible to achieve results in a short time."
+                }, {
+                    islem: "Emsculpt",
+                    aciklama: "Using Emsculpt High-Intensity Focused Electromagnetic (HIFEM) technology enables the body to burn fat and activates muscle tissue in areas such as abdominal muscle, butt lift and arm tightening.  without requiring any surgical intervention."
+                }]
+            }
+        ]
+    }, {
+        id: "bacak",
+        bolge: "Leg",
+        bolge_baslik: "Treatments applicable for <span class='data'>leg</span>.",
+        tedaviler: [
+            {
+                tedavi: "Cellulite treatment",
+                id: "selulit_tedavisi",
+                islemler: [{
+                    islem: "Emtone",
+                    aciklama: "It aims to remove the orange peel texture on the skin from the first session. Developed as a result of long-term research, the most distinctive feature of Emtone is that it is also effective against the factors causing cellulite."
+                }, {
+                    islem: "Exilis",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Tightening",
+                id: "sikilasma",
+                islemler: [{
+                    islem: "Emsculpt",
+                    aciklama: "Using Emsculpt High-Intensity Focused Electromagnetic (HIFEM) technology enables the body to burn fat and activates muscle tissue in areas such as abdominal muscle, butt lift and arm tightening.  without requiring any surgical intervention."
+                }, {
+                    islem: "Coolsculpting",
+                    aciklama: "CoolScupting, also known as Cold Lipolysis, is a medical aesthetic method that freezes and breaks up fat tissue."
+                }, {
+                    islem: "Exilis",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Skin Rejuvenation",
+                id: "cilt_genclestirme",
+                islemler: [{
+                    islem: "BBL Hero",
+                    aciklama: "It is a light therapy that is effective against acne, freckles, and deeper spots than rosacea. It can be applied regardless of age and it is possible to achieve results in a short time."
+                }, {
+                    islem: "HI-FU",
+                    aciklama: "HIFU, which means High-Intensity Focused Ultrasound Energy, is a treatment method that triggers collagen production in the subcutaneous tissues by using ultra cell sound waves, thereby creating tightening and stretching in the face, neck and décolleté area. "
+                }]
+            }, {
+                tedavi: "Epilasyon",
+                id: "epilasyon",
+                islemler: [{
+                    islem: "Alexandrite Cynsure",
+                    aciklama: ""
+                }, {
+                    islem: "Diod Leda",
+                    aciklama: ""
+                }]
+            }, {
+                tedavi: "Leg Slimming Surgery",
+                id: "bacak_inceltme_ameliyati",
+                islemler: [{
+                    islem: "Surgical operation",
+                    aciklama: ""
+                }, {
+                    islem: "Liposuction",
+                    aciklama: "It is performed to remove excess fat in certain parts of the body such as the abdomen, waist, hips, legs, back, arms or neck areas. It helps to shape these areas and improve their contours. "
+                }]
+            }
+        ]
+    }, {
+        id: "ayak",
+        bolge: "Feet",
+        bolge_baslik: "Treatments applicable for <span class='data'>feet</span>.",
+        tedaviler: [
+            {
+                tedavi: "Skin treatment",
+                id: "cilt_tedavisi",
+                islemler: [{
+                    islem: "Callus removal",
+                    aciklama: ""
+                }, {
+                    islem: "Wart Removal",
+                    aciklama: ""
+                }, {
+                    islem: "Fungus Removal",
+                    aciklama: ""
+                }]
+            }
+        ]
+    }];
+
+    var geoip = localStorage.getItem('geoip');
+    var country_code = 'en';
+    try {
+        if (geoip) {
+            var parsed_json = JSON.parse(geoip);
+            if (parsed_json && typeof parsed_json.country_code === 'string') {
+                country_code = parsed_json.country_code.toLowerCase();
+            }
+        }
+    } catch (e) {
+        country_code = 'en';
+    }
+
+    jQuery("#language_1_select option[data-lang='"+country_code+"']").prop("selected","selected");
+
+</script>

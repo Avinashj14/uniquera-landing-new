@@ -28,6 +28,7 @@ import {
   ArrowRight,
   Mail
 } from 'lucide-react';
+import UniqueraConsultationForm from './components/UniqueraConsultationForm';
 
 // Assets
 const LOGO_URL = "https://uniqueraclinic.com/wp-content/uploads/2024/09/Group-17.svg";
@@ -943,25 +944,6 @@ const AnniversaryCTA = () => (
   </section>
 );
 
-const ConsultationEmbed = () => {
-  const src = 'https://uniqueraclinic.com/consultation-embed/';
-
-  return (
-    <section id="consultation-form" aria-label="Consultation form" className="bg-primary-bg">
-      <div className="w-full">
-        <div className="bg-white overflow-hidden shadow-2xl border-white/10">
-          <iframe
-            title="Hair consultation form"
-            src={src}
-            style={{ border: '0', width: '100%', minHeight: '900px', display: 'block' }}
-            loading="lazy"
-          />
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const Footer = () => (
   <footer className="pt-24 pb-12 bg-[#031011] border-t border-white/5">
     <div className="container mx-auto px-4">
@@ -1203,7 +1185,7 @@ export default function App() {
       <main>
         <Hero />
         <EducationHeader />
-        <ConsultationEmbed />
+        <UniqueraConsultationForm />
         <Transformations />
         <WhatsappSection />
         <Testimonials />

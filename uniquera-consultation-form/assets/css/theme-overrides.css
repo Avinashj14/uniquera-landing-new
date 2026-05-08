@@ -1,0 +1,555 @@
+.uniquera-form-wrap{
+    --primary: rgb(14,179,173);
+    --secondary: rgb(14,179,173);
+    --accent: #EAF6F6; /* light background */
+    background-color:var(--accent) !important;
+}
+
+/* Prevent initial flash of all steps before JS init */
+.uniquera-form-wrap #onlineForm .question{
+    display:none;
+}
+.uniquera-form-wrap #onlineForm .question.active,
+.uniquera-form-wrap #onlineForm .question-content > .question:first-child{
+    display:block;
+}
+
+.uniquera-form-wrap a{
+    color:var(--primary) !important;
+}
+
+.uniquera-form-wrap h6{
+    color:var(--primary) !important;
+}
+
+/* Main CTA + hover */
+.uniquera-form-wrap .form-button{
+    background:var(--primary) !important;
+}
+.uniquera-form-wrap .form-button:hover{
+    background:var(--primary) !important;
+}
+
+/* Secondary CTA used in the UI */
+.uniquera-form-wrap .human-button{
+    background:var(--primary) !important;
+}
+.uniquera-form-wrap .human-button:hover{
+    background:rgb(10,150,145) !important;
+}
+
+/* Slider */
+.uniquera-form-wrap #slider{
+    background:var(--accent) !important;
+}
+.uniquera-form-wrap #slider .noUi-connects .noUi-connect{
+    background:var(--primary) !important;
+}
+.uniquera-form-wrap #slider .noUi-handle{
+    background:var(--primary) !important;
+    border-color:#fff !important; /* keep handle look */
+}
+
+/* Loader + footer progress */
+.uniquera-form-wrap #loading .meter span{
+    background:var(--primary) !important;
+}
+.uniquera-form-wrap #footer .steps .step{
+    border-color:var(--primary) !important;
+}
+.uniquera-form-wrap #footer .steps .step::before{
+    background:var(--primary) !important;
+}
+
+/* Info pill */
+.uniquera-form-wrap .message span{
+    background:var(--secondary) !important;
+}
+
+/* Primary accents (selection, accordions, buttons) */
+.uniquera-form-wrap .question-button.active,
+.uniquera-form-wrap .styled-checkbox:checked + label:before,
+.uniquera-form-wrap .styled-checkbox + label:before{
+    background:var(--primary) !important;
+    border-color:var(--primary) !important;
+}
+.uniquera-form-wrap .question-button.active{
+    color:#fff !important;
+}
+.uniquera-form-wrap .popup-title span,
+.uniquera-form-wrap .popup-box-title{
+    color:var(--primary) !important;
+}
+.uniquera-form-wrap .popup-box-list{
+    border-color:var(--primary) !important;
+}
+.uniquera-form-wrap .accordion-title .question-button.active{
+    background:var(--primary) !important;
+}
+.uniquera-form-wrap .application-item.text{
+    background:var(--primary) !important;
+}
+
+/* Selected hair-svg styling (SVG inside <object/>) */
+.uniquera-form-wrap .selected{
+    fill:var(--primary) !important;
+    fill-opacity:.7 !important;
+}
+
+/* Title strip: doctorImage() toggles [data-step] (object or img). */
+.uniquera-form-wrap #onlineForm .title-image object,
+.uniquera-form-wrap #onlineForm .title-image img{
+    display:none;
+    max-width:100%;
+    width:auto;
+    height:auto;
+    max-height:290px;
+    vertical-align:middle;
+}
+.uniquera-form-wrap #onlineForm .title-image [data-step]{
+    display:none;
+}
+
+/* Step 5: native date picker (calendar) — ISO value, valid dates only */
+.uniquera-form-wrap #question-5 .uniquera-q5-date-wrap{
+    margin-bottom:0;
+    position:relative;
+    /* Above decorative SVG columns that skew toward the center on lg+ */
+    z-index:5;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-native{
+    background-color:rgb(14,179,173);
+    color:#fff;
+    font-size:clamp(16px,3.5vw,24px);
+    text-align:center;
+    border:none;
+    border-radius:8px;
+    padding:10px 12px;
+    min-height:52px;
+    color-scheme:dark;
+    cursor:pointer;
+    position:relative;
+    z-index:3;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-native-picker{
+    position:absolute;
+    width:1px;
+    height:1px;
+    border:0;
+    padding:0;
+    margin:0;
+    overflow:hidden;
+    opacity:0;
+    clip:rect(0,0,0,0);
+    clip-path:inset(50%);
+    pointer-events:none;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-native-picker::-webkit-calendar-picker-indicator{
+    opacity:0;
+    display:none;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-native.error{
+    box-shadow:0 0 0 2px #e74c3c;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar{
+    display:none;
+    margin-top:10px;
+    border:1px solid #c9dde1;
+    border-radius:12px;
+    background:#fff;
+    box-shadow:0 10px 24px rgba(0,0,0,.12);
+    padding:10px;
+    text-align:left;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar.is-open{
+    display:block;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__title{
+    font-size:15px;
+    font-weight:700;
+    color:#1f2d3d;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__nav{
+    width:30px;
+    height:30px;
+    border:1px solid #c9dde1;
+    border-radius:8px;
+    background:#fff;
+    color:#1f2d3d;
+    font-size:18px;
+    line-height:1;
+    padding:0;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__weekdays,
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__days{
+    display:grid;
+    grid-template-columns:repeat(7, minmax(0, 1fr));
+    gap:4px;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__weekdays span{
+    font-size:12px;
+    color:#5b6b79;
+    text-align:center;
+    font-weight:600;
+    padding:3px 0;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__day{
+    border:0;
+    border-radius:8px;
+    min-height:34px;
+    background:#f4f8fa;
+    color:#1f2d3d;
+    font-weight:600;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__day:hover{
+    background:#def3f2;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__day.is-selected{
+    background:rgb(14,179,173);
+    color:#fff;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-calendar__day:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+    background:#eef3f5;
+}
+.uniquera-form-wrap #question-5 .uniquera-date-native-hint{
+    display:block;
+    margin-top:10px;
+    color:#3a4a5a;
+    font-size:14px;
+}
+/* Side art can overlap the center column when skewed; never steal clicks */
+.uniquera-form-wrap #question-5 .row > .col-lg-3 object{
+    pointer-events:none;
+}
+.uniquera-form-wrap .uniquera-sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+}
+
+/* Step 6 (tried treatments): card-style checklist redesign */
+.uniquera-form-wrap #question-6 p.small.text-muted{
+    font-size:15px !important;
+    font-weight:700 !important;
+    color:#3a4a5a !important;
+    margin-bottom:14px !important;
+}
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check{
+    margin-bottom:10px !important;
+    background:#ffffff;
+    border:1px solid #d7e2e8;
+    border-radius:10px;
+    padding:10px 12px;
+    padding-left:12px !important;
+    transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check:hover{
+    border-color:var(--primary);
+    background:#f6fcfc;
+}
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check:focus-within{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(14,179,173,.15);
+}
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check-label{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin:0;
+    font-size:15px !important;
+    font-weight:600 !important;
+    color:#1f2d3d !important;
+    line-height:1.45;
+    cursor:pointer;
+}
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check-input[type="checkbox"]{
+    position:static;
+    float:none;
+    width:18px;
+    height:18px;
+    min-width:18px;
+    margin:2px 0 0 !important;
+    margin-left:0 !important;
+    accent-color:var(--primary);
+}
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-group .form-control{
+    border-radius:10px;
+    border:1px solid #d7e2e8;
+}
+
+/* Step 10 redesign: broader layout, compact option icons */
+.uniquera-form-wrap #question-10 .uniquera-step9-field,
+.uniquera-form-wrap #question-10 .uniquera-step10-field{
+    background:#ffffff;
+    border:none;
+    border-radius:12px;
+    padding:12px 14px;
+    margin-bottom:12px;
+}
+.uniquera-form-wrap #question-10 .uniquera-step9-field .col-form-label,
+.uniquera-form-wrap #question-10 .uniquera-step10-field .col-form-label{
+    font-weight:600;
+    color:#1f2d3d;
+}
+.uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select .option,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select .option{
+    min-height:120px;
+    padding:10px 8px;
+}
+.uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select .animate,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select .animate{
+    width:44px;
+    height:44px;
+    margin:0 auto 8px;
+}
+.uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select object,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select object{
+    width:34px !important;
+    height:34px !important;
+}
+.uniquera-form-wrap #question-10 .uniquera-q9-english .option-text,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .option-text{
+    font-size:13px;
+}
+.uniquera-form-wrap #question-10 .uniquera-se-other-wrap{
+    width:100%;
+}
+.uniquera-form-wrap #question-10 .uniquera-se-other-wrap--full{
+    margin-top:6px;
+    padding-top:2px;
+    flex:0 0 100%;
+    max-width:100%;
+}
+.uniquera-form-wrap #question-10 .uniquera-se-other-wrap .form-control{
+    border-radius:10px;
+    border:1px solid #cfdbe4;
+}
+
+/* Consent (policies): checkbox + label text — no overlap with theme/Elementor */
+.uniquera-form-wrap #question-10 .uniquera-step10-field .form-check{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding-left:0;
+}
+.uniquera-form-wrap #question-10 .uniquera-step10-field .form-check-input{
+    float:none !important;
+    margin-left:0 !important;
+    margin-top:0.35em;
+    flex-shrink:0;
+    position:relative;
+    z-index:1;
+}
+.uniquera-form-wrap #question-10 .uniquera-step10-field .form-check-label{
+    flex:1;
+    min-width:0;
+    padding-left:0;
+    margin-bottom:0;
+}
+
+/* Step 10: optional free-text — compact, clearly not required */
+.uniquera-form-wrap #question-10 .uniquera-additional-message-field .uniquera-optional-hint{
+    font-weight:400;
+    font-size:13px;
+    line-height:1.35;
+    margin-bottom:0;
+}
+.uniquera-form-wrap #question-10 .uniquera-additional-message{
+    min-height:4.25rem;
+    resize:vertical;
+    max-height:min(40vh,260px);
+}
+
+/* Thank-you redesign */
+.uniquera-form-wrap #onlineForm .uniquera-thankyou-screen .uniquera-thankyou-card{
+    width:min(100%, 700px);
+    background:#fff;
+    border:1px solid #d7e2e8;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(18,47,66,.08);
+    padding:34px 28px;
+    text-align:center;
+}
+.uniquera-form-wrap #onlineForm .uniquera-thankyou-screen .uniquera-thankyou-card h1{
+    color:#0d2a3f;
+    margin:0 0 12px;
+    font-size:clamp(1.9rem, 4vw, 2.35rem);
+    font-weight:800;
+    letter-spacing:.2px;
+}
+.uniquera-form-wrap #onlineForm .uniquera-thankyou-screen .uniquera-thankyou-card p{
+    margin:0 0 10px;
+    width:100%;
+    max-width:none;
+    color:#3f5366;
+    font-size:1.03rem;
+    line-height:1.65;
+    text-align:center;
+}
+
+.uniquera-form-wrap #onlineForm .uniquera-thankyou-screen .uniquera-thankyou-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.uniquera-form-wrap #onlineForm .uniquera-thankyou-screen .uniquera-thankyou-card .uniquera-thankyou-text{
+    width:auto !important;
+    max-width:100% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    text-align:center !important;
+    text-wrap:balance;
+}
+.uniquera-form-wrap #onlineForm .uniquera-thankyou-screen .uniquera-thankyou-card .uniquera-thankyou-whatsapp{
+    margin-top:18px;
+    padding-top:12px;
+    border-top:1px dashed #d7e2e8;
+    font-weight:700;
+    color:#0b7f7a;
+}
+.uniquera-form-wrap #onlineForm .uniquera-thankyou-screen .uniquera-thankyou-card .uniquera-thankyou-whatsapp a{
+    color:#0b7f7a !important;
+    text-decoration:underline;
+}
+
+/* Step 2 female: prevent hover zoom/cropping on hair area options */
+.uniquera-form-wrap #question-2 .question-female .radio-select .option,
+.uniquera-form-wrap #question-2 .question-female .radio-select .option:hover{
+    transform:none !important;
+}
+.uniquera-form-wrap #question-2 .question-female .radio-select .option svg,
+.uniquera-form-wrap #question-2 .question-female .radio-select .option:hover svg{
+    transform:none !important;
+}
+.uniquera-form-wrap #question-2 .question-female .radio-select .option > div{
+    overflow:visible !important;
+}
+.uniquera-form-wrap #question-2 .question-female .radio-select object{
+    max-width:100%;
+    height:auto;
+}
+
+/* Validation modal */
+.uniquera-form-wrap #onlineForm .uniquera-validation-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(10,22,34,.45);
+    z-index:9998;
+}
+.uniquera-form-wrap #onlineForm .uniquera-validation-modal{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:min(92vw, 560px);
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 18px 45px rgba(0,0,0,.25);
+    z-index:9999;
+    overflow:hidden;
+}
+.uniquera-form-wrap #onlineForm .uniquera-validation-modal__head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 16px;
+    background:#f3fbfb;
+    border-bottom:1px solid #d7e2e8;
+}
+.uniquera-form-wrap #onlineForm .uniquera-validation-modal__head h4{
+    margin:0;
+    font-size:18px;
+    color:#143247;
+    font-weight:700;
+}
+.uniquera-form-wrap #onlineForm .uniquera-validation-close{
+    border:0;
+    background:transparent;
+    font-size:18px;
+    line-height:1;
+    color:#607284;
+    cursor:pointer;
+}
+.uniquera-form-wrap #onlineForm .uniquera-validation-modal__body{
+    padding:14px 18px 10px;
+}
+.uniquera-form-wrap #onlineForm .uniquera-validation-modal__body ul{
+    margin:0;
+    padding-left:20px;
+}
+.uniquera-form-wrap #onlineForm .uniquera-validation-modal__body li{
+    margin:0 0 7px;
+    color:#2b3f51;
+    font-size:14px;
+    line-height:1.5;
+}
+.uniquera-form-wrap #onlineForm .uniquera-validation-modal__foot{
+    padding:12px 16px 16px;
+    display:flex;
+    justify-content:flex-end;
+}
+.uniquera-form-wrap #onlineForm .uniquera-validation-ok{
+    border:0;
+    background:var(--primary);
+    color:#fff;
+    border-radius:8px;
+    font-weight:600;
+    padding:8px 16px;
+    cursor:pointer;
+}
+
+/* Async submit: full-viewport overlay while AJAX + uploads complete */
+.uniquera-form-wrap .uniquera-submit-loader{
+    position:fixed;
+    inset:0;
+    z-index:10050;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:saturate(180%) blur(2px);
+}
+.uniquera-form-wrap .uniquera-submit-loader__inner{
+    text-align:center;
+    max-width:90vw;
+}
+.uniquera-form-wrap .uniquera-submit-loader__spinner{
+    width:44px;
+    height:44px;
+    margin:0 auto 14px;
+    border:3px solid #d7e2e8;
+    border-top-color:var(--primary);
+    border-radius:50%;
+    animation:uniquera-submit-spin .75s linear infinite;
+}
+.uniquera-form-wrap .uniquera-submit-loader__text{
+    margin:0;
+    font-size:16px;
+    font-weight:600;
+    color:#1f2d3d;
+}
+@keyframes uniquera-submit-spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+@media (prefers-reduced-motion:reduce){
+    .uniquera-form-wrap .uniquera-submit-loader__spinner{
+        animation:none;
+        border-top-color:#8ab8b6;
+    }
+}

@@ -1,0 +1,411 @@
+/* Full-width friendly layout inside Elementor sections */
+.uniquera-form-wrap {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+.elementor-widget-uniquera_consultation_form .uniquera-form-wrap,
+.elementor-widget-shortcode .uniquera-form-wrap {
+    min-height: 0;
+}
+
+/*
+ * main_v2.css targets a standalone full-page form:
+ *   body { overflow: hidden }
+ *   .main { height: 100vh; overflow-y: auto }
+ * That traps scroll inside .main. For WordPress embeds, use the document scroll only.
+ */
+body.uniquera-consultation-form-active {
+    overflow-y: auto !important;
+    overflow-x: hidden;
+}
+
+/* Core: let the form grow with content; no inner scrollbar on .main */
+.uniquera-form-wrap #onlineForm .main {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    align-items: stretch;
+}
+
+/* Initial loader block: avoid locking to full viewport when embedded */
+.uniquera-form-wrap #loading .row {
+    height: auto !important;
+    min-height: 50vh;
+}
+
+/* Elementor columns/sections often use overflow:hidden for layout */
+.elementor-widget-uniquera_consultation_form .elementor-widget-wrap,
+.elementor-widget-uniquera_consultation_form .elementor-container {
+    overflow: visible !important;
+}
+
+.elementor-element:has(.uniquera-form-wrap),
+.elementor-element:has(.uniquera-form-wrap) .elementor-widget-wrap {
+    overflow: visible !important;
+}
+
+/*
+ * main_v2.css: .wrapper { display: none } until the loader animation calls .show().
+ * In WordPress/Elementor, meter width can be 0, scripts can load late, or the 3s gate feels broken—users see a blank area.
+ * Show the form shell immediately; hide the full-page loader in embeds.
+ */
+.uniquera-form-wrap #onlineForm .wrapper {
+    display: block !important;
+}
+
+.uniquera-form-wrap #onlineForm #loading {
+    display: none !important;
+}
+
+/*
+ * main_v2.css: .question { display: none } except .active. JS adds .active on first paint;
+ * if anything blocks init, no step is visible. Prefer first step visible until JS takes over (inline display from .hide() wins when navigating).
+ */
+.uniquera-form-wrap #onlineForm .question-content > .question:first-child {
+    display: block;
+}
+
+/* Back control: main_v2 uses missing ../images/prev.png + absolute positioning without a reliable offset */
+.uniquera-form-wrap #footer .col {
+    position: relative;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uniquera-form-wrap #footer .back {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 44px;
+    height: 44px;
+    background: none !important;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    pointer-events: auto;
+}
+
+.uniquera-form-wrap #footer .back::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    margin-left: 2px;
+    border-left: 3px solid rgb(14, 179, 173);
+    border-bottom: 3px solid rgb(14, 179, 173);
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-sizing: border-box;
+}
+
+.uniquera-form-wrap #footer .steps {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 9;
+}
+
+/*
+ * main_v2.css hides .step unless .hair-question — force all dots visible in embeds.
+ */
+.uniquera-form-wrap #onlineForm #footer .steps .step,
+.uniquera-form-wrap #onlineForm #footer .steps .step.hide {
+    display: inline-block !important;
+    vertical-align: middle;
+}
+
+.uniquera-form-wrap #footer .steps .step {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/*
+ * Step strip: hollow circles + connector line (7px).
+ */
+.uniquera-form-wrap #onlineForm #footer .steps .step {
+    width: 26px !important;
+    height: 20px !important;
+    border-width: 3px !important;
+    border-style: solid !important;
+    border-radius: 50% !important;
+    box-sizing: border-box !important;
+    background-color: #f4f6f7 !important;
+    box-shadow: none !important;
+    position: relative;
+    font-size: 7px;
+    line-height: 13px;
+    text-align: center;
+    z-index: 2;
+}
+
+.uniquera-form-wrap #footer .steps .step::before {
+    height: 7px !important;
+    background: #d5dde1 !important;
+    box-shadow: none !important;
+    z-index: 1;
+}
+
+/* iPad / tablet sizing: prevent number overlap, larger dots */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .uniquera-form-wrap #onlineForm #footer .steps .step {
+        width: 30px !important;
+        height: 27px !important;
+        border-width: 1px !important;
+        border-style: solid !important;
+        border-radius: 50% !important;
+        box-sizing: border-box !important;
+        background-color: #f4f6f7 !important;
+        box-shadow: none !important;
+        position: relative;
+        font-size: 10px;
+        line-height: 24px;
+        text-align: center;
+        z-index: 2;
+    }
+}
+
+/* Trail completed through previous step */
+.uniquera-form-wrap #footer .steps .step.done {
+    background-color: #f4f6f7 !important;
+    border-color: var(--primary, rgb(14, 179, 173)) !important;
+}
+
+.uniquera-form-wrap #footer .steps .step.done + .step::before {
+    background: var(--primary, rgb(14, 179, 173)) !important;
+}
+
+/* Current position */
+.uniquera-form-wrap #footer .steps .step.active {
+    background-color: #f4f6f7 !important;
+    border-color: var(--primary, rgb(14, 179, 173)) !important;
+    box-shadow: 0 0 0 1px rgba(14, 179, 173, 0.35) !important;
+}
+
+.uniquera-form-wrap #footer .steps .step.active::before {
+    background: var(--primary, rgb(14, 179, 173)) !important;
+}
+
+/* Not yet reached */
+.uniquera-form-wrap #footer .steps .step.active ~ .step {
+    background-color: #f4f6f7 !important;
+    border-color: #c8d4d8 !important;
+    box-shadow: none !important;
+}
+
+.uniquera-form-wrap #footer .steps .step.active ~ .step::before {
+    background: #d5dde1 !important;
+}
+
+/* Step label under Continue / Submit */
+.uniquera-form-wrap .uniquera-step-indicator {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.3;
+    color: #555;
+    font-weight: 500;
+}
+
+/*
+ * Gender / radio cards: <object> SVG and the shine ::before sit above the invisible
+ * input in many browsers and steal clicks. Let events reach the overlay input.
+ */
+.uniquera-form-wrap .radio-select input[type="radio"] {
+    z-index: 5 !important;
+}
+
+.uniquera-form-wrap .radio-select .option .animate::before {
+    pointer-events: none;
+}
+
+.uniquera-form-wrap .radio-select object {
+    pointer-events: none;
+}
+
+/* Step validation: female hair-loss row needs a visible error when nothing is selected */
+.uniquera-form-wrap #question-2 .question-female.error {
+    outline: 2px solid #e74c3c;
+    outline-offset: 6px;
+    border-radius: 4px;
+}
+
+/* Step 8: referral source — horizontal icon radios */
+.uniquera-form-wrap .uniquera-referral-section {
+    margin-bottom: 1.75rem;
+}
+
+.uniquera-form-wrap .uniquera-referral-row {
+    margin-left: -6px;
+    margin-right: -6px;
+}
+
+.uniquera-form-wrap .uniquera-referral-row > .uniquera-referral-option {
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-bottom: 12px;
+}
+
+.uniquera-form-wrap .uniquera-referral-row .radio-select .option {
+    text-align: center;
+    min-height: 0;
+    padding: 10px 6px 12px;
+}
+
+.uniquera-form-wrap .uniquera-referral-row .radio-select .option .animate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+    margin-bottom: 6px;
+}
+
+.uniquera-form-wrap .uniquera-referral-row .radio-select object {
+    width: 56px;
+    height: 56px;
+    pointer-events: none;
+}
+
+.uniquera-form-wrap .uniquera-referral-row .option-text {
+    display: block;
+    font-size: 13px;
+    line-height: 1.25;
+    padding: 0 2px;
+}
+
+.uniquera-form-wrap #question-9 .uniquera-referral-section.error {
+    outline: 2px solid #e74c3c;
+    outline-offset: 8px;
+    border-radius: 6px;
+    padding-bottom: 4px;
+}
+
+/* Step 9: match core form rows + radio-select cards */
+.uniquera-form-wrap .uniquera-step9-field .col-form-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.uniquera-form-wrap #question-10 .iti {
+    width: 100%;
+}
+
+.uniquera-form-wrap .uniquera-step9-field.has-error .form-control.error {
+    border-color: #e74c3c !important;
+}
+
+.uniquera-form-wrap #question-10 .uniquera-q9-english.validate.error,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel.validate.error {
+    outline: 2px solid #e74c3c;
+    outline-offset: 8px;
+    border-radius: 8px;
+    padding: 6px 4px;
+}
+
+/* Step 9: minimal file control (no “No file chosen” / four-tile UI) */
+.uniquera-form-wrap .uniquera-file-upload-simple {
+    position: relative;
+}
+
+.uniquera-form-wrap .uniquera-file-input-screen-reader {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.uniquera-form-wrap .uniquera-file-upload-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    background: #0eb3ad;
+    color: #fff !important;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0;
+    border: none;
+    line-height: 1.3;
+}
+
+.uniquera-form-wrap .uniquera-file-upload-btn:hover,
+.uniquera-form-wrap .uniquera-file-upload-btn:focus {
+    background: #0c9a95;
+    color: #fff !important;
+    outline: 2px solid #0a7f7b;
+    outline-offset: 2px;
+}
+
+.uniquera-form-wrap .uniquera-file-info {
+    min-height: 1.25em;
+}
+
+/* Step 10: same row layout as question 7 / contact fields */
+.uniquera-form-wrap .uniquera-step10-field .col-form-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.uniquera-form-wrap #question-10 .form-check-label {
+    line-height: 1.45;
+    text-align: left;
+}
+
+.uniquera-form-wrap .uniquera-tried-treatments.validate.error,
+#onlineForm .uniquera-tried-treatments.validate.error {
+    outline: 2px solid #e74c3c;
+    outline-offset: 8px;
+    border-radius: 6px;
+    padding: 8px 10px 10px;
+}
+
+.uniquera-form-wrap .uniquera-thankyou-screen,
+#onlineForm .uniquera-thankyou-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 45vh;
+    padding: 2rem 1rem;
+}
+
+.uniquera-form-wrap .uniquera-thankyou-screen.uniquera-thankyou-screen--open,
+#onlineForm .uniquera-thankyou-screen.uniquera-thankyou-screen--open {
+    display: flex;
+}
+
+.uniquera-form-wrap .uniquera-thankyou-screen h1,
+#onlineForm .uniquera-thankyou-screen h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: #1a2b3c;
+}
+
+.uniquera-form-wrap .uniquera-thankyou-screen p,
+#onlineForm .uniquera-thankyou-screen p {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #555;
+    max-width: 28rem;
+}
