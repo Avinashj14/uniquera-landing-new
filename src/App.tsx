@@ -29,6 +29,8 @@ import {
   Mail
 } from 'lucide-react';
 import UniqueraConsultationForm from './components/UniqueraConsultationForm';
+import {absoluteLandingUrl, matchesThankYouPath, normalizeBasePath} from './routeUtils';
+import {pushConsultationFormThankYouIfPending} from './gtmTrack';
 
 // Assets
 const LOGO_URL = "https://uniqueraclinic.com/wp-content/uploads/2024/09/Group-17.svg";
@@ -82,27 +84,51 @@ const TopBar = () => {
 };
 
 
-const Header = () => (
-  <header className="sticky top-0 z-50 bg-primary-bg/80 backdrop-blur-lg border-b border-white/5 py-4">
-    <div className="container mx-auto px-4 flex justify-between items-center">
-      <img src={LOGO_WHITE_URL} alt="UniquEra Clinic" className="h-10 md:h-12" referrerPolicy="no-referrer" />
-      <div className="hidden lg:flex items-center gap-8 text-sm font-medium">
-        <a href="#about" className="hover:text-brand-cyan transition-colors">About Us</a>
-        <a href="#transformations" className="hover:text-brand-cyan transition-colors">Transformations</a>
-        <a href="#doctors" className="hover:text-brand-cyan transition-colors">Doctors</a>
-        <button 
-          onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
-          className="btn-cyan text-sm py-2.5"
-        >
-          Request An Appointment
+type HeaderProps = {
+  /** Logo link — landing root. Defaults to /. */
+  homeHref?: string;
+  /** Prefix for section links (#about …). Defaults to \"\" (same-page hashes on landing). On thank-you, pass landing home URL without trailing slash. */
+  navHashBase?: string;
+  /** When set, overrides default scroll-to consultation for the CTA button. */
+  bookNowHref?: string;
+};
+
+const Header = ({homeHref = '/', navHashBase = '', bookNowHref}: HeaderProps = {}) => {
+  const hash = (id: string) => (navHashBase ? `${navHashBase.replace(/\/+$/, '')}#${id}` : `#${id}`);
+  const goBookNow = () => {
+    if (bookNowHref) {
+      window.location.href = bookNowHref;
+      return;
+    }
+    document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+  return (
+    <header className="sticky top-0 z-50 bg-primary-bg/80 backdrop-blur-lg border-b border-white/5 py-4">
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <a href={homeHref} className="inline-block shrink-0">
+          <img src={LOGO_WHITE_URL} alt="UniquEra Clinic" className="h-10 md:h-12" referrerPolicy="no-referrer" />
+        </a>
+        <div className="hidden lg:flex items-center gap-8 text-sm font-medium">
+          <a href={hash('about')} className="hover:text-brand-cyan transition-colors">
+            About Us
+          </a>
+          <a href={hash('transformations')} className="hover:text-brand-cyan transition-colors">
+            Transformations
+          </a>
+          <a href={hash('doctors')} className="hover:text-brand-cyan transition-colors">
+            Doctors
+          </a>
+          <button type="button" onClick={goBookNow} className="btn-cyan text-sm py-2.5">
+            Request An Appointment
+          </button>
+        </div>
+        <button type="button" className="lg:hidden text-white" aria-label="Menu">
+          <Menu size={24} />
         </button>
       </div>
-      <button className="lg:hidden text-white">
-        <Menu size={24} />
-      </button>
-    </div>
-  </header>
-);
+    </header>
+  );
+};
 
 const Hero = () => (
   <section id="about" className="relative overflow-hidden">
@@ -932,7 +958,28 @@ const AnniversaryProgram = () => (
   </section>
 );
 
-const Footer = () => (
+type FooterProps = {
+  /** When set, footer “Book now” targets use navigation instead of in-page scroll. */
+  consultationHref?: string;
+};
+
+const Footer = ({consultationHref}: FooterProps = {}) => {
+  const goConsultation = () => {
+    if (consultationHref) {
+      window.location.href = consultationHref;
+      return;
+    }
+    document.getElementById('consultation-form')?.scrollIntoView({behavior: 'smooth'});
+  };
+  const goTestimonials = () => {
+    if (consultationHref) {
+      const base = consultationHref.split('#')[0] || consultationHref;
+      window.location.href = `${base.replace(/\/+$/, '')}#testimonials`;
+      return;
+    }
+    document.getElementById('testimonials')?.scrollIntoView({behavior: 'smooth'});
+  };
+  return (
   <footer className="pt-24 pb-12 bg-[#031011] border-t border-white/5">
     <div className="container mx-auto px-4">
        <div className="grid md:grid-cols-5 gap-12 mb-20">
@@ -1017,7 +1064,7 @@ const Footer = () => (
           © UNIQUERA 2025, All rights reserved.
        </div>
     </div>
-    <div className="hidden md:block fixed bottom-6 left-[5%] z-50">
+    <div className="hidden md:block fixed bottom-6 left-[5%] z-50 pointer-events-auto">
       <a
         href={WHATSAPP_URL}
         target="_blank"
@@ -1032,17 +1079,14 @@ const Footer = () => (
     {/* Floating Action Tabs */}
     <div className="fixed right-0 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-1">
        <div 
-        onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+        onClick={goConsultation}
         className="bg-brand-cyan text-[#031011] py-6 px-3 flex flex-col items-center gap-4 rounded-l-2xl shadow-2xl cursor-pointer hover:bg-white hover:text-brand-cyan transition-all group"
        >
           <Calendar size={18} className="group-hover:scale-110 transition-transform" />
           <span className="[writing-mode:vertical-rl] rotate-180 font-bold text-[10px] tracking-widest uppercase">Book Now</span>
        </div>
        <div 
-        onClick={() => {
-          const testimonials = document.getElementById('testimonials');
-          if (testimonials) testimonials.scrollIntoView({ behavior: 'smooth' });
-        }}
+        onClick={goTestimonials}
         className="bg-white text-[#031011] py-6 px-3 flex flex-col items-center gap-4 rounded-l-2xl shadow-2xl cursor-pointer hover:bg-brand-cyan hover:text-white transition-all group"
        >
           <MessageSquare size={18} className="group-hover:scale-110 transition-transform" />
@@ -1051,6 +1095,7 @@ const Footer = () => (
     </div>
   </footer>
 );
+};
 
 const PromoPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -1214,14 +1259,105 @@ const CookieConsent = () => {
   );
 };
 
-export default function App() {
-  const [isScrolled, setIsScrolled] = useState(false);
+type MobileBookingBarProps = {
+  consultationHref?: string;
+};
+
+const MobileBookingBar = ({consultationHref}: MobileBookingBarProps) => {
+  const goConsultation = () => {
+    if (consultationHref) {
+      window.location.href = consultationHref;
+      return;
+    }
+    document.getElementById('consultation-form')?.scrollIntoView({behavior: 'smooth'});
+  };
+  return (
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex flex-col items-start gap-3">
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="ml-[5%] w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
+        aria-label="Chat with us on WhatsApp"
+      >
+        <MessageCircle size={32} fill="currentColor" />
+      </a>
+      <button
+        type="button"
+        onClick={goConsultation}
+        className="w-[95%] self-center mb-[3px] btn-cyan py-4 text-lg shadow-2xl"
+      >
+        Book Now
+      </button>
+    </div>
+  );
+};
+
+const ThankYouPage = ({basePath}: {basePath: string}) => {
+  const landingHome = absoluteLandingUrl(basePath);
+  const bookHref = `${landingHome.replace(/\/+$/, '')}#consultation-form`;
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    pushConsultationFormThankYouIfPending();
   }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-primary-bg bg-primary-bg">
+      <TopBar />
+      <Header
+        homeHref={landingHome}
+        navHashBase={landingHome.replace(/\/+$/, '')}
+        bookNowHref={bookHref}
+      />
+      <main className="flex-1 flex flex-col items-center justify-center px-4 py-16 md:py-24">
+        <div className="glass-card border border-white/10 rounded-3xl max-w-lg w-full px-8 py-12 text-center shadow-2xl">
+          <div
+            className="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-brand-cyan text-primary-bg text-3xl font-bold"
+            aria-hidden
+          >
+            ✓
+          </div>
+          <h1 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">Thank you</h1>
+          <p className="text-gray-300 text-base leading-relaxed mb-3">
+            Your consultation form has been submitted successfully.
+          </p>
+          <p className="text-gray-300 text-base leading-relaxed mb-6">
+            One of our medical consultants will contact you within 24 hours.
+          </p>
+          <p className="text-brand-cyan font-semibold">
+            <a href="https://wa.me/905388770199" target="_blank" rel="noopener noreferrer" className="underline">
+              Chat on WhatsApp
+            </a>
+          </p>
+          <div className="mt-10">
+            <a href={landingHome} className="btn-cyan inline-block">
+              Back to home
+            </a>
+          </div>
+        </div>
+      </main>
+      <Footer consultationHref={bookHref} />
+      <MobileBookingBar consultationHref={bookHref} />
+    </div>
+  );
+};
+
+export default function App() {
+  const basePath = normalizeBasePath(import.meta.env.BASE_URL || '/');
+  const [isThankYou, setIsThankYou] = useState(
+    () => typeof window !== 'undefined' && matchesThankYouPath(window.location.pathname, basePath),
+  );
+
+  useEffect(() => {
+    const sync = () => setIsThankYou(matchesThankYouPath(window.location.pathname, basePath));
+    sync();
+    window.addEventListener('popstate', sync);
+    return () => window.removeEventListener('popstate', sync);
+  }, [basePath]);
+
+  if (isThankYou) {
+    return <ThankYouPage basePath={basePath} />;
+  }
 
   return (
     <div className="min-h-screen selection:bg-brand-cyan selection:text-primary-bg">
@@ -1254,25 +1390,7 @@ export default function App() {
 
       <Footer />
 
-      {/* Floating CTA for Mobile */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex flex-col items-start gap-3">
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ml-[5%] w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
-          aria-label="Chat with us on WhatsApp"
-        >
-          <MessageCircle size={32} fill="currentColor" />
-        </a>
-        <button
-          type="button"
-          onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
-          className="w-[95%] self-center mb-[3px] btn-cyan py-4 text-lg shadow-2xl"
-        >
-          Book Now
-        </button>
-      </div>
+      <MobileBookingBar />
     </div>
   );
 }

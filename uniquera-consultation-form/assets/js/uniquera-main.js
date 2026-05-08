@@ -31,6 +31,127 @@ function uniqueraThankYouParamPresent() {
     }
 }
 
+/**
+ * Signals successful consultation form submission for Google Tag Manager / GA.
+ * Uses window.dataLayer (GTM-compatible) plus gtag(...) when loaded from index.html.
+ */
+function uniqueraSignalConsultationFormSubmit(payload) {
+    var ut = {};
+    try {
+        ut = getUtmParameters();
+    } catch (_eUt) {}
+
+    var base = typeof payload === 'object' && payload !== null ? payload : {};
+    var eventName = typeof base.event !== 'undefined' && base.event !== null && base.event !== ''
+        ? base.event
+        : 'uniquera_consultation_form_submit_success';
+    try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(Object.assign({}, {
+            event: eventName,
+            form_id: 'uniquera_consultation_form',
+            form_name: 'Uniquera consultation form',
+            form_flow_version: 5,
+            page_path: (typeof window !== 'undefined' && window.location.pathname) ? window.location.pathname : '',
+            page_hostname: (typeof window !== 'undefined' && window.location.hostname) ? window.location.hostname : '',
+            page_url: ut.page_url || (typeof window !== 'undefined' ? window.location.href : ''),
+            utm_source: ut.utm_source || '',
+            utm_medium: ut.utm_medium || '',
+            utm_campaign: ut.utm_campaign || '',
+            utm_audience: ut.utm_audience || ''
+        }, base));
+    } catch (_eDl) {}
+
+    try {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'consultation_form_submit_success', {
+                form_id: 'uniquera_consultation_form',
+                funnel_step: typeof base.funnel_step === 'string' ? base.funnel_step : '',
+                utm_medium: ut.utm_medium || undefined,
+                utm_campaign: ut.utm_campaign || undefined,
+                utm_source: ut.utm_source || undefined
+            });
+        }
+    } catch (_eGtag) {}
+}
+
+/** Normalize jQuery AJAX payloads some hosts return as plain text or with a BOM. */
+function uniqueraCoerceAjaxJson(respRaw) {
+    if (respRaw === null || typeof respRaw === 'undefined') {
+        return null;
+    }
+    if (typeof respRaw === 'object') {
+        return respRaw;
+    }
+    if (typeof respRaw === 'string') {
+        var s = respRaw.replace(/^\uFEFF/, '').trim();
+        try {
+            return window.JSON.parse(s);
+        } catch (_e) {
+            return null;
+        }
+    }
+    return null;
+}
+
+/** e.g. /subdir/api/foo.php → /subdir/thank-you/ ; /api/foo.php → /thank-you/ */
+function uniqueraDefaultThankYouPathFromAjax(ajaxUrl) {
+    if (!ajaxUrl || typeof ajaxUrl !== 'string') {
+        return '/thank-you/';
+    }
+    try {
+        var u = ajaxUrl.replace(/\\/g, '/');
+        var marker = '/api/';
+        var idx = u.indexOf(marker);
+        if (idx <= 0) {
+            return '/thank-you/';
+        }
+        var prefix = u.slice(0, idx);
+        if (!prefix) {
+            return '/thank-you/';
+        }
+        return prefix.replace(/\/+$/, '') + '/thank-you/';
+    } catch (_e) {
+        return '/thank-you/';
+    }
+}
+
+function uniqueraResolveThankYouRedirectUrl() {
+    var fromCfg = '';
+    if (typeof uniqueraForm !== 'undefined' && uniqueraForm && typeof uniqueraForm.thankYouUrl === 'string') {
+        fromCfg = uniqueraForm.thankYouUrl.trim();
+    }
+    if (fromCfg) {
+        return fromCfg;
+    }
+
+    var dom = '';
+    try {
+        var el = document.getElementById('uniquera-react-form-root');
+        if (el && el.getAttribute) {
+            dom = (el.getAttribute('data-thank-you-url') || '').trim();
+        }
+    } catch (_eDom) {}
+
+    if (dom) {
+        return dom;
+    }
+
+    var pathGuess = uniqueraDefaultThankYouPathFromAjax(
+        (typeof uniqueraForm !== 'undefined' && uniqueraForm && uniqueraForm.ajaxUrl) ? uniqueraForm.ajaxUrl : ''
+    );
+    pathGuess = pathGuess.charAt(0) === '/' ? pathGuess : '/' + pathGuess;
+
+    try {
+        var origin = typeof window.location !== 'undefined' && window.location.origin ? window.location.origin : '';
+        if (origin) {
+            return origin + pathGuess;
+        }
+    } catch (_eO) {}
+
+    return pathGuess;
+}
+
 function uniqueraSetThankYouUrl() {
     try {
         var u = new URL(window.location.href);
@@ -81,6 +202,7 @@ function uniqueraSubmitToWordPressAsync(formData) {
         data: formData,
         processData: false,
         contentType: false,
+        dataType: 'json',
         timeout: 0
     });
 }
@@ -974,39 +1096,28 @@ function uniqueraShowSubmitLoader($root) {
 
 
             var stepAtla = 0;
-            var thankYouRedirectTimer = null;
 
+            /* SPA hosts full thank-you route (React); always navigate off the embedded form shell. */
             function showInlineThankYouAndRedirect() {
-                uniqueraSetThankYouUrl();
-                var redirectTarget = '/';
-                if (typeof uniqueraForm !== 'undefined') {
-                    if (typeof uniqueraForm.thankYouUrl === 'string' && uniqueraForm.thankYouUrl.trim() !== '') {
-                        redirectTarget = uniqueraForm.thankYouUrl;
-                    } else if (typeof uniqueraForm.homeUrl === 'string' && uniqueraForm.homeUrl.trim() !== '') {
-                        redirectTarget = uniqueraForm.homeUrl;
-                    }
-                }
-                var $thankYou = $root.find('#uniquera-thankyou-screen');
-                if (!$thankYou.length) {
-                    window.setTimeout(function () {
+                var redirectTarget = uniqueraResolveThankYouRedirectUrl();
+
+                uniqueraSignalConsultationFormSubmit({
+                    event: 'uniquera_consultation_form_submit_success',
+                    funnel_step: 'server_accepted_pending_redirect',
+                    confirmation_url: redirectTarget
+                });
+
+                try {
+                    window.sessionStorage.setItem('uniquera_cf_confirmation_pending', '1');
+                } catch (_eSs) {}
+
+                window.setTimeout(function () {
+                    try {
+                        window.location.assign(redirectTarget);
+                    } catch (_eNav) {
                         window.location.href = redirectTarget;
-                    }, 8000);
-                    return;
-                }
-
-                $root.find('#content > form').hide();
-                $root.find('#footer').hide();
-                $root.find('.form-button-wrapper').hide();
-                $root.find('.back').addClass('hide');
-                $thankYou.addClass('uniquera-thankyou-screen--open').show();
-                scrollToFormTitle();
-
-                if (thankYouRedirectTimer) {
-                    window.clearTimeout(thankYouRedirectTimer);
-                }
-                thankYouRedirectTimer = window.setTimeout(function () {
-                    window.location.href = redirectTarget;
-                }, 8000);
+                    }
+                }, 0);
             }
 
             loadQuestion = function (currentQuestionNumber) {
@@ -1032,7 +1143,8 @@ function uniqueraShowSubmitLoader($root) {
                                     $loader.remove();
                                     $submitBtn.prop('disabled', false);
                                 })
-                                .done(function (resp) {
+                                .done(function (respRaw) {
+                                    var resp = uniqueraCoerceAjaxJson(respRaw);
                                     if (resp && resp.success) {
                                         settings.validate = true;
                                         try {
@@ -1955,7 +2067,11 @@ function uniqueraShowSubmitLoader($root) {
                 }
 
                 if (uniqueraThankYouParamPresent()) {
-                    var thankYouUrl = 'https://uniqueraclinic.com/thank-you/';
+                    var thankYouUrl = (typeof uniqueraForm !== 'undefined'
+                        && uniqueraForm.thankYouUrl
+                        && String(uniqueraForm.thankYouUrl).trim())
+                        ? String(uniqueraForm.thankYouUrl).trim()
+                        : 'https://uniqueraclinic.com/thank-you/';
                     if (window.parent !== window) {
                         /* Inside iframe: open in new tab and reload iframe so form is fresh */
                         try { window.open(thankYouUrl, '_blank', 'noopener'); } catch (e) {}

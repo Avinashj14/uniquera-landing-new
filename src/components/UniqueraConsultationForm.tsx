@@ -1,4 +1,5 @@
 import {useEffect, useMemo, useRef} from 'react';
+import {absoluteLandingUrl, thankYouPageUrl} from '../routeUtils';
 import formHtmlRaw from '../../uniquera-consultation-form/templates/form-fragment.html?raw';
 
 /* Form markup is in `.uniquera-form-wrap`; CSS is scoped in uniquera-form-scoped.css and loaded unlayered in index.css so Bootstrap class names beat Tailwind utilities inside the form. */
@@ -113,8 +114,8 @@ export default function UniqueraConsultationForm() {
         ajaxUrl: submitUrl,
         nonce: 'react-app',
         submitError: 'Could not submit your form. Please try again.',
-        homeUrl: `${basePath || ''}/`,
-        thankYouUrl: 'https://uniqueraclinic.com/thank-you/',
+        homeUrl: absoluteLandingUrl(basePath),
+        thankYouUrl: thankYouPageUrl(basePath),
         trackingDefaults: {
           utm_source: window.location.hostname,
           utm_campaign: 'uniquera_consultation_form',
@@ -176,6 +177,7 @@ export default function UniqueraConsultationForm() {
           ref={rootRef}
           className="uniquera-form-wrap"
           data-uniquera-form="1"
+          data-thank-you-url={thankYouPageUrl(basePath)}
           dangerouslySetInnerHTML={{__html: formHtml}}
         />
       </div>
