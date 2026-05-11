@@ -29,6 +29,7 @@ import {
   Mail
 } from 'lucide-react';
 import UniqueraConsultationForm from './components/UniqueraConsultationForm';
+import FreeGuideModal from './components/FreeGuideModal';
 import {absoluteLandingUrl, matchesThankYouPath, normalizeBasePath} from './routeUtils';
 import {pushConsultationFormThankYouIfPending} from './gtmTrack';
 
@@ -413,6 +414,8 @@ const MedicalGuideSection = () => {
     "When surgery becomes the only reliable option"
   ];
 
+  const [isGuideModalOpen, setIsGuideModalOpen] = useState(false);
+
   return (
     <section className="py-24 bg-accent-bg">
       <div className="container mx-auto px-4">
@@ -427,7 +430,8 @@ const MedicalGuideSection = () => {
             <div className="bg-brand-cyan/5 border border-brand-cyan/10 p-6 rounded-2xl">
               <p className="text-brand-cyan font-bold italic text-sm mb-4">Guide - A Guide to fixing hair loss</p>
               <button 
-                onClick={() => window.open('https://uniqueraclinic.com/wp-content/uploads/2026/05/A-Guide-to-fixing-hair-loss.pdf', '_blank')}
+                type="button"
+                onClick={() => setIsGuideModalOpen(true)}
                 className="btn-cyan w-full flex items-center justify-center gap-2"
               >
                 <Download size={18} /> Download the Free Guide
@@ -447,6 +451,8 @@ const MedicalGuideSection = () => {
           </div>
         </div>
       </div>
+
+      <FreeGuideModal open={isGuideModalOpen} onClose={() => setIsGuideModalOpen(false)} />
     </section>
   );
 };

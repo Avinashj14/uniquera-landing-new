@@ -4,6 +4,7 @@ import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
 import Busboy from 'busboy';
 import nodemailer from 'nodemailer';
+import {buildConsultationEmailHtml} from './emailTemplates/consultationEmail.js';
 
 const fieldLabels: Record<string, string> = {
   gender: 'Gender',
@@ -126,22 +127,16 @@ export default defineConfig(({mode}) => {
                   }))
                   .filter((row) => row.value.trim() !== '');
 
-                const htmlRows = rows
-                  .map(
-                    (row) =>
-                      `<tr><th style="text-align:left;padding:8px;border:1px solid #ddd;vertical-align:top;">${row.label}</th><td style="padding:8px;border:1px solid #ddd;">${row.value}</td></tr>`,
-                  )
-                  .join('');
-
                 const email = fields.email?.[0];
                 const fullName = fields.fullName?.[0] || 'Unknown';
+                const pageUrl = fields.page_url?.[0];
 
                 await transporter.sendMail({
                   to: env.SMTP_TO || 'uniquera@Uniqueraclinic.com',
                   from: env.MAIL_FROM || env.SMTP_USER,
                   replyTo: email,
                   subject: `[Uniquera] New consultation form submission - ${fullName}`,
-                  html: `<!doctype html><html><body><h3>Uniquera Consultation Form Submission</h3><table style="border-collapse:collapse;width:100%;max-width:900px;">${htmlRows}</table></body></html>`,
+                  html: buildConsultationEmailHtml({subjectName: fullName, rows, pageUrl}),
                   attachments,
                 });
 

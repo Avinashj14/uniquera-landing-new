@@ -4,6 +4,7 @@ import {fileURLToPath} from 'url';
 import multer from 'multer';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import {buildConsultationEmailHtml} from './emailTemplates/consultationEmail.js';
 
 dotenv.config();
 
@@ -93,13 +94,6 @@ app.post('/api/uniquera-form-submit', upload.any(), async (req, res) => {
         value: Array.isArray(value) ? value.join(', ') : String(value),
       }));
 
-    const htmlRows = rows
-      .map(
-        (row) =>
-          `<tr><th style="text-align:left;padding:8px;border:1px solid #ddd;vertical-align:top;">${row.label}</th><td style="padding:8px;border:1px solid #ddd;">${row.value}</td></tr>`,
-      )
-      .join('');
-
     const attachments = files.map((file) => ({
       filename: file.originalname,
       content: file.buffer,
@@ -110,13 +104,14 @@ app.post('/api/uniquera-form-submit', upload.any(), async (req, res) => {
     const to = process.env.SMTP_TO || 'uniquera@Uniqueraclinic.com';
     const from = process.env.MAIL_FROM || process.env.SMTP_USER;
     const subjectName = typeof body.fullName === 'string' && body.fullName ? body.fullName : 'Unknown';
+    const pageUrl = typeof body.page_url === 'string' && body.page_url ? body.page_url : undefined;
 
     await transporter.sendMail({
       to,
       from,
       replyTo,
       subject: `[Uniquera] New consultation form submission - ${subjectName}`,
-      html: `<!doctype html><html><body><h3>Uniquera Consultation Form Submission</h3><table style="border-collapse:collapse;width:100%;max-width:900px;">${htmlRows}</table></body></html>`,
+      html: buildConsultationEmailHtml({subjectName, rows, pageUrl}),
       attachments,
     });
 
