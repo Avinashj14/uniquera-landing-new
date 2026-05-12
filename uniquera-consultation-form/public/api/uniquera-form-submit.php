@@ -207,3 +207,4 @@ try {
     error_log('[Uniquera] Submit error: ' . $e->getMessage());
     uniquera_mail_error_response('mail_failed', $e->getMessage());
 }
+
