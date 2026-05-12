@@ -8,3 +8,4 @@ coverage/
 .env*
 !.env.example
 uniquera-landing.zip
+*.zip
