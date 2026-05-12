@@ -164,7 +164,7 @@ const TrustFeatures = () => (
 );
 
 const EducationHeader = () => (
-  <section className="pt-24 bg-primary-bg overflow-hidden">
+  <section className="pt-10 md:pt-24 bg-primary-bg overflow-hidden">
     <div className="container mx-auto px-4">
       <div className="text-center max-w-4xl mx-auto">
         <span className="text-brand-cyan font-extrabold uppercase tracking-[0.2em] text-[10px] md:text-xs mb-4 block">
@@ -200,7 +200,7 @@ const Transformations = () => {
   ];
 
   return (
-    <section id="transformations" className="py-24 bg-primary-bg overflow-hidden">
+    <section id="transformations" className="pt-0 pb-10 md:py-24 bg-primary-bg overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold">Real <span className="text-brand-cyan">Transformations</span></h2>
@@ -270,7 +270,7 @@ const WhatsappSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-accent-bg border-y border-white/5 overflow-hidden">
+    <section className="py-10 md:py-24 bg-accent-bg border-y border-white/5 overflow-hidden">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-16">Real <span className="text-brand-cyan italic">Patient Conversations</span></h2>
         <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto items-center">
@@ -345,7 +345,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="py-24 bg-primary-bg">
+    <section id="testimonials" className="py-10 md:py-24 bg-primary-bg">
       <div className="container mx-auto px-4 grid lg:grid-cols-3 gap-12 items-center">
         <div className="lg:col-span-1 space-y-8">
           <h2 className="text-4xl md:text-5xl font-bold">Trusted <span className="text-brand-cyan italic">Worldwide</span></h2>
@@ -417,7 +417,7 @@ const MedicalGuideSection = () => {
   const [isGuideModalOpen, setIsGuideModalOpen] = useState(false);
 
   return (
-    <section className="py-24 bg-accent-bg">
+    <section className="py-10 md:py-24 bg-accent-bg">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto bg-primary-bg rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl flex flex-col md:flex-row">
           <div className="md:w-1/2 p-8 md:p-12 border-b md:border-b-0 md:border-r border-white/5">
@@ -459,7 +459,7 @@ const MedicalGuideSection = () => {
 
 const ConsultationSection = () => {
   return (
-    <section className="py-24 bg-[#043a40] border-y border-white/5">
+    <section className="py-10 md:py-24 bg-[#043a40] border-y border-white/5">
       <div className="container mx-auto px-4 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold mb-8 italic">
@@ -482,7 +482,7 @@ const ConsultationSection = () => {
 
 const HighAttentionCTA = () => {
   return (
-    <section className="py-24 bg-accent-bg relative overflow-hidden">
+    <section className="py-10 md:py-24 bg-accent-bg relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-cyan/5 -skew-x-12 translate-x-1/2"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-cyan/10 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2"></div>
@@ -576,7 +576,7 @@ const MedicalTeam = () => {
   }, [activeTeam, isSliderPaused]);
 
   return (
-    <section id="doctors" className="py-24 bg-primary-bg">
+    <section id="doctors" className="py-10 md:py-24 bg-primary-bg">
       <div className="container mx-auto px-4 text-center">
         <h4 className="text-xs uppercase font-bold text-gray-500 tracking-widest mb-2">Doctors</h4>
         <h2 className="text-4xl md:text-6xl font-bold mb-16">Our Expert Doctors <span className="text-brand-cyan italic">For The Patients</span></h2>
@@ -716,7 +716,7 @@ const YoutubeSection = () => {
   const thumbnail = "https://uniqueraclinic.com/wp-content/uploads/2026/02/maxresdefault-1200x675.jpg";
 
   return (
-    <section className="py-24 bg-primary-bg overflow-hidden border-y border-white/5">
+    <section className="py-10 md:py-24 bg-primary-bg overflow-hidden border-y border-white/5">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-12 uppercase tracking-tight">Real Patient <span className="text-brand-cyan">Experience</span></h2>
         
@@ -782,7 +782,7 @@ const InstagramSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-primary-bg">
+    <section className="py-10 md:py-24 bg-primary-bg">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4 uppercase tracking-tight">Real Results on <span className="text-brand-cyan">Instagram</span></h2>
@@ -814,7 +814,7 @@ const MedicalStandards = () => {
   ];
 
   return (
-    <section className="py-24 bg-accent-bg overflow-hidden border-y border-white/5">
+    <section className="py-10 md:py-24 bg-accent-bg overflow-hidden border-y border-white/5">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-6 max-w-4xl mx-auto leading-tight">
           Certified Medical Standards. <span className="text-brand-cyan italic">Trusted International Patient Care.</span>
@@ -864,7 +864,7 @@ const BloombergSection = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section className="py-24 bg-primary-bg border-y border-white/5">
+    <section className="py-10 md:py-24 bg-primary-bg border-y border-white/5">
       <div className="container mx-auto px-4 text-center">
          <p className="text-xs uppercase font-bold tracking-widest text-gray-500 mb-4">As Seen In</p>
          <h2 className="text-4xl md:text-8xl font-black mb-12 opacity-90 italic">Bloomberg</h2>
@@ -911,7 +911,7 @@ const BloombergSection = () => {
 };
 
 const AnniversaryProgram = () => (
-  <section className="py-24 bg-accent-bg border-y border-white/5">
+  <section className="py-10 md:py-24 bg-accent-bg border-y border-white/5">
     <div className="container mx-auto px-4 text-center">
       <div className="max-w-4xl mx-auto bg-primary-bg p-8 md:p-16 rounded-[2.5rem] border border-brand-cyan/20 shadow-glow relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-64 h-64 bg-brand-cyan/10 rounded-full blur-3xl"></div>
@@ -986,7 +986,7 @@ const Footer = ({consultationHref}: FooterProps = {}) => {
     document.getElementById('testimonials')?.scrollIntoView({behavior: 'smooth'});
   };
   return (
-  <footer className="pt-24 pb-12 bg-[#031011] border-t border-white/5">
+  <footer className="pt-10 md:pt-24 pb-10 md:pb-12 bg-[#031011] border-t border-white/5">
     <div className="container mx-auto px-4">
        <div className="grid md:grid-cols-5 gap-12 mb-20">
           <div className="col-span-1">
@@ -1315,7 +1315,7 @@ const ThankYouPage = ({basePath}: {basePath: string}) => {
         navHashBase={landingHome.replace(/\/+$/, '')}
         bookNowHref={bookHref}
       />
-      <main className="flex-1 flex flex-col items-center justify-center px-4 py-16 md:py-24">
+      <main className="flex-1 flex flex-col items-center justify-center px-4 py-10 md:py-24">
         <div className="glass-card border border-white/10 rounded-3xl max-w-lg w-full px-8 py-12 text-center shadow-2xl">
           <div
             className="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-brand-cyan text-primary-bg text-3xl font-bold"
