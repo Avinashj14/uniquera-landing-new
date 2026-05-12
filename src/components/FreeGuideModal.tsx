@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {AnimatePresence, motion} from 'motion/react';
 import {X} from 'lucide-react';
 
@@ -53,14 +53,24 @@ export default function FreeGuideModal({open, onClose}: Props) {
     return () => window.clearTimeout(t);
   }, [open]);
 
+  const closeAndReset = useCallback(() => {
+    setName('');
+    setEmail('');
+    setTouched({name: false, email: false});
+    setErrors({});
+    setIsSubmitting(false);
+    setIsSuccess(false);
+    onClose();
+  }, [onClose]);
+
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') closeAndReset();
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [onClose, open]);
+  }, [closeAndReset, open]);
 
   useEffect(() => {
     if (!open) return;
@@ -75,20 +85,6 @@ export default function FreeGuideModal({open, onClose}: Props) {
     if (!open) return;
     setErrors((prev) => ({...prev, ...fieldErrors, submit: prev.submit}));
   }, [fieldErrors, open]);
-
-  const resetForm = () => {
-    setName('');
-    setEmail('');
-    setTouched({name: false, email: false});
-    setErrors({});
-    setIsSubmitting(false);
-    setIsSuccess(false);
-  };
-
-  const closeAndReset = () => {
-    resetForm();
-    onClose();
-  };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -159,16 +155,21 @@ export default function FreeGuideModal({open, onClose}: Props) {
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
-          <motion.button
-            type="button"
-            aria-label="Close modal"
+        <div className="fixed inset-0 z-[130] flex items-center justify-center p-4">
+          {/* Backdrop: must stay below panel (z-index) so close button receives clicks */}
+          <motion.div
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
-            onClick={closeAndReset}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-          />
+            className="absolute inset-0 z-0 bg-black/80 backdrop-blur-sm"
+          >
+            <button
+              type="button"
+              aria-label="Close modal"
+              onClick={closeAndReset}
+              className="absolute inset-0 h-full w-full cursor-pointer border-0 bg-transparent p-0"
+            />
+          </motion.div>
 
           <motion.div
             role="dialog"
@@ -178,14 +179,18 @@ export default function FreeGuideModal({open, onClose}: Props) {
             animate={{opacity: 1, scale: 1, y: 0}}
             exit={{opacity: 0, scale: 0.95, y: 12}}
             transition={{duration: 0.18, ease: 'easeOut'}}
-            className="relative w-full max-w-md rounded-3xl border border-white/10 bg-[#043a40] shadow-[0_60px_120px_-30px_rgba(0,0,0,0.6)] overflow-hidden"
+            className="relative z-10 w-full max-w-md rounded-3xl border border-white/10 bg-[#043a40] shadow-[0_60px_120px_-30px_rgba(0,0,0,0.6)] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-brand-cyan/15 blur-[80px]" />
+            <div
+              className="pointer-events-none absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-brand-cyan/15 blur-[80px]"
+              aria-hidden
+            />
 
             <button
               type="button"
               onClick={closeAndReset}
-              className="absolute right-4 top-4 rounded-full p-2 text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+              className="absolute right-4 top-4 z-20 rounded-full p-2 text-white/50 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Close"
             >
               <X size={18} />
