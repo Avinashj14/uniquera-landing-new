@@ -1216,7 +1216,9 @@ function uniqueraShowSubmitLoader($root) {
                 doctorImage(nextQuestionNumber);
 
                 $root.find('#question-' + nextQuestionNumber).fadeIn(1000);
-                scrollToFormTitle();
+                if (currentQuestionNumber >= 1) {
+                    scrollToFormTitle();
+                }
 
                 $root.find('#question-' + currentQuestionNumber).removeClass('active');
                 $root.find('#question-' + nextQuestionNumber).addClass('active');

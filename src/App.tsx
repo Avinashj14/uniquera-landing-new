@@ -352,7 +352,7 @@ const Testimonials = () => {
           <div className="flex flex-col gap-4">
             <div className="bg-white/5 p-6 rounded-2xl border border-white/10 flex items-center justify-between">
               <div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-5 mb-2 grayscale brightness-200" referrerPolicy="no-referrer" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-5 mb-2 brightness-200" referrerPolicy="no-referrer" />
                 <div className="text-3xl font-bold">200+</div>
                 <div className="text-[10px] uppercase font-bold text-gray-500">Google Reviews</div>
               </div>
@@ -457,79 +457,32 @@ const MedicalGuideSection = () => {
   );
 };
 
-const ConsultationSection = () => {
-  return (
-    <section className="py-10 md:py-24 bg-[#043a40] border-y border-white/5">
-      <div className="container mx-auto px-4 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold mb-8 italic">
-            Consultation Slots Are <span className="text-brand-cyan">Limited This Month</span>
-          </h2>
-          <p className="text-gray-300 text-lg mb-10 leading-relaxed">
-            You’ve seen real patient results, WhatsApp conversations, and reviews. Now let UniquEra’s team review your hair loss stage, donor area, and goals before you decide your next step.
-          </p>
-          <button 
-            onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-cyan px-10 py-5 text-lg font-bold shadow-[0_20px_40px_-10px_rgba(45,199,204,0.3)] hover:translate-y-[-4px] transition-all"
-          >
-            Secure My Free Consultation
-          </button>
-        </div>
-      </div>
-    </section>
-  );
+const scrollToConsultationForm = () => {
+  document.getElementById('consultation-form')?.scrollIntoView({behavior: 'smooth'});
 };
 
-const HighAttentionCTA = () => {
-  return (
-    <section className="py-10 md:py-24 bg-accent-bg relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-cyan/5 -skew-x-12 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-cyan/10 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2"></div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="max-w-5xl mx-auto bg-[#043a40] border-2 border-brand-cyan/30 rounded-[3rem] p-8 md:p-16 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] relative overflow-hidden"
+/** Simple flat CTA (upper style) — used in both places on the page. */
+const ConsultationSlotsCtaSection = () => (
+  <section className="py-10 md:py-24 bg-[#043a40] border-y border-white/5">
+    <div className="container mx-auto px-4 text-center">
+      <div className="max-w-3xl mx-auto">
+        <h2 className="text-3xl md:text-5xl font-bold mb-8 italic text-white">
+          Consultation Slots Are <span className="text-brand-cyan">Limited This Month</span>
+        </h2>
+        <p className="text-gray-300 text-lg mb-10 leading-relaxed">
+          You’ve seen real patient results, WhatsApp conversations, and reviews. Now let UniquEra’s team review your hair loss stage, donor area, and goals before you decide your next step.
+        </p>
+        <button
+          type="button"
+          onClick={scrollToConsultationForm}
+          className="btn-cyan px-10 py-5 text-lg font-bold shadow-[0_20px_40px_-10px_rgba(45,199,204,0.3)] hover:translate-y-[-4px] transition-all"
         >
-          {/* Inner Glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/10 to-transparent pointer-events-none"></div>
-
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-cyan/20 text-brand-cyan text-sm font-bold tracking-widest uppercase mb-6">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-cyan"></span>
-                </span>
-                High Demand: Limited Availability
-              </div>
-              <h2 className="text-4xl md:text-6xl font-bold mb-6 italic leading-tight">
-                Consultation Slots Are <span className="text-brand-cyan">Limited This Month</span>
-              </h2>
-              <p className="text-gray-300 text-lg mb-0 leading-relaxed max-w-xl">
-                You’ve seen real patient results, WhatsApp conversations, and reviews. Now let UniquEra’s team review your hair loss stage, donor area, and goals before you decide your next step.
-              </p>
-            </div>
-            
-            <div className="shrink-0">
-               <button 
-                onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
-                className="group relative inline-flex items-center gap-3 bg-brand-cyan text-primary-bg px-12 py-6 text-xl font-black rounded-full shadow-[0_20px_50px_rgba(45,199,204,0.4)] hover:shadow-[0_25px_60px_rgba(45,199,204,0.6)] hover:scale-105 transition-all duration-300 uppercase tracking-tighter"
-              >
-                Secure My Free Consultation
-                <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </div>
-        </motion.div>
+          Secure My Free Consultation
+        </button>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 const MedicalTeam = () => {
   const doctors = [
@@ -626,7 +579,7 @@ const MedicalTeam = () => {
                   <img
                     src={member.img}
                     alt={member.name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    className="w-full h-full object-cover transition-all duration-500"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -1379,7 +1332,7 @@ export default function App() {
         <Transformations />
         <WhatsappSection />
         <Testimonials />
-        <ConsultationSection />
+        <ConsultationSlotsCtaSection />
         <YoutubeSection />
         <InstagramSection />
         <MedicalStandards />
@@ -1389,7 +1342,7 @@ export default function App() {
 
 
         <MedicalGuideSection />
-        <HighAttentionCTA />
+        <ConsultationSlotsCtaSection />
         <MedicalTeam />
         <AnniversaryProgram />
       </main>
