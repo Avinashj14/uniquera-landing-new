@@ -95,18 +95,38 @@ type HeaderProps = {
 };
 
 const Header = ({homeHref = '/', navHashBase = '', bookNowHref}: HeaderProps = {}) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const hash = (id: string) => (navHashBase ? `${navHashBase.replace(/\/+$/, '')}#${id}` : `#${id}`);
   const goBookNow = () => {
+    setMobileMenuOpen(false);
     if (bookNowHref) {
       window.location.href = bookNowHref;
       return;
     }
     document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' });
   };
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeMobileMenu();
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
+  const mobileNavLinkClass =
+    'block w-full text-left px-4 py-3.5 text-base font-medium text-white rounded-xl hover:bg-white/10 hover:text-brand-cyan transition-colors border border-transparent hover:border-white/10';
   return (
-    <header className="sticky top-0 z-50 bg-primary-bg/80 backdrop-blur-lg border-b border-white/5 py-4">
+    <header className="sticky top-0 z-50 bg-primary-bg/80 backdrop-blur-lg border-b border-white/5 py-4 relative">
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <a href={homeHref} className="inline-block shrink-0">
+        <a href={homeHref} className="inline-block shrink-0" onClick={closeMobileMenu}>
           <img src={LOGO_WHITE_URL} alt="UniquEra Clinic" className="h-10 md:h-12" referrerPolicy="no-referrer" />
         </a>
         <div className="hidden lg:flex items-center gap-8 text-sm font-medium">
@@ -123,10 +143,61 @@ const Header = ({homeHref = '/', navHashBase = '', bookNowHref}: HeaderProps = {
             Request An Appointment
           </button>
         </div>
-        <button type="button" className="lg:hidden text-white" aria-label="Menu">
-          <Menu size={24} />
+        <button
+          type="button"
+          className="lg:hidden relative z-[70] flex h-10 w-10 items-center justify-center rounded-lg text-white hover:bg-white/10 transition-colors"
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-nav-menu"
+          onClick={() => setMobileMenuOpen((open) => !open)}
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
+
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.button
+              type="button"
+              aria-label="Close menu"
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              exit={{opacity: 0}}
+              transition={{duration: 0.2}}
+              className="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm lg:hidden"
+              onClick={closeMobileMenu}
+            />
+            <motion.nav
+              id="mobile-nav-menu"
+              initial={{opacity: 0, y: -12}}
+              animate={{opacity: 1, y: 0}}
+              exit={{opacity: 0, y: -12}}
+              transition={{duration: 0.22, ease: 'easeOut'}}
+              className="absolute left-0 right-0 top-full z-[65] border-b border-white/10 bg-[#031011]/98 backdrop-blur-xl shadow-2xl lg:hidden"
+            >
+              <div className="container mx-auto px-4 py-5 flex flex-col gap-2">
+                <a href={hash('about')} className={mobileNavLinkClass} onClick={closeMobileMenu}>
+                  About Us
+                </a>
+                <a href={hash('transformations')} className={mobileNavLinkClass} onClick={closeMobileMenu}>
+                  Transformations
+                </a>
+                <a href={hash('doctors')} className={mobileNavLinkClass} onClick={closeMobileMenu}>
+                  Doctors
+                </a>
+                <button
+                  type="button"
+                  onClick={goBookNow}
+                  className="btn-cyan w-full mt-2 py-3.5 text-sm font-bold shadow-[0_12px_28px_-8px_rgba(45,199,204,0.45)]"
+                >
+                  Request An Appointment
+                </button>
+              </div>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
