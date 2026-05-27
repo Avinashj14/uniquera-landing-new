@@ -246,3 +246,15 @@
 .uniquera-form-wrap--short #onlineForm .title-image img[data-step].uniquera-title-visible {
   display: inline-block;
 }
+
+/* Footer progress (desktop/tablet): center 1-4 step dots in short form. */
+@media (min-width: 576px) {
+  .uniquera-form-wrap--short #footer .col {
+    justify-content: center !important;
+  }
+
+  .uniquera-form-wrap--short #footer .steps {
+    margin-left: 0 !important;
+    justify-content: center !important;
+  }
+}
