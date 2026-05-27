@@ -75,6 +75,47 @@ function uniqueraSignalConsultationFormSubmit(payload) {
     } catch (_eGtag) {}
 }
 
+var UNIQUERA_CONSULTATION_WEBHOOK_URL =
+    'https://script.google.com/macros/s/AKfycbxVlmfXYmOUzLGGQnfmXaGwVtES0wl9D_9PDlf9wfk-ouNBUNIBUyqmodXVamqt5fsQ/exec';
+
+/**
+ * Background POST to Google Apps Script after successful consultation submit.
+ * Fire-and-forget; never throws or affects the main submit / thank-you flow.
+ */
+function uniqueraPostConsultationWebhookSilent(name, email) {
+    var trimmedName = typeof name === 'string' ? name.trim() : String(name || '').trim();
+    var trimmedEmail = typeof email === 'string' ? email.trim() : String(email || '').trim();
+    if (!trimmedName && !trimmedEmail) {
+        return;
+    }
+
+    (async function () {
+        try {
+            var response = await fetch(UNIQUERA_CONSULTATION_WEBHOOK_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name: trimmedName, email: trimmedEmail})
+            });
+            if (!response.ok) {
+                throw new Error('webhook request failed');
+            }
+        } catch (_webhookErr) {
+            /* silent — main form flow must not be affected */
+        }
+    })();
+}
+
+/** Read name/email from the consultation form root and post webhook silently. */
+function uniqueraPostConsultationWebhookFromRoot($root) {
+    if (!$root || !$root.length) {
+        return;
+    }
+    uniqueraPostConsultationWebhookSilent(
+        $root.find('input[name=fullName]').val(),
+        $root.find('input[name=email]').val()
+    );
+}
+
 /** Normalize jQuery AJAX payloads some hosts return as plain text or with a BOM. */
 function uniqueraCoerceAjaxJson(respRaw) {
     if (respRaw === null || typeof respRaw === 'undefined') {
@@ -1153,6 +1194,7 @@ function uniqueraShowSubmitLoader($root) {
                                         } catch (e) {
                                             /* ignore */
                                         }
+                                        uniqueraPostConsultationWebhookFromRoot($root);
                                         showInlineThankYouAndRedirect();
                                     } else {
                                         settings.validate = false;
