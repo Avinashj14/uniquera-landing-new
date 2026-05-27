@@ -1,0 +1,248 @@
+/*
+ * Short consultation form uses steps 1–4 mapped from full form steps 2, 6, 7, 10.
+ * Duplicate theme rules so spacing/colors match the full form.
+ */
+.uniquera-form-wrap--short #question-2 p.small.text-muted,
+.uniquera-form-wrap #question-6 p.small.text-muted {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #3a4a5a !important;
+  margin-bottom: 14px !important;
+}
+
+.uniquera-form-wrap--short #question-2 .uniquera-tried-treatments .form-check,
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check {
+  margin-bottom: 10px !important;
+  background: #ffffff;
+  border: 1px solid #d7e2e8;
+  border-radius: 10px;
+  padding: 10px 12px;
+  padding-left: 12px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.uniquera-form-wrap--short #question-2 .uniquera-tried-treatments .form-check:hover,
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check:hover {
+  border-color: var(--primary);
+  background: #f6fcfc;
+}
+
+.uniquera-form-wrap--short #question-2 .uniquera-tried-treatments .form-check:focus-within,
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 179, 173, 0.15);
+}
+
+.uniquera-form-wrap--short #question-2 .uniquera-tried-treatments .form-check-label,
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #1f2d3d !important;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.uniquera-form-wrap--short #question-2 .uniquera-tried-treatments .form-check-input[type='checkbox'],
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-check-input[type='checkbox'] {
+  position: static;
+  float: none;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  margin: 2px 0 0 !important;
+  margin-left: 0 !important;
+  accent-color: var(--primary);
+}
+
+.uniquera-form-wrap--short #question-2 .uniquera-tried-treatments .form-group .form-control,
+.uniquera-form-wrap #question-6 .uniquera-tried-treatments .form-group .form-control {
+  border-radius: 10px;
+  border: 1px solid #d7e2e8;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-step9-field,
+.uniquera-form-wrap--short #question-4 .uniquera-step10-field,
+.uniquera-form-wrap #question-10 .uniquera-step9-field,
+.uniquera-form-wrap #question-10 .uniquera-step10-field {
+  background: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+
+.uniquera-form-wrap--short #question-4 .form-group,
+.uniquera-form-wrap #question-10 .form-group {
+  margin-bottom: 8px;
+}
+
+.uniquera-form-wrap--short #question-4 .col-form-label,
+.uniquera-form-wrap #question-10 .col-form-label {
+  padding-top: 8px;
+  padding-bottom: 6px;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-q9-english,
+.uniquera-form-wrap--short #question-4 .uniquera-q9-travel,
+.uniquera-form-wrap #question-10 .uniquera-q9-english,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel {
+  justify-content: flex-start !important;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-q9-english > [class*='col-'],
+.uniquera-form-wrap--short #question-4 .uniquera-q9-travel > [class*='col-'],
+.uniquera-form-wrap #question-10 .uniquera-q9-english > [class*='col-'],
+.uniquera-form-wrap #question-10 .uniquera-q9-travel > [class*='col-'] {
+  margin-bottom: 8px !important;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-q9-english .radio-select .option,
+.uniquera-form-wrap--short #question-4 .uniquera-q9-travel .radio-select .option,
+.uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select .option,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select .option {
+  min-height: 120px;
+  padding: 10px 8px;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-step9-field .col-form-label,
+.uniquera-form-wrap--short #question-4 .uniquera-step10-field .col-form-label,
+.uniquera-form-wrap #question-10 .uniquera-step9-field .col-form-label,
+.uniquera-form-wrap #question-10 .uniquera-step10-field .col-form-label {
+  font-weight: 600;
+  color: #1f2d3d;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-q9-english .radio-select .option > div,
+.uniquera-form-wrap--short #question-4 .uniquera-q9-travel .radio-select .option > div,
+.uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select .option > div,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select .option > div {
+  overflow: visible !important;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-q9-english .radio-select .animate,
+.uniquera-form-wrap--short #question-4 .uniquera-q9-travel .radio-select .animate,
+.uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select .animate,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select .animate {
+  width: 44px;
+  height: 48px;
+  margin: 0 auto 8px;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-q9-english .radio-select object,
+.uniquera-form-wrap--short #question-4 .uniquera-q9-travel .radio-select object,
+.uniquera-form-wrap #question-10 .uniquera-q9-english .radio-select object,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .radio-select object {
+  width: 38px !important;
+  height: 38px !important;
+  margin-top: 2px;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-q9-english .option-text,
+.uniquera-form-wrap--short #question-4 .uniquera-q9-travel .option-text,
+.uniquera-form-wrap #question-10 .uniquera-q9-english .option-text,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel .option-text {
+  font-size: 13px;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-se-other-wrap,
+.uniquera-form-wrap #question-10 .uniquera-se-other-wrap {
+  width: 100%;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-se-other-wrap--full,
+.uniquera-form-wrap #question-10 .uniquera-se-other-wrap--full {
+  margin-top: 6px;
+  padding-top: 2px;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-se-other-wrap .form-control,
+.uniquera-form-wrap #question-10 .uniquera-se-other-wrap .form-control {
+  border-radius: 10px;
+  border: 1px solid #cfdbe4;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-step10-field .form-check,
+.uniquera-form-wrap #question-10 .uniquera-step10-field .form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding-left: 0;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-step10-field .form-check-input,
+.uniquera-form-wrap #question-10 .uniquera-step10-field .form-check-input {
+  float: none !important;
+  margin-left: 0 !important;
+  margin-top: 0.35em;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-step10-field .form-check-label,
+.uniquera-form-wrap #question-10 .uniquera-step10-field .form-check-label {
+  flex: 1;
+  min-width: 0;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-additional-message-field .uniquera-optional-hint,
+.uniquera-form-wrap #question-10 .uniquera-additional-message-field .uniquera-optional-hint {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.35;
+  margin-bottom: 0;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-additional-message,
+.uniquera-form-wrap #question-10 .uniquera-additional-message {
+  min-height: 4.25rem;
+  resize: vertical;
+  max-height: min(40vh, 260px);
+}
+
+.uniquera-form-wrap--short #question-4 .iti,
+.uniquera-form-wrap #question-10 .iti {
+  width: 100%;
+}
+
+.uniquera-form-wrap--short #question-4 .uniquera-q9-english.validate.error,
+.uniquera-form-wrap--short #question-4 .uniquera-q9-travel.validate.error,
+.uniquera-form-wrap #question-10 .uniquera-q9-english.validate.error,
+.uniquera-form-wrap #question-10 .uniquera-q9-travel.validate.error {
+  outline: 2px solid #e74c3c;
+  outline-offset: 8px;
+  border-radius: 8px;
+  padding: 6px 4px;
+}
+
+.uniquera-form-wrap--short #question-4 .form-check-label,
+.uniquera-form-wrap #question-10 .form-check-label {
+  line-height: 1.45;
+  text-align: left;
+}
+
+.uniquera-form-wrap--short #question-2 .uniquera-tried-treatments.validate.error,
+.uniquera-form-wrap .uniquera-tried-treatments.validate.error,
+#onlineForm .uniquera-tried-treatments.validate.error {
+  outline: 2px solid #e74c3c;
+  outline-offset: 8px;
+  border-radius: 6px;
+  padding: 8px 10px 10px;
+}
+
+/* Title character: one image at a time (no inline display override). */
+.uniquera-form-wrap--short #onlineForm .title-image img[data-step] {
+  display: none;
+}
+
+.uniquera-form-wrap--short #onlineForm .title-image img[data-step].uniquera-title-visible {
+  display: inline-block;
+}

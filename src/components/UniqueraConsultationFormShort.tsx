@@ -1,9 +1,7 @@
 import {useEffect, useMemo, useRef} from 'react';
 import {absoluteLandingUrl, thankYouPageUrl} from '../routeUtils';
 import {hideEmbeddedThankYouScreens} from '../utils/uniqueraFormThankYou';
-import formHtmlRaw from '../../uniquera-consultation-form/templates/form-fragment.html?raw';
-
-/* Form markup is in `.uniquera-form-wrap`; CSS is scoped in uniquera-form-scoped.css and loaded unlayered in index.css so Bootstrap class names beat Tailwind utilities inside the form. */
+import formHtmlRaw from '../../uniquera-consultation-form-short/templates/form-fragment.html?raw';
 
 function loadScript(src: string): Promise<void> {
   window.__uniqueraScriptPromises = window.__uniqueraScriptPromises || {};
@@ -49,27 +47,28 @@ async function waitFor(check: () => boolean, retries = 20, delayMs = 150): Promi
   return false;
 }
 
-export default function UniqueraConsultationForm() {
+export default function UniqueraConsultationFormShort() {
   const rootRef = useRef<HTMLDivElement>(null);
   const basePath = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
-  const assetBase = `${basePath}/uniquera-consultation-form/assets`;
+  const sharedAssetBase = `${basePath}/uniquera-consultation-form/assets`;
+  const shortAssetBase = `${basePath}/uniquera-consultation-form-short/assets`;
   const submitUrl = `${basePath}/api/uniquera-form-submit.php`;
   const scriptSources = useMemo(
     () => [
-      `${assetBase}/js/jquery-3.6.0.min.js`,
-      `${assetBase}/js/nouislider.min.js`,
-      `${assetBase}/js/intlTelInput.min.js`,
-      `${assetBase}/js/utils.js`,
-      `${assetBase}/js/uniquera-main.js`,
+      `${sharedAssetBase}/js/jquery-3.6.0.min.js`,
+      `${sharedAssetBase}/js/nouislider.min.js`,
+      `${sharedAssetBase}/js/intlTelInput.min.js`,
+      `${sharedAssetBase}/js/utils.js`,
+      `${shortAssetBase}/js/uniquera-main.js`,
     ],
-    [assetBase],
+    [sharedAssetBase, shortAssetBase],
   );
 
   const formHtml = useMemo(() => {
     return formHtmlRaw
-      .replaceAll('../assets/form/images/', `${assetBase}/images/`)
+      .replaceAll('../assets/form/images/', `${sharedAssetBase}/images/`)
       .replaceAll('https://uniqueraclinic.com/', `${basePath}/`);
-  }, [assetBase, basePath]);
+  }, [sharedAssetBase, basePath]);
 
   useEffect(() => {
     hideEmbeddedThankYouScreens(rootRef.current);
@@ -88,7 +87,7 @@ export default function UniqueraConsultationForm() {
     const boot = async () => {
       window.language = 'en';
       window.tedaviler = [];
-      window.uniqueraForm = {
+      window.uniqueraFormShort = {
         ajaxUrl: submitUrl,
         nonce: 'react-app',
         submitError: 'Could not submit your form. Please try again.',
@@ -96,10 +95,11 @@ export default function UniqueraConsultationForm() {
         thankYouUrl: thankYouPageUrl(basePath),
         trackingDefaults: {
           utm_source: window.location.hostname,
-          utm_campaign: 'uniquera_consultation_form',
+          utm_campaign: 'uniquera_consultation_form_short',
           utm_audience: '',
         },
       };
+      window.uniqueraForm = window.uniqueraFormShort;
 
       for (const src of scriptSources) {
         if (cancelled) {
@@ -114,14 +114,14 @@ export default function UniqueraConsultationForm() {
 
       const ready = await waitFor(() => {
         const jq = window.jQuery;
-        if (!jq || !jq.fn?.onlineForm || !rootRef.current) {
+        if (!jq || !jq.fn?.onlineFormShort || !rootRef.current) {
           return false;
         }
         const wrap = rootRef.current;
         return wrap.querySelector('.questions') != null && wrap.querySelector('#footer .steps') != null;
       });
       if (!ready) {
-        throw new Error('Uniquera form scripts loaded but onlineForm plugin was not ready');
+        throw new Error('Uniquera short form scripts loaded but onlineFormShort plugin was not ready');
       }
       const jq = window.jQuery;
 
@@ -131,15 +131,15 @@ export default function UniqueraConsultationForm() {
         return rootRef.current.querySelectorAll('#footer .steps .step').length > 0;
       };
 
-      jq(selector)?.onlineForm?.();
+      jq(selector)?.onlineFormShort?.();
       await new Promise((resolve) => window.setTimeout(resolve, 400));
       if (!hasBootedUi()) {
-        throw new Error('Uniquera form initialization incomplete: steps were not mounted');
+        throw new Error('Uniquera short form initialization incomplete: steps were not mounted');
       }
     };
 
     boot().catch((error) => {
-      console.error('Uniquera form boot failed', error);
+      console.error('Uniquera short form boot failed', error);
     });
 
     return () => {
@@ -148,12 +148,12 @@ export default function UniqueraConsultationForm() {
   }, [scriptSources, submitUrl]);
 
   return (
-    <section id="consultation-form" aria-label="Consultation form" className="bg-primary-bg">
+    <section id="consultation-form-short" aria-label="Short consultation form" className="bg-primary-bg">
       <div className="w-full bg-primary-bg overflow-x-hidden overflow-y-visible shadow-2xl border-white/10 py-6">
         <div
-          id="uniquera-react-form-root"
+          id="uniquera-react-form-short-root"
           ref={rootRef}
-          className="uniquera-form-wrap"
+          className="uniquera-form-wrap uniquera-form-wrap--short"
           data-uniquera-form="1"
           data-thank-you-url={thankYouPageUrl(basePath)}
           dangerouslySetInnerHTML={{__html: formHtml}}

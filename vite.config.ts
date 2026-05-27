@@ -1,10 +1,19 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import fs from 'node:fs';
 import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
 import Busboy from 'busboy';
 import nodemailer from 'nodemailer';
 import {buildConsultationEmailHtml} from './emailTemplates/consultationEmail.js';
+
+function getMime(filePath: string): string {
+  if (filePath.endsWith('.js')) return 'application/javascript';
+  if (filePath.endsWith('.css')) return 'text/css';
+  if (filePath.endsWith('.svg')) return 'image/svg+xml';
+  if (filePath.endsWith('.png')) return 'image/png';
+  return 'application/octet-stream';
+}
 
 const fieldLabels: Record<string, string> = {
   gender: 'Gender',
@@ -69,6 +78,32 @@ export default defineConfig(({mode}) => {
       {
         name: 'uniquera-dev-mail-api',
         configureServer(server) {
+          const serveStaticDir = (urlPrefix: string, dir: string) => {
+            server.middlewares.use(urlPrefix, (req, res, next) => {
+              if (!req.url) {
+                next();
+                return;
+              }
+              const rel = req.url.split('?')[0] || '';
+              const filePath = path.join(dir, rel);
+              if (!filePath.startsWith(dir) || !fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+                next();
+                return;
+              }
+              res.setHeader('Content-Type', getMime(filePath));
+              fs.createReadStream(filePath).pipe(res);
+            });
+          };
+
+          serveStaticDir(
+            '/uniquera-consultation-form/assets',
+            path.resolve(__dirname, 'uniquera-consultation-form', 'assets'),
+          );
+          serveStaticDir(
+            '/uniquera-consultation-form-short/assets',
+            path.resolve(__dirname, 'uniquera-consultation-form-short', 'assets'),
+          );
+
           server.middlewares.use('/api/uniquera-form-nonce', (_req, res) => {
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({success: true, data: {nonce: 'react-app'}}));

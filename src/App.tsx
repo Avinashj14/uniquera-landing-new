@@ -27,7 +27,8 @@ import {
   ArrowRight,
   Mail
 } from 'lucide-react';
-import UniqueraConsultationForm from './components/UniqueraConsultationForm';
+// import UniqueraConsultationForm from './components/UniqueraConsultationForm';
+ import UniqueraConsultationFormShort from './components/UniqueraConsultationFormShort';
 import FreeGuideModal from './components/FreeGuideModal';
 import {absoluteLandingUrl, matchesThankYouPath, normalizeBasePath} from './routeUtils';
 import {pushConsultationFormThankYouIfPending} from './gtmTrack';
@@ -1411,7 +1412,8 @@ export default function App() {
       <main>
         <Hero />
         <EducationHeader />
-        <UniqueraConsultationForm />
+        {/* <UniqueraConsultationForm /> */}
+        <UniqueraConsultationFormShort />
         <Transformations />
         <WhatsappSection />
         <Testimonials />

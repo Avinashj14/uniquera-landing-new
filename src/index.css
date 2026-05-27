@@ -88,6 +88,7 @@
 @import "./generated/uniquera-form-scoped.css";
 @import "../uniquera-consultation-form/assets/css/theme-overrides.css";
 @import "../uniquera-consultation-form/assets/css/uniquera-elementor-compat.css";
+@import "./uniquera-short-form-parity.css";
 
 /*
  * Prefixed legacy `body { overflow: hidden }` maps to `.uniquera-form-wrap { overflow:hidden }`,
@@ -96,4 +97,35 @@
 body.uniquera-consultation-form-active .uniquera-form-wrap {
   overflow-x: hidden;
   overflow-y: visible;
+}
+
+/*
+ * Thank-you panel must stay hidden until after submit (.uniquera-thankyou-screen--open).
+ * Vite may not bundle the tail of uniquera-elementor-compat.css; enforce here for dev + prod.
+ */
+.uniquera-form-wrap .uniquera-thankyou-screen:not(.uniquera-thankyou-screen--open),
+.uniquera-form-wrap #onlineForm .uniquera-thankyou-screen:not(.uniquera-thankyou-screen--open),
+.uniquera-form-wrap #onlineFormShort .uniquera-thankyou-screen:not(.uniquera-thankyou-screen--open),
+.uniquera-form-wrap--short #onlineForm .uniquera-thankyou-screen:not(.uniquera-thankyou-screen--open) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+}
+
+.uniquera-form-wrap .uniquera-thankyou-screen.uniquera-thankyou-screen--open {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  visibility: visible !important;
+  height: auto !important;
+  min-height: 45vh !important;
+  padding: 2rem 1rem !important;
+  margin: 0 !important;
+  pointer-events: auto !important;
 }
