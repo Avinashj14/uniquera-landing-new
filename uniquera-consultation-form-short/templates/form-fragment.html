@@ -66,6 +66,29 @@
                     <div class="questions" id="questions">
 
                         <div class="question-content">
+                            <!--question-0 (intro "pre-step")-->
+                            <div class="question step uniquera-intro-question" id="question-0" data-question="0" data-title="">
+                                <div class="uniquera-intro-inner">
+                                    <div class="uniquera-intro-inner__media" aria-hidden="true">
+                                        <img src="../assets/form/images/transparent/8.png" width="275" height="325" alt="">
+                                    </div>
+                                    <div class="uniquera-intro-inner__content">
+                                        <div class="uniquera-intro-inner__badge">Science-led hair growth solution</div>
+                                        <h3 class="uniquera-intro-inner__title">Book your hair test</h3>
+                                        <p class="uniquera-intro-inner__subtitle">Answer a few quick questions to understand your hair loss and get your personalized consultation plan.</p>
+                                        <div class="uniquera-intro-inner__points">
+                                            <span class="uniquera-intro-inner__point">Quick 4-step flow</span>
+                                            <span class="uniquera-intro-inner__point">Medical team review</span>
+                                            <span class="uniquera-intro-inner__point">No commitment</span>
+                                        </div>
+                                        <button type="button" id="uniquera-intro-start" class="uniquera-intro-inner__button">
+                                            Start hair test
+                                            <span class="uniquera-intro-inner__button-arrow" aria-hidden="true">→</span>
+                                        </button>
+                                        <div class="uniquera-intro-inner__meta">Takes ~2 minutes • Free</div>
+                                    </div>
+                                </div>
+                            </div>
 <!--question-1-->
                             <div class="question hair-question step" id="question-1" data-question="1" data-title="How do you define your hair loss?">
 
@@ -533,7 +556,7 @@
             </div>
 
             <!--footer-->
-            <div class="container-fluid">
+            <div class="container-fluid" style="display:none;">
                 <div class="row" id="footer">
                     <div class="col">
                         <button type="button" class="back hide" aria-label="Previous step"></button>
@@ -551,6 +574,155 @@
     margin-top: 19px !important;
   }
 }
+                /* -------- Intro panel inside the white question card -------- */
+                #question-0.uniquera-intro-question {
+                    display: none;
+                    min-height: 320px;
+                    align-items: center;
+                }
+                #question-0.uniquera-intro-question.active {
+                    display: flex;
+                }
+                #question-0 .uniquera-intro-inner {
+                    display: grid;
+                    grid-template-columns: minmax(220px, 320px) 1fr;
+                    align-items: center;
+                    gap: 18px;
+                    padding: 20px 24px;
+                    width: 100%;
+                    border-radius: 18px;
+                    border: 1px solid rgba(5, 93, 103, 0.14);
+                    background:
+                        radial-gradient(140% 120% at 0% 0%, rgba(16, 191, 214, 0.10) 0%, rgba(16, 191, 214, 0) 55%),
+                        linear-gradient(180deg, #fcfeff 0%, #f5fafc 100%);
+                    box-shadow: 0 12px 32px rgba(0, 22, 29, 0.06);
+                }
+                #question-0 .uniquera-intro-inner__media {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding-top: 6px;
+                }
+                #question-0 .uniquera-intro-inner__media img {
+                    width: min(300px, 100%);
+                    max-height: 220px;
+                    height: auto;
+                    object-fit: contain;
+                    filter: drop-shadow(0 8px 16px rgba(3, 39, 45, 0.12));
+                }
+                #question-0 .uniquera-intro-inner__content {
+                    padding: 10px 14px;
+                }
+                #question-0 .uniquera-intro-inner__badge {
+                    display: inline-flex;
+                    width: fit-content;
+                    padding: 6px 10px;
+                    border-radius: 999px;
+                    font-size: 12px;
+                    letter-spacing: 0.02em;
+                    font-weight: 700;
+                    color: #014f57;
+                    background: rgba(19, 198, 220, 0.14);
+                    border: 1px solid rgba(19, 198, 220, 0.36);
+                    margin-bottom: 12px;
+                }
+                #question-0 .uniquera-intro-inner__title {
+                    margin: 0 0 10px;
+                    font-size: 28px;
+                    line-height: 1.1;
+                    font-weight: 800;
+                    color: #111;
+                    letter-spacing: -0.02em;
+                }
+                #question-0 .uniquera-intro-inner__subtitle {
+                    margin: 0 0 16px;
+                    font-size: 15px;
+                    line-height: 1.55;
+                    color: #0a5963 !important;
+                    font-weight: 500;
+                    max-width: 55ch;
+                    display: block;
+                }
+                #question-0 .uniquera-intro-inner__points {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    margin: 0 0 14px;
+                }
+                #question-0 .uniquera-intro-inner__point {
+                    display: inline-flex;
+                    align-items: center;
+                    padding: 5px 10px;
+                    border-radius: 999px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #0d4e57;
+                    background: rgba(16, 191, 214, 0.10);
+                    border: 1px solid rgba(16, 191, 214, 0.22);
+                }
+                #question-0 .uniquera-intro-inner__button {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    padding: 12px 20px;
+                    border-radius: 12px;
+                    border: 1px solid rgba(8, 108, 120, 0.5);
+                    background: linear-gradient(180deg, #26d4e9 0%, #10bfd6 100%);
+                    color: #01343b;
+                    font-weight: 800;
+                    font-size: clamp(13px, 2.5vw, 14.5px);
+                    letter-spacing: 0.01em;
+                    cursor: pointer;
+                    transition: transform 0.14s ease, box-shadow 0.18s ease, filter 0.14s ease;
+                    box-shadow: 0 12px 26px rgba(16, 191, 214, 0.28);
+                }
+                #question-0 .uniquera-intro-inner__button:hover {
+                    transform: translateY(-2px) scale(1.01);
+                    filter: brightness(1.02);
+                    box-shadow: 0 18px 36px rgba(16, 191, 214, 0.36);
+                }
+                #question-0 .uniquera-intro-inner__button:active {
+                    transform: translateY(0px);
+                }
+                #question-0 .uniquera-intro-inner__button:focus-visible {
+                    outline: 3px solid rgba(201, 169, 98, 0.55);
+                    outline-offset: 2px;
+                }
+                #question-0 .uniquera-intro-inner__meta {
+                    margin-top: 10px;
+                    font-size: 13px;
+                    color: #6a717b;
+                }
+                .uniquera-intro--hidden {
+                    display: none !important;
+                }
+                @media (max-width: 900px) {
+                    #question-0 .uniquera-intro-inner {
+                        grid-template-columns: 1fr;
+                        padding: 16px 16px;
+                        text-align: center;
+                    }
+                    #question-0 .uniquera-intro-inner__badge,
+                    #question-0 .uniquera-intro-inner__button {
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    #question-0 .uniquera-intro-inner__points {
+                        justify-content: center;
+                    }
+                    #question-0.uniquera-intro-question {
+                        min-height: 0;
+                    }
+                    #question-0 .uniquera-intro-inner__media img {
+                        max-height: 170px;
+                    }
+                }
+                @media (prefers-reduced-motion: reduce) {
+                    #question-0 .uniquera-intro-inner__button {
+                        transition: none;
+                    }
+                }
                 /* Full-page preloader (all viewports): hide broken first paint until ready */
                 .uniquera-page-preloader {
                     transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -832,6 +1004,12 @@ font-size: 17px !important;
                         line-height: 1.15;
                     }
                 }
+                #onlineForm .wrapper {
+                    padding-bottom: 0 !important;
+                }
+                #onlineForm .questions {
+                    margin-top: auto;
+                }
 
                 /* Non-desktop (mobile + tablet): hide the under-button step indicator */
                 @media (max-width: 991.98px) {
@@ -848,6 +1026,11 @@ font-size: 17px !important;
         padding:10px 12px;
     }
 }
+
+                /* Force readable intro subtitle over global `.question p { color:#fff !important }` */
+                .uniquera-form-wrap #onlineForm .question#question-0 p.uniquera-intro-inner__subtitle {
+                    color: #0a5963 !important;
+                }
 
             </style>
 

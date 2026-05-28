@@ -1868,6 +1868,9 @@ function uniqueraShowSubmitLoader($root) {
                     $panel.removeClass('uniquera-thankyou-screen--open');
                 });
 
+                var $intro = $root.find('#question-0');
+                var introEnabled = !!($intro.length);
+
                 if ($root.closest('.uniquera-form-wrap').length) {
                     $root.find('#loading').hide();
                     $root.find('.wrapper').show();
@@ -2261,6 +2264,17 @@ function uniqueraShowSubmitLoader($root) {
                     unfinished = null;
                 }
 
+                // For short-form intro flow: always show intro on refresh.
+                if (introEnabled) {
+                    unfinished = null;
+                    try {
+                        localStorage.removeItem('unfinished');
+                        localStorage.removeItem('human');
+                    } catch (_eStorage) {
+                        /* ignore */
+                    }
+                }
+
                 if (uniqueraThankYouParamPresent()) {
                     var thankYouUrl = (typeof uniqueraForm !== 'undefined'
                         && uniqueraForm.thankYouUrl
@@ -2275,10 +2289,51 @@ function uniqueraShowSubmitLoader($root) {
                         window.location.replace(thankYouUrl);
                     }
                 } else if (unfinished != null) {
+                    // Resume in-progress form: skip intro.
+                    if (introEnabled) {
+                        $intro.addClass('uniquera-intro--hidden');
+                    }
+                    $root.find('.wrapper').show();
+                    $root.find('#footer .col').show();
                     loadContent();
                 } else {
-                    loadQuestion(0);
-                    typewriter(1);
+                    if (introEnabled) {
+                        // Show intro as a "pre-step" inside the same question card.
+                        $root.find('.wrapper').show();
+                        $root.find('#footer').closest('.container-fluid').hide();
+                        $root.find('#footer .col').hide();
+                        $root.find('.form-button-wrapper').hide();
+
+                        // Hide question title image + title while intro is showing.
+                        $root.find('.title-image [data-step]').hide();
+                        $root.find('.title-text h2').text('');
+
+                        // Show only the intro panel in the white card.
+                        $root.find('.question').stop(true, true).hide().removeClass('active');
+                        $intro.show().addClass('active');
+
+                        var startFromIntro = function () {
+                            $intro.addClass('uniquera-intro--hidden');
+                            $root.find('.form-button-wrapper').show();
+                            $root.find('.wrapper').show();
+                            $root.find('#footer').closest('.container-fluid').show();
+                            $root.find('#footer .col').show();
+                            loadQuestion(0);
+                            typewriter(1);
+                        };
+
+                        $intro.off('click.uniqueraIntroStart');
+                        $intro.on('click.uniqueraIntroStart', '#uniquera-intro-start', function (e) {
+                            e.preventDefault();
+                            startFromIntro();
+                        });
+
+                    } else {
+                        $root.find('.wrapper').show();
+                        $root.find('#footer .col').show();
+                        loadQuestion(0);
+                        typewriter(1);
+                    }
                 }
 
                 var api = {
