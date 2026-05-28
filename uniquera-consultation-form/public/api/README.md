@@ -1,28 +1,24 @@
-# Vitality 90 – Form API (PHP for Apache)
+# Uniquera consultation form API (static / Hostinger)
 
-The consultation form submits to `api/enroll.php`. This script uses **PHPMailer** to send email via SMTP.
+The React build submits to:
 
-## Build
+`https://your-domain.com/api/uniquera-form-submit.php`
 
-- **PHPMailer is included** in `public/api/vendor` (no Composer required). **`npm run build`** runs Vite only; the `dist` output includes `api/vendor` with PHPMailer.
-- Optional: if you use Composer, **`npm run setup:api`** refreshes `public/api/vendor` via `composer install`.
+## Required on production (Hostinger)
 
-## Setup on Apache hosting
+1. Upload the full `dist/api/` folder (including `vendor/` and `uniquera-form-submit.php`).
+2. Copy `api/.env.example` to `api/.env` on the server.
+3. Fill in SMTP credentials (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, etc.).
+4. Ensure PHP is enabled on the hosting plan.
 
-1. Deploy the built app (from `dist/`), including the `api` folder with `enroll.php`, `vendor`, and `api/.env`.
+Without `api/.env`, submissions return `smtp_not_configured` and the form shows an error alert.
 
-2. **Configure SMTP** in `api/.env` (copy from `.env.example`):
-   - `SMTP_HOST` – e.g. `smtp.gmail.com`, `smtp.office365.com`
-   - `SMTP_PORT` – usually `587` (TLS) or `465` (SSL)
-   - `SMTP_SECURE` – `tls`, `ssl`, or leave empty
-   - `SMTP_USER` – your SMTP login email
-   - `SMTP_PASS` – password or app password
-   - `SMTP_TO` – optional; default `info@threetreebiotech.com`
+## Email behavior
 
-3. Ensure the app is deployed so that `api/enroll.php` is reachable at  
-   `https://yourdomain.com/vitality-90-program/api/enroll.php`  
-   (same path as in the built app).
+On successful submit, PHPMailer sends an HTML email to `SMTP_TO` (default: `uniquera@uniqueraclinic.com`) with all form fields. Reply-To is set to the visitor email when valid.
 
-## Local dev
+A separate Google Apps Script webhook may also receive name/email (see `uniqueraPostConsultationWebhookSilent` in form JS).
 
-With `npm run dev`, the Node server handles `POST /vitality-90-program/api/enroll.php` so the form works without PHP. Configure SMTP in the project root `.env` for Node.
+## Local development
+
+`npm run dev` handles `/api/uniquera-form-submit.php` via Node (see `vite.config.ts`). Configure SMTP in the project root `.env` for real mail in dev, or use the dev mock success fallback when SMTP is unset.

@@ -135,6 +135,48 @@ function uniqueraCoerceAjaxJson(respRaw) {
     return null;
 }
 
+function uniqueraDefaultSubmitError() {
+    return (typeof uniqueraForm !== 'undefined' && typeof uniqueraForm.submitError === 'string')
+        ? uniqueraForm.submitError
+        : 'Could not submit your form. Please try again.';
+}
+
+function uniqueraSubmitErrorMessage(xhr, resp) {
+    var code = '';
+    if (resp && resp.data && typeof resp.data.message === 'string') {
+        code = resp.data.message;
+    } else if (xhr && xhr.responseJSON && xhr.responseJSON.data && typeof xhr.responseJSON.data.message === 'string') {
+        code = xhr.responseJSON.data.message;
+    } else if (xhr && typeof xhr.responseText === 'string') {
+        var parsed = uniqueraCoerceAjaxJson(xhr.responseText);
+        if (parsed && parsed.data && typeof parsed.data.message === 'string') {
+            code = parsed.data.message;
+        }
+    }
+
+    if (code === 'smtp_not_configured') {
+        return 'Form email is not configured on the server. Please add api/.env on hosting (SMTP settings) and try again.';
+    }
+    if (code === 'phpmailer_missing') {
+        return 'Form mail library is missing on the server. Re-upload the dist/api folder (including vendor).';
+    }
+    if (code === 'mail_failed') {
+        return 'We could not send your submission email. Please check SMTP credentials in api/.env and try again.';
+    }
+    if (code === 'invalid_nonce') {
+        return 'Your session expired. Please refresh the page and submit again.';
+    }
+
+    if (xhr && xhr.status === 404) {
+        return 'Form submit endpoint was not found. Ensure dist/api/uniquera-form-submit.php is uploaded.';
+    }
+    if (xhr && xhr.status === 0) {
+        return 'Network error while submitting. Check your connection and try again.';
+    }
+
+    return uniqueraDefaultSubmitError();
+}
+
 /** e.g. /subdir/api/foo.php → /subdir/thank-you/ ; /api/foo.php → /thank-you/ */
 function uniqueraDefaultThankYouPathFromAjax(ajaxUrl) {
     if (!ajaxUrl || typeof ajaxUrl !== 'string') {
@@ -1337,7 +1379,8 @@ function uniqueraShowSubmitLoader($root) {
                                         showInlineThankYouAndRedirect();
                                     } else {
                                         settings.validate = false;
-                                        window.alert(typeof uniqueraForm !== 'undefined' && typeof uniqueraForm.submitError === 'string' ? uniqueraForm.submitError : 'Could not submit your form. Please try again.');
+                                        console.error('[Uniquera] submit rejected', resp);
+                                        window.alert(uniqueraSubmitErrorMessage(null, resp));
                                     }
                                 })
                                 .fail(function (xhr) {
@@ -1347,7 +1390,8 @@ function uniqueraShowSubmitLoader($root) {
                                     } else if (xhr && xhr.status === 503) {
                                         window.alert('Server busy or timeout. Please try again with smaller images.');
                                     } else {
-                                        window.alert(typeof uniqueraForm !== 'undefined' && typeof uniqueraForm.submitError === 'string' ? uniqueraForm.submitError : 'Could not submit your form. Please try again.');
+                                        console.error('[Uniquera] submit failed', xhr);
+                                        window.alert(uniqueraSubmitErrorMessage(xhr, null));
                                     }
                                 });
                         };

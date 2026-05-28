@@ -4,16 +4,12 @@ export function resolveFormAjaxUrl(fallbackUrl: string): string {
   }
 
   try {
-    // If WP (or theme) exposes ajaxurl, prefer it.
+    // Only use WordPress AJAX when the page explicitly exposes ajaxurl (WP embed).
+    // Do NOT auto-detect via api.w.org link — static Vite builds on Hostinger would
+    // otherwise post to admin-ajax.php and always fail.
     const w = window as unknown as {ajaxurl?: unknown};
     if (typeof w.ajaxurl === 'string' && w.ajaxurl.trim()) {
       return w.ajaxurl.trim();
-    }
-
-    // Heuristic: WP frontend often has the REST discovery link tag.
-    const wpApiLink = document.querySelector('link[rel="https://api.w.org/"]');
-    if (wpApiLink) {
-      return `${window.location.origin}/wp-admin/admin-ajax.php`;
     }
   } catch {
     // ignore

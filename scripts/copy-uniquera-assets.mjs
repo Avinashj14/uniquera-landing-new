@@ -30,8 +30,11 @@ fs.mkdirSync(path.dirname(targetApi), { recursive: true });
 fs.cpSync(sourceApi, targetApi, {
   recursive: true,
   force: true,
-  // Never publish local secrets.
-  filter: (src) => !src.endsWith(`${path.sep}.env`),
+  // Never publish local secrets (keep .env.example for server setup).
+  filter: (src) => {
+    const base = path.basename(src);
+    return base !== '.env';
+  },
 });
 
 console.log(`Copied ${path.relative(root, sourceAssets)} -> ${path.relative(root, targetAssets)}`);

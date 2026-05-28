@@ -8,6 +8,9 @@
   RewriteEngine On
   RewriteBase /
 
+  # Let PHP API endpoints handle POST (do not rewrite to index.html).
+  RewriteRule ^api/ - [L]
+
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^ index.html [L]
