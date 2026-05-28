@@ -1,7 +1,6 @@
 import {useEffect, useMemo, useRef} from 'react';
 import {absoluteLandingUrl, thankYouPageUrl} from '../routeUtils';
 import {hideEmbeddedThankYouScreens} from '../utils/uniqueraFormThankYou';
-import {resolveFormAjaxUrl} from '../utils/resolveFormAjaxUrl';
 import formHtmlRaw from '../../uniquera-consultation-form-short/templates/form-fragment.html?raw';
 
 function loadScript(src: string): Promise<void> {
@@ -53,7 +52,7 @@ export default function UniqueraConsultationFormShort() {
   const basePath = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
   const sharedAssetBase = `${basePath}/uniquera-consultation-form/assets`;
   const shortAssetBase = `${basePath}/uniquera-consultation-form-short/assets`;
-  const submitUrl = resolveFormAjaxUrl(`${basePath}/api/uniquera-form-submit.php`);
+  const submitUrl = `${basePath}/api/uniquera-form-submit.php`;
   const scriptSources = useMemo(
     () => [
       `${sharedAssetBase}/js/jquery-3.6.0.min.js`,
@@ -90,7 +89,6 @@ export default function UniqueraConsultationFormShort() {
       window.tedaviler = [];
       window.uniqueraFormShort = {
         ajaxUrl: submitUrl,
-        nonce: 'react-app',
         submitError: 'Could not submit your form. Please try again.',
         homeUrl: absoluteLandingUrl(basePath),
         thankYouUrl: thankYouPageUrl(basePath),

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap');
 @import url("/uniquera-consultation-form/assets/css/theme-overrides.css");
-@import url("/uniquera-consultation-form/assets/css/uniquera-elementor-compat.css");
+@import url("/uniquera-consultation-form/assets/css/uniquera-form-embed.css");
 
 @import "tailwindcss";
 @import "./generated/uniquera-form-scoped.css";
@@ -101,7 +101,7 @@ body.uniquera-consultation-form-active .uniquera-form-wrap {
 
 /*
  * Thank-you panel must stay hidden until after submit (.uniquera-thankyou-screen--open).
- * Vite may not bundle the tail of uniquera-elementor-compat.css; enforce here for dev + prod.
+ * Enforce thank-you visibility rules for dev + prod.
  */
 .uniquera-form-wrap .uniquera-thankyou-screen:not(.uniquera-thankyou-screen--open),
 .uniquera-form-wrap #onlineForm .uniquera-thankyou-screen:not(.uniquera-thankyou-screen--open),

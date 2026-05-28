@@ -82,7 +82,44 @@ var UNIQUERA_CONSULTATION_WEBHOOK_URL =
  * Background POST to Google Apps Script after successful consultation submit.
  * Fire-and-forget; never throws or affects the main submit / thank-you flow.
  */
-function uniqueraPostConsultationWebhookSilent(name, email) {
+function uniqueraCollectFormFieldsFromRoot($root) {
+    var fields = {};
+    if (!$root || !$root.length) {
+        return fields;
+    }
+    $root.find('input, select, textarea').each(function () {
+        var $el = $(this);
+        var name = $el.attr('name');
+        if (!name || name === 'nonce' || name === 'action') {
+            return;
+        }
+        var type = ($el.attr('type') || '').toLowerCase();
+        if (type === 'file' || type === 'password' || type === 'hidden' && name.indexOf('visit_') === 0) {
+            return;
+        }
+        if (type === 'checkbox' || type === 'radio') {
+            if (!$el.prop('checked')) {
+                return;
+            }
+        }
+        var val = $el.val();
+        if (val == null) {
+            return;
+        }
+        val = String(val).trim();
+        if (val === '') {
+            return;
+        }
+        if (fields[name]) {
+            fields[name] = fields[name] + ', ' + val;
+        } else {
+            fields[name] = val;
+        }
+    });
+    return fields;
+}
+
+function uniqueraPostConsultationWebhookSilent(name, email, extraFields) {
     var trimmedName = typeof name === 'string' ? name.trim() : String(name || '').trim();
     var trimmedEmail = typeof email === 'string' ? email.trim() : String(email || '').trim();
     if (!trimmedName && !trimmedEmail) {
@@ -94,7 +131,11 @@ function uniqueraPostConsultationWebhookSilent(name, email) {
             var response = await fetch(UNIQUERA_CONSULTATION_WEBHOOK_URL, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({name: trimmedName, email: trimmedEmail})
+                body: JSON.stringify({
+                    name: trimmedName,
+                    email: trimmedEmail,
+                    fields: extraFields && typeof extraFields === 'object' ? extraFields : {}
+                })
             });
             if (!response.ok) {
                 throw new Error('webhook request failed');
@@ -112,7 +153,8 @@ function uniqueraPostConsultationWebhookFromRoot($root) {
     }
     uniqueraPostConsultationWebhookSilent(
         $root.find('input[name=fullName]').val(),
-        $root.find('input[name=email]').val()
+        $root.find('input[name=email]').val(),
+        uniqueraCollectFormFieldsFromRoot($root)
     );
 }
 
@@ -162,6 +204,9 @@ function uniqueraSubmitErrorMessage(xhr, resp) {
     }
     if (code === 'mail_failed') {
         return 'We could not send your submission email. Please check SMTP credentials in api/.env and try again.';
+    }
+    if (code === 'invalid_recipient') {
+        return 'Form email recipient (SMTP_TO) is invalid. Fix api/.env on the server.';
     }
     if (code === 'invalid_nonce') {
         return 'Your session expired. Please refresh the page and submit again.';
@@ -270,16 +315,14 @@ function uniqueraSafeStorageJSON(key, fallbackValue) {
 }
 
 /**
- * Async submit to WordPress (uploads + DB + email on server). Returns jQuery jqXHR.
+ * Submit consultation form to static API (PHP on Hostinger). Returns jQuery jqXHR.
  * @param {FormData} formData
  * @returns {JQuery.jqXHR|JQuery.Promise}
  */
-function uniqueraSubmitToWordPressAsync(formData) {
+function uniqueraSubmitFormAsync(formData) {
     if (typeof uniqueraForm === 'undefined' || !uniqueraForm.ajaxUrl) {
         return jQuery.Deferred().reject({ status: 0, statusText: 'no_config' }).promise();
     }
-    formData.append('action', 'uniquera_form_submit');
-    formData.append('nonce', uniqueraForm.nonce);
     return jQuery.ajax({
         url: uniqueraForm.ajaxUrl,
         type: 'POST',
@@ -288,21 +331,6 @@ function uniqueraSubmitToWordPressAsync(formData) {
         contentType: false,
         dataType: 'json',
         timeout: 0
-    });
-}
-
-/**
- * Fetch a fresh nonce from WordPress for cached pages.
- * @returns {JQuery.jqXHR|JQuery.Promise}
- */
-function uniqueraFetchFreshNonceAsync() {
-    if (typeof uniqueraForm === 'undefined' || !uniqueraForm.ajaxUrl) {
-        return jQuery.Deferred().reject({ status: 0, statusText: 'no_config' }).promise();
-    }
-    return jQuery.ajax({
-        url: uniqueraForm.ajaxUrl,
-        type: 'POST',
-        data: { action: 'uniquera_form_nonce' }
     });
 }
 
@@ -955,50 +983,7 @@ function uniqueraShowSubmitLoader($root) {
                 formDataUpdate.set('utm_audience', utmParams.utm_audience);
                 formDataUpdate.set('page_url', utmParams.page_url);
 
-                return uniqueraSubmitToWordPressAsync(formDataUpdate);
-            };
-
-            var submitWithNonceRetry = function (buildRequestFn) {
-                var dfd = $.Deferred();
-
-                var runOnce = function () {
-                    return buildRequestFn();
-                };
-
-                runOnce()
-                    .done(function (resp) {
-                        dfd.resolve(resp);
-                    })
-                    .fail(function (xhr) {
-                        var invalidNonce = false;
-                        if (xhr && xhr.status === 403 && xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message === 'invalid_nonce') {
-                            invalidNonce = true;
-                        }
-                        if (!invalidNonce) {
-                            dfd.reject(xhr);
-                            return;
-                        }
-
-                        uniqueraFetchFreshNonceAsync()
-                            .done(function (nonceResp) {
-                                var nextNonce = nonceResp && nonceResp.success && nonceResp.data ? nonceResp.data.nonce : '';
-                                if (typeof nextNonce !== 'string' || nextNonce === '') {
-                                    dfd.reject(xhr);
-                                    return;
-                                }
-                                if (typeof uniqueraForm !== 'undefined') {
-                                    uniqueraForm.nonce = nextNonce;
-                                }
-                                runOnce()
-                                    .done(function (resp2) { dfd.resolve(resp2); })
-                                    .fail(function (xhr2) { dfd.reject(xhr2); });
-                            })
-                            .fail(function () {
-                                dfd.reject(xhr);
-                            });
-                    });
-
-                return dfd.promise();
+                return uniqueraSubmitFormAsync(formDataUpdate);
             };
 
             var showValidationModal = function (messages, title) {
@@ -1355,7 +1340,7 @@ function uniqueraShowSubmitLoader($root) {
                         var $loader = uniqueraShowSubmitLoader($root);
                         $submitBtn.prop('disabled', true);
                         var runSubmit = function () {
-                            submitWithNonceRetry(submitConsultationFromStep9)
+                            submitConsultationFromStep9()
                                 .always(function () {
                                     $loader.remove();
                                     $submitBtn.prop('disabled', false);

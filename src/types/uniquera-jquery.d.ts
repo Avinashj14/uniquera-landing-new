@@ -15,7 +15,6 @@ declare global {
     });
     uniqueraFormShort?: {
       ajaxUrl: string;
-      nonce: string;
       submitError: string;
       homeUrl?: string;
       thankYouUrl?: string;

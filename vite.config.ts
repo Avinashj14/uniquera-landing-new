@@ -116,24 +116,6 @@ export default defineConfig(({mode}) => {
               return;
             }
 
-            if (req.url?.includes('uniquera-form-submit') && req.headers['content-type']?.includes('application/x-www-form-urlencoded')) {
-              const chunks: Buffer[] = [];
-              req.on('data', (chunk: Buffer) => chunks.push(chunk));
-              req.on('end', () => {
-                const params = new URLSearchParams(Buffer.concat(chunks).toString('utf8'));
-                if (params.get('action') === 'uniquera_form_nonce') {
-                  res.statusCode = 200;
-                  res.setHeader('Content-Type', 'application/json');
-                  res.end(JSON.stringify({success: true, data: {nonce: 'react-app'}}));
-                  return;
-                }
-                res.statusCode = 400;
-                res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({success: false, data: {message: 'bad_request'}}));
-              });
-              return;
-            }
-
             const transporter = createTransport(env);
             if (!transporter) {
               // Local/dev fallback: allow form UX testing without SMTP.

@@ -22,57 +22,7 @@ if (!is_file($autoload)) {
     exit;
 }
 require_once $autoload;
-
-function uniquera_env_value($key, $default = '') {
-    static $env = null;
-    if ($env === null) {
-        $env = array();
-        foreach (array(__DIR__ . '/.env', __DIR__ . '/../.env', __DIR__ . '/../../.env') as $path) {
-            if (!is_readable($path)) {
-                continue;
-            }
-            $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-            if (!is_array($lines)) {
-                continue;
-            }
-            foreach ($lines as $line) {
-                $line = trim($line);
-                if ($line === '' || strpos($line, '#') === 0 || strpos($line, '=') === false) {
-                    continue;
-                }
-                list($k, $v) = explode('=', $line, 2);
-                $k = trim($k);
-                $v = trim($v);
-                if (preg_match('/^([\'"])(.*)\1$/', $v, $m)) {
-                    $v = $m[2];
-                }
-                $env[$k] = $v;
-            }
-            break;
-        }
-    }
-    return isset($env[$key]) && $env[$key] !== '' ? $env[$key] : $default;
-}
-
-function uniquera_debug_enabled() {
-    $flag = strtolower(trim((string)uniquera_env_value('FORM_DEBUG', 'false')));
-    return in_array($flag, array('1', 'true', 'yes', 'on'), true);
-}
-
-function uniquera_mail_error_response($publicMessage, $exceptionMessage = '') {
-    $payload = array('success' => false, 'data' => array('message' => $publicMessage));
-    if (uniquera_debug_enabled() && $exceptionMessage !== '') {
-        $payload['data']['debug'] = $exceptionMessage;
-    }
-    http_response_code(500);
-    echo json_encode($payload);
-    exit;
-}
-
-if (isset($_POST['action']) && $_POST['action'] === 'uniquera_form_nonce') {
-    echo json_encode(array('success' => true, 'data' => array('nonce' => 'react-app')));
-    exit;
-}
+require_once __DIR__ . '/uniquera-smtp-config.php';
 
 $smtpHost = uniquera_env_value('SMTP_HOST', '');
 $smtpUser = uniquera_env_value('SMTP_USER', '');
@@ -144,31 +94,49 @@ foreach ($rows as $row) {
         . '</td></tr>';
 }
 
-$to = uniquera_env_value('SMTP_TO', 'uniquera@Uniqueraclinic.com');
-$from = uniquera_env_value('MAIL_FROM', $smtpUser);
+$defaultTo = 'uniquera@uniqueraclinic.com';
+$toList = uniquera_parse_email_list(uniquera_env_value('SMTP_TO', $defaultTo));
+if (empty($toList)) {
+    $toList = uniquera_parse_email_list($defaultTo);
+}
+$ccList = uniquera_parse_email_list(uniquera_env_value('SMTP_CC', ''));
+$bccList = uniquera_parse_email_list(uniquera_env_value('SMTP_BCC', ''));
+
+$from = strtolower(trim(uniquera_env_value('MAIL_FROM', $smtpUser)));
+if ($from === '' || !filter_var($from, FILTER_VALIDATE_EMAIL)) {
+    $from = strtolower(trim($smtpUser));
+}
+// Hostinger and most SMTP providers require From to match the authenticated mailbox.
+if (strtolower(trim($smtpUser)) !== $from) {
+    $from = strtolower(trim($smtpUser));
+}
 $fromName = uniquera_env_value('MAIL_FROM_NAME', 'Uniquera Clinic');
 $replyTo = isset($_POST['email']) ? trim((string)$_POST['email']) : '';
 $fullName = isset($_POST['fullName']) && trim((string)$_POST['fullName']) !== '' ? trim((string)$_POST['fullName']) : 'Unknown';
 
+if (empty($toList) && empty($ccList) && empty($bccList)) {
+    http_response_code(500);
+    echo json_encode(array('success' => false, 'data' => array('message' => 'invalid_recipient')));
+    exit;
+}
+
+uniquera_save_submission_backup($rows, $fullName);
+
 try {
     $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host = $smtpHost;
-    $mail->SMTPAuth = true;
-    $mail->Username = $smtpUser;
-    $mail->Password = $smtpPass;
-    $mail->Port = (int)uniquera_env_value('SMTP_PORT', '587');
-
-    $secure = strtolower(trim((string)uniquera_env_value('SMTP_SECURE', 'tls')));
-    if ($secure === 'ssl' || $secure === 'smtps') {
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    } elseif ($secure === 'tls' || $secure === 'starttls') {
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    }
+    uniquera_configure_smtp_mailer($mail);
 
     $mail->CharSet = 'UTF-8';
     $mail->setFrom($from, $fromName);
-    $mail->addAddress($to);
+    foreach ($toList as $addr) {
+        $mail->addAddress($addr);
+    }
+    foreach ($ccList as $addr) {
+        $mail->addCC($addr);
+    }
+    foreach ($bccList as $addr) {
+        $mail->addBCC($addr);
+    }
     if (filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
         $mail->addReplyTo($replyTo, $fullName);
     }
@@ -199,7 +167,19 @@ try {
     }, $rows));
     $mail->send();
 
-    echo json_encode(array('success' => true, 'data' => array('id' => time())));
+    $response = array(
+        'success' => true,
+        'data' => array(
+            'id' => time(),
+            'mail_sent' => true,
+            'recipients' => count($toList) + count($ccList) + count($bccList),
+        ),
+    );
+    if (uniquera_debug_enabled()) {
+        $response['data']['sent_to'] = $toList;
+        $response['data']['from'] = $from;
+    }
+    echo json_encode($response);
 } catch (PHPMailerException $e) {
     error_log('[Uniquera] PHPMailer error: ' . $e->getMessage());
     uniquera_mail_error_response('mail_failed', $e->getMessage());

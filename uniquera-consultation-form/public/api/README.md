@@ -1,24 +1,49 @@
 # Uniquera consultation form API (static / Hostinger)
 
-The React build submits to:
+Submit URL: `https://your-domain.com/api/uniquera-form-submit.php`
 
-`https://your-domain.com/api/uniquera-form-submit.php`
+## Fix: form works but no email
 
-## Required on production (Hostinger)
+1. Edit **`api/.env`** on the server (not only `.env.example`).
+2. Use a **real Hostinger mailbox** for `SMTP_USER` / `SMTP_PASS`.
+3. Set **`SMTP_TO`** to the inbox you check (lowercase domain is fine).
+4. Use **`SMTP_PORT=465`** + **`SMTP_SECURE=ssl`** (Hostinger default).
+5. **`MAIL_FROM`** must be the same address as **`SMTP_USER`**.
+6. Check **spam/junk** for `[Uniquera] New consultation form submission`.
+7. Submissions are also saved under **`api/storage/submissions/`** (JSON backup).
 
-1. Upload the full `dist/api/` folder (including `vendor/` and `uniquera-form-submit.php`).
-2. Copy `api/.env.example` to `api/.env` on the server.
-3. Fill in SMTP credentials (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, etc.).
-4. Ensure PHP is enabled on the hosting plan.
+## Test SMTP without the form
 
-Without `api/.env`, submissions return `smtp_not_configured` and the form shows an error alert.
+In `api/.env` add:
 
-## Email behavior
+```env
+MAIL_TEST_KEY=my-secret-test-key-12345
+FORM_DEBUG=true
+```
 
-On successful submit, PHPMailer sends an HTML email to `SMTP_TO` (default: `uniquera@uniqueraclinic.com`) with all form fields. Reply-To is set to the visitor email when valid.
+Then from your PC:
 
-A separate Google Apps Script webhook may also receive name/email (see `uniqueraPostConsultationWebhookSilent` in form JS).
+```bash
+curl -X POST https://landing.uniqueraclinic.com/api/mail-test.php \
+  -H "Content-Type: application/json" \
+  -d "{\"key\":\"my-secret-test-key-12345\"}"
+```
 
-## Local development
+Success: `{"success":true,"sent_to":["uniquera@uniqueraclinic.com"]}`  
+Failure: `mail_failed` and `debug` with the SMTP error (when `FORM_DEBUG=true`).
 
-`npm run dev` handles `/api/uniquera-form-submit.php` via Node (see `vite.config.ts`). Configure SMTP in the project root `.env` for real mail in dev, or use the dev mock success fallback when SMTP is unset.
+Remove `MAIL_TEST_KEY` when done.
+
+## Deploy checklist
+
+- Upload full `dist/api/` including `vendor/`, `uniquera-smtp-config.php`, `storage/`
+- Create `api/.env` from `.env.example`
+- Folder `api/storage/submissions/` must be writable by PHP
+
+## Email + backup
+
+| Channel | What |
+|--------|------|
+| SMTP email | Full form table to `SMTP_TO` |
+| Server JSON | `api/storage/submissions/YYYY-MM-DD/*.json` |
+| Google Sheet webhook | Name, email, and all form fields (browser, after success) |

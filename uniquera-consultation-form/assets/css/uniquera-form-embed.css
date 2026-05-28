@@ -1,27 +1,21 @@
-/* Full-width friendly layout inside Elementor sections */
+/* Embedded consultation form (React landing / static host) */
 .uniquera-form-wrap {
     width: 100%;
     max-width: 100%;
     position: relative;
 }
 
-.elementor-widget-uniquera_consultation_form .uniquera-form-wrap,
-.elementor-widget-shortcode .uniquera-form-wrap {
-    min-height: 0;
-}
-
 /*
  * main_v2.css targets a standalone full-page form:
  *   body { overflow: hidden }
  *   .main { height: 100vh; overflow-y: auto }
- * That traps scroll inside .main. For WordPress embeds, use the document scroll only.
+ * Use document scroll when embedded in the landing page.
  */
 body.uniquera-consultation-form-active {
     overflow-y: auto !important;
     overflow-x: hidden;
 }
 
-/* Core: let the form grow with content; no inner scrollbar on .main */
 .uniquera-form-wrap #onlineForm .main {
     height: auto !important;
     min-height: 0 !important;
@@ -30,28 +24,11 @@ body.uniquera-consultation-form-active {
     align-items: stretch !important;
 }
 
-/* Initial loader block: avoid locking to full viewport when embedded */
 .uniquera-form-wrap #loading .row {
     height: auto !important;
     min-height: 50vh;
 }
 
-/* Elementor columns/sections often use overflow:hidden for layout */
-.elementor-widget-uniquera_consultation_form .elementor-widget-wrap,
-.elementor-widget-uniquera_consultation_form .elementor-container {
-    overflow: visible !important;
-}
-
-.elementor-element:has(.uniquera-form-wrap),
-.elementor-element:has(.uniquera-form-wrap) .elementor-widget-wrap {
-    overflow: visible !important;
-}
-
-/*
- * main_v2.css: .wrapper { display: none } until the loader animation calls .show().
- * In WordPress/Elementor, meter width can be 0, scripts can load late, or the 3s gate feels broken—users see a blank area.
- * Show the form shell immediately; hide the full-page loader in embeds.
- */
 .uniquera-form-wrap #onlineForm .wrapper {
     display: block !important;
     background-color: #05191C !important;
@@ -73,7 +50,6 @@ body.uniquera-consultation-form-active {
     opacity: 1 !important;
 }
 
-/* Safety: never let legacy overlay block inputs in embedded mode */
 .uniquera-form-wrap #onlineForm .overlay {
     display: none !important;
     pointer-events: none !important;
@@ -83,15 +59,10 @@ body.uniquera-consultation-form-active {
     display: none !important;
 }
 
-/*
- * main_v2.css: .question { display: none } except .active. JS adds .active on first paint;
- * if anything blocks init, no step is visible. Prefer first step visible until JS takes over (inline display from .hide() wins when navigating).
- */
 .uniquera-form-wrap #onlineForm .question-content > .question:first-child {
     display: block;
 }
 
-/* Back control: main_v2 uses missing ../images/prev.png + absolute positioning without a reliable offset */
 .uniquera-form-wrap #footer .col {
     position: relative;
     min-height: 48px;
@@ -136,7 +107,6 @@ body.uniquera-consultation-form-active {
     box-sizing: border-box;
 }
 
-/* Continue/Submit button: centered on bottom edge, half outside card */
 .uniquera-form-wrap #onlineForm .question-content .form-button-wrapper {
     position: absolute !important;
     left: 50% !important;
@@ -157,12 +127,9 @@ body.uniquera-consultation-form-active {
     align-items: center;
     justify-content: flex-start;
     gap: 0;
-    margin-left: 56px; /* keep clear of back button area */
+    margin-left: 56px;
 }
 
-/*
- * main_v2.css hides .step unless .hair-question — force all dots visible in embeds.
- */
 .uniquera-form-wrap #onlineForm #footer .steps .step,
 .uniquera-form-wrap #onlineForm #footer .steps .step.hide {
     display: inline-block !important;
@@ -174,9 +141,6 @@ body.uniquera-consultation-form-active {
     pointer-events: auto;
 }
 
-/*
- * Step strip: hollow circles + connector line (7px).
- */
 .uniquera-form-wrap #onlineForm #footer .steps .step {
     width: 26px !important;
     height: 26px !important;
@@ -200,26 +164,16 @@ body.uniquera-consultation-form-active {
     z-index: 1;
 }
 
-/* iPad / tablet sizing: prevent number overlap, larger dots */
 @media (min-width: 768px) and (max-width: 1024px) {
     .uniquera-form-wrap #onlineForm #footer .steps .step {
         width: 30px !important;
         height: 27px !important;
         border-width: 1px !important;
-        border-style: solid !important;
-        border-radius: 50% !important;
-        box-sizing: border-box !important;
-        background-color: #f4f6f7 !important;
-        box-shadow: none !important;
-        position: relative;
         font-size: 10px;
         line-height: 24px;
-        text-align: center;
-        z-index: 2;
     }
 }
 
-/* Trail completed through previous step */
 .uniquera-form-wrap #footer .steps .step.done {
     background-color: #f4f6f7 !important;
     border-color: var(--primary, rgb(14, 179, 173)) !important;
@@ -229,7 +183,6 @@ body.uniquera-consultation-form-active {
     background: var(--primary, rgb(14, 179, 173)) !important;
 }
 
-/* Current position */
 .uniquera-form-wrap #footer .steps .step.active {
     background-color: #f4f6f7 !important;
     border-color: var(--primary, rgb(14, 179, 173)) !important;
@@ -240,7 +193,6 @@ body.uniquera-consultation-form-active {
     background: var(--primary, rgb(14, 179, 173)) !important;
 }
 
-/* Not yet reached */
 .uniquera-form-wrap #footer .steps .step.active ~ .step {
     background-color: #f4f6f7 !important;
     border-color: #c8d4d8 !important;
@@ -251,21 +203,10 @@ body.uniquera-consultation-form-active {
     background: #d5dde1 !important;
 }
 
-/* Step label under Continue / Submit */
 .uniquera-form-wrap .uniquera-step-indicator {
     display: none !important;
-    text-align: center;
-    margin-top: 12px;
-    font-size: 14px;
-    line-height: 1.3;
-    color: #555;
-    font-weight: 500;
 }
 
-/*
- * Gender / radio cards: <object> SVG and the shine ::before sit above the invisible
- * input in many browsers and steal clicks. Let events reach the overlay input.
- */
 .uniquera-form-wrap .radio-select input[type="radio"] {
     position: absolute;
     inset: 0;
@@ -281,18 +222,10 @@ body.uniquera-consultation-form-active {
     pointer-events: none;
 }
 
-/* Keep option visuals centered without changing plugin layout mechanics */
 .uniquera-form-wrap .radio-select .option {
     text-align: center;
-}
-
-.uniquera-form-wrap .radio-select {
     position: relative;
     cursor: pointer;
-}
-
-.uniquera-form-wrap .radio-select .option {
-    text-align: center;
 }
 
 .uniquera-form-wrap .radio-select .option .animate,
@@ -309,14 +242,12 @@ body.uniquera-consultation-form-active {
     margin-right: auto;
 }
 
-/* Step validation: female hair-loss row needs a visible error when nothing is selected */
 .uniquera-form-wrap #question-2 .question-female.error {
     outline: 2px solid #e74c3c;
     outline-offset: 6px;
     border-radius: 4px;
 }
 
-/* Step 8: referral source — horizontal icon radios */
 .uniquera-form-wrap .uniquera-referral-section {
     margin-bottom: 1.75rem;
 }
@@ -366,7 +297,6 @@ body.uniquera-consultation-form-active {
     padding-bottom: 4px;
 }
 
-/* Step 9: match core form rows + radio-select cards */
 .uniquera-form-wrap .uniquera-step9-field .col-form-label {
     font-weight: 500;
     color: #333;
@@ -388,7 +318,6 @@ body.uniquera-consultation-form-active {
     padding: 6px 4px;
 }
 
-/* Step 9: minimal file control (no “No file chosen” / four-tile UI) */
 .uniquera-form-wrap .uniquera-file-upload-simple {
     position: relative;
 }
@@ -431,7 +360,6 @@ body.uniquera-consultation-form-active {
     min-height: 1.25em;
 }
 
-/* Step 10: same row layout as question 7 / contact fields */
 .uniquera-form-wrap .uniquera-step10-field .col-form-label {
     font-weight: 500;
     color: #333;

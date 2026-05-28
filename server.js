@@ -72,17 +72,8 @@ function createTransport() {
   });
 }
 
-app.post('/api/uniquera-form-nonce', (_req, res) => {
-  res.json({success: true, data: {nonce: 'react-app'}});
-});
-
 const handleSubmit = async (req, res) => {
   try {
-    if (req.body?.action === 'uniquera_form_nonce') {
-      res.json({success: true, data: {nonce: 'react-app'}});
-      return;
-    }
-
     const transporter = createTransport();
     if (!transporter) {
       res.status(500).json({success: false, data: {message: 'smtp_not_configured'}});
