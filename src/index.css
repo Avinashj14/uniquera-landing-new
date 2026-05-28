@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap');
+@import url("/uniquera-consultation-form/assets/css/theme-overrides.css");
+@import url("/uniquera-consultation-form/assets/css/uniquera-elementor-compat.css");
 
 @import "tailwindcss";
+@import "./generated/uniquera-form-scoped.css";
+@import "./uniquera-short-form-parity.css";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -83,12 +87,8 @@
  * Form CSS must NOT live in a layer below Tailwind utilities: Bootstrap-style
  * classes (.order-1, .text-center, etc.) share names with Tailwind; earlier layers
  * always lose to @layer utilities, which breaks image-left / text-right rows and
- * radio-overlay cards. Imports are unlayered; selectors are scoped to .uniquera-form-wrap only.
+ * radio-overlay cards. Imports are unlayered and intentionally loaded first.
  */
-@import "./generated/uniquera-form-scoped.css";
-@import "../uniquera-consultation-form/assets/css/theme-overrides.css";
-@import "../uniquera-consultation-form/assets/css/uniquera-elementor-compat.css";
-@import "./uniquera-short-form-parity.css";
 
 /*
  * Prefixed legacy `body { overflow: hidden }` maps to `.uniquera-form-wrap { overflow:hidden }`,

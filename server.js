@@ -76,8 +76,13 @@ app.post('/api/uniquera-form-nonce', (_req, res) => {
   res.json({success: true, data: {nonce: 'react-app'}});
 });
 
-app.post('/api/uniquera-form-submit', upload.any(), async (req, res) => {
+const handleSubmit = async (req, res) => {
   try {
+    if (req.body?.action === 'uniquera_form_nonce') {
+      res.json({success: true, data: {nonce: 'react-app'}});
+      return;
+    }
+
     const transporter = createTransport();
     if (!transporter) {
       res.status(500).json({success: false, data: {message: 'smtp_not_configured'}});
@@ -120,7 +125,10 @@ app.post('/api/uniquera-form-submit', upload.any(), async (req, res) => {
     console.error('Form submit failed', error);
     res.status(500).json({success: false, data: {message: 'mail_failed'}});
   }
-});
+};
+
+app.post('/api/uniquera-form-submit', upload.any(), handleSubmit);
+app.post('/api/uniquera-form-submit.php', upload.any(), handleSubmit);
 
 app.use(express.static(distPath));
 
