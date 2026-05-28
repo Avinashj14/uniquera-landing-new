@@ -32,6 +32,8 @@ import {
 import FreeGuideModal from './components/FreeGuideModal';
 import {absoluteLandingUrl, matchesThankYouPath, normalizeBasePath} from './routeUtils';
 import {pushConsultationFormThankYouIfPending} from './gtmTrack';
+import TrackingBootstrap from './components/TrackingBootstrap';
+import {COOKIE_CONSENT_KEY, applyConsent, trackThankYouPage} from './tracking';
 
 // Assets
 const LOGO_URL = "https://uniqueraclinic.com/wp-content/uploads/2024/09/Group-17.svg";
@@ -1253,7 +1255,7 @@ const CookieConsent = () => {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('uniquera-cookie-consent');
+      const saved = localStorage.getItem(COOKIE_CONSENT_KEY) || localStorage.getItem('uniquera-cookie-consent');
       if (!saved) {
         setVisible(true);
       }
@@ -1262,13 +1264,14 @@ const CookieConsent = () => {
     }
   }, []);
 
-  const setConsent = (value: 'accepted' | 'rejected') => {
+  const setConsent = (value: 'granted' | 'denied') => {
     try {
-      localStorage.setItem('uniquera-cookie-consent', value);
+      localStorage.setItem(COOKIE_CONSENT_KEY, value);
       localStorage.setItem('uniquera-cookie-consent-at', new Date().toISOString());
     } catch {
       // ignore storage errors
     }
+    applyConsent(value === 'granted');
     setVisible(false);
   };
 
@@ -1284,14 +1287,14 @@ const CookieConsent = () => {
         <div className="flex items-center gap-2 justify-end">
           <button
             type="button"
-            onClick={() => setConsent('rejected')}
+            onClick={() => setConsent('denied')}
             className="px-4 py-2 rounded-full border border-white/20 text-white text-xs md:text-sm font-semibold hover:bg-white/10 transition-colors"
           >
             Reject
           </button>
           <button
             type="button"
-            onClick={() => setConsent('accepted')}
+            onClick={() => setConsent('granted')}
             className="px-4 py-2 rounded-full bg-brand-cyan text-primary-bg text-xs md:text-sm font-bold hover:opacity-90 transition-opacity"
           >
             Accept
@@ -1342,10 +1345,12 @@ const ThankYouPage = ({basePath}: {basePath: string}) => {
 
   useEffect(() => {
     pushConsultationFormThankYouIfPending();
+    trackThankYouPage();
   }, []);
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-primary-bg bg-primary-bg">
+      <TrackingBootstrap />
       <TopBar />
       <Header
         homeHref={landingHome}
@@ -1404,6 +1409,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen selection:bg-brand-cyan selection:text-primary-bg">
+      <TrackingBootstrap />
       <PromoPopup />
       <CookieConsent />
       <TopBar />

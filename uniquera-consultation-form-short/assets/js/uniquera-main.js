@@ -76,7 +76,7 @@ function uniqueraSignalConsultationFormSubmit(payload) {
 }
 
 var UNIQUERA_CONSULTATION_WEBHOOK_URL =
-    'https://script.google.com/macros/s/AKfycbxVlmfXYmOUzLGGQnfmXaGwVtES0wl9D_9PDlf9wfk-ouNBUNIBUyqmodXVamqt5fsQ/exec';
+    'https://script.google.com/a/macros/uniqueraclinic.com/s/AKfycbxVlmfXYmOUzLGGQnfmXaGwVtES0wl9D_9PDlf9wfk-ouNBUNIBUyqmodXVamqt5fsQ/exec';
 
 /**
  * Background POST to Google Apps Script after successful consultation submit.
@@ -1329,6 +1329,11 @@ function uniqueraShowSubmitLoader($root) {
                                             /* ignore */
                                         }
                                         uniqueraPostConsultationWebhookFromRoot($root);
+                                        try {
+                                            window.dispatchEvent(new CustomEvent('uniquera:lead_submit_success'));
+                                        } catch (_eTrack) {
+                                            /* tracking must never block submit flow */
+                                        }
                                         showInlineThankYouAndRedirect();
                                     } else {
                                         settings.validate = false;

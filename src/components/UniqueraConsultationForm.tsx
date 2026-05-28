@@ -1,6 +1,7 @@
 import {useEffect, useMemo, useRef} from 'react';
 import {absoluteLandingUrl, thankYouPageUrl} from '../routeUtils';
 import {hideEmbeddedThankYouScreens} from '../utils/uniqueraFormThankYou';
+import {resolveFormAjaxUrl} from '../utils/resolveFormAjaxUrl';
 import formHtmlRaw from '../../uniquera-consultation-form/templates/form-fragment.html?raw';
 
 /* Form markup is in `.uniquera-form-wrap`; CSS is scoped in uniquera-form-scoped.css and loaded unlayered in index.css so Bootstrap class names beat Tailwind utilities inside the form. */
@@ -53,7 +54,7 @@ export default function UniqueraConsultationForm() {
   const rootRef = useRef<HTMLDivElement>(null);
   const basePath = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
   const assetBase = `${basePath}/uniquera-consultation-form/assets`;
-  const submitUrl = `${basePath}/api/uniquera-form-submit.php`;
+  const submitUrl = resolveFormAjaxUrl(`${basePath}/api/uniquera-form-submit.php`);
   const scriptSources = useMemo(
     () => [
       `${assetBase}/js/jquery-3.6.0.min.js`,
